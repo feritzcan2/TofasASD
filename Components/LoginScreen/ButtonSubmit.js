@@ -33,6 +33,10 @@ export default class ButtonSubmit extends Component {
     this._onPress = this._onPress.bind(this);
   }
 
+  componentDidMount() {
+    this._onPress();
+  }
+
   _onPress() {
     if (this.state.isLoading) return;
 

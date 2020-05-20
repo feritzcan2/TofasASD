@@ -12,13 +12,13 @@ import {
   Dimensions,
 } from "react-native";
 
-import { normalize } from "../HelperFunctions";
+import { normalize } from "../../../HelperFunctions";
 var screenHeight = Dimensions.get("screen").height;
 var screenWidth = Dimensions.get("screen").width;
 
-import LoginScreen from "../Components/LoginScreen/LoginScreen";
+import LoginScreen from "../../LoginScreen/LoginScreen";
 
-export default class PerformanceComponent extends React.Component {
+export default class KampanyaPerformanceTableComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -111,7 +111,17 @@ export default class PerformanceComponent extends React.Component {
               isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
             ]}
           >
-            {isHeader ? "Hedefe Tabi Satış" : rowData.tabiSatis + " ₺"}
+            {isHeader
+              ? "Hedefe Tabi Satış"
+              : this.props.hedefTuru === 0
+              ? rowData.hepsi
+              : this.props.hedefTuru === 1
+              ? rowData.perakende
+              : this.props.hedefTuru === 2
+              ? rowData.sigorta
+              : this.props.hedefTuru === 3
+              ? rowData.yetkili
+              : "s" + " ₺"}
           </Text>
         </View>
         <View
@@ -171,7 +181,9 @@ export default class PerformanceComponent extends React.Component {
     return (
       <View key={"a:" + index} style={styles.areaContainer}>
         <View style={styles.bolgeTextContainer}>
-          <Text style={styles.bolgeText}>{index + 1 + ".BÖLGE"}</Text>
+          <Text style={styles.bolgeText}>
+            {data[0][0]["Region"] + ".BÖLGE"}
+          </Text>
         </View>
         <ScrollView
           key={"d" + index}
@@ -203,7 +215,6 @@ export default class PerformanceComponent extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: "20%",
     width: "100%",
   },
   areaContainer: {

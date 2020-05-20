@@ -3,6 +3,7 @@ let getUserUrl = "https://puan.donmezdebriyaj.com.tr/api/user/GetUser/";
 let customerListUrl =
   "https://puan.donmezdebriyaj.com.tr/api/user/GetCustomerList/";
 import { AsyncStorage } from "react-native";
+import { getBayiList, getCampaigns } from "./GeneralPerformance";
 export function login(UserName, Password) {
   return new Promise(async function (resolve, reject) {
     let result = await fetch(url, {
@@ -31,7 +32,6 @@ export function login(UserName, Password) {
       resolve(false);
       return;
     });
-    console.log(result);
     if (result.data === null || result.Message !== "Success") {
       resolve(false);
       return;
@@ -40,6 +40,9 @@ export function login(UserName, Password) {
     await AsyncStorage.setItem("Password", "" + Password);
     await AsyncStorage.setItem("userStored", "true");
     global.userData = result.Data;
+    console.log(result.Data);
+    getBayiList();
+    getCampaigns();
     resolve(true);
   });
 }

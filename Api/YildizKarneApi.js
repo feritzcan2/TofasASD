@@ -1,6 +1,6 @@
-let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
+let url = "https://b2b.opar.com/api/adminmobile/GetList_CustomerSearchASD";
 
-export function getBayiList() {
+export function getYildizPuanDetail() {
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
 
@@ -13,51 +13,9 @@ export function getBayiList() {
       },
       body: JSON.stringify({
         Token: global.userData.Token,
-        Name: "GetList_DealerASD",
 
         Data: {
-          Name: "GetList_DealerASD",
-        },
-      }),
-    });
-
-    result = await result.json().catch((error) => {
-      resolve(null);
-      return;
-    });
-    if (result.Data === null || result.Data === undefined) {
-      resolve(null);
-      return;
-    }
-    global.bayiler = result.Data;
-
-    resolve(result.Data);
-  });
-}
-
-export function getGenelPerformance(filters) {
-  return new Promise(async function (resolve, reject) {
-    if (!global.userData || !global.userData.Token) resolve(null);
-
-    let result = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-
-        Authorization: "",
-      },
-      body: JSON.stringify({
-        Token: global.userData.Token,
-        Data: {
-          Parameters: {
-            Region: filters.region,
-            DealerCode: filters.dealerCode,
-            Year: filters.year,
-            PreviewType: filters.donemTuru,
-            Quarter: filters.quarter,
-            MonthNo: filters.month,
-          },
-          Name: "GetList_SalePerformanceSalesmanASD",
+          Name: "GetList_TympCalculateDataASD",
         },
       }),
     });
@@ -75,7 +33,7 @@ export function getGenelPerformance(filters) {
   });
 }
 
-export function getCampaigns() {
+export function getYildizKarneDetails() {
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
 
@@ -88,12 +46,9 @@ export function getCampaigns() {
       },
       body: JSON.stringify({
         Token: global.userData.Token,
+
         Data: {
-          Parameters: {
-            RegionId: 0,
-            DealerCode: "",
-          },
-          Name: "GetList_CampaignASD",
+          Name: "GetList_CalculateTympData",
         },
       }),
     });
@@ -102,17 +57,81 @@ export function getCampaigns() {
       resolve(null);
       return;
     });
-    // console.log("kampanya:", result);
     if (result.Data === null || result.Data === undefined) {
       resolve(null);
       return;
     }
-    global.campaigns = result.Data;
 
     resolve(result.Data);
   });
 }
-export function getCampaignPerformance(id) {
+
+export function getYildizKarneBayiParams() {
+  return new Promise(async function (resolve, reject) {
+    if (!global.userData || !global.userData.Token) resolve(null);
+
+    let result = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+
+        Authorization: "",
+      },
+      body: JSON.stringify({
+        Token: global.userData.Token,
+
+        Data: {
+          Name: "GetList_TympDealer",
+        },
+      }),
+    });
+
+    result = await result.json().catch((error) => {
+      resolve(null);
+      return;
+    });
+    if (result.Data === null || result.Data === undefined) {
+      resolve(null);
+      return;
+    }
+
+    resolve(result.Data);
+  });
+}
+export function getYildizKarneTympParams() {
+  return new Promise(async function (resolve, reject) {
+    if (!global.userData || !global.userData.Token) resolve(null);
+
+    let result = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+
+        Authorization: "",
+      },
+      body: JSON.stringify({
+        Token: global.userData.Token,
+
+        Data: {
+          Name: "GetList_TympType",
+        },
+      }),
+    });
+
+    result = await result.json().catch((error) => {
+      resolve(null);
+      return;
+    });
+    if (result.Data === null || result.Data === undefined) {
+      resolve(null);
+      return;
+    }
+
+    resolve(result.Data);
+  });
+}
+
+export function getHedef(type) {
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
 
@@ -126,10 +145,10 @@ export function getCampaignPerformance(id) {
       body: JSON.stringify({
         Token: global.userData.Token,
         Data: {
+          Name: "GetTympTargetHeaderList",
           Parameters: {
-            ASDCampaignId: id,
+            Type: type,
           },
-          Name: "GetList_SalesmanPerformanceCampaign",
         },
       }),
     });
@@ -138,15 +157,46 @@ export function getCampaignPerformance(id) {
       resolve(null);
       return;
     });
-    // console.log("kampanya:", result);
-    if (
-      result.Data === null ||
-      result.Data === undefined ||
-      result.Data.saleListSalesman === undefined
-    ) {
+    if (result.Data === null || result.Data === undefined) {
       resolve(null);
       return;
     }
-    resolve(result.Data.saleListSalesman);
+
+    resolve(result.Data);
+  });
+}
+
+export function getHedefDetail(id) {
+  return new Promise(async function (resolve, reject) {
+    if (!global.userData || !global.userData.Token) resolve(null);
+
+    let result = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+
+        Authorization: "",
+      },
+      body: JSON.stringify({
+        Token: global.userData.Token,
+        Data: {
+          Name: "GetList_TympTargetData",
+          Parameters: {
+            HeaderId: id,
+          },
+        },
+      }),
+    });
+
+    result = await result.json().catch((error) => {
+      resolve(null);
+      return;
+    });
+    if (result.Data === null || result.Data === undefined) {
+      resolve(null);
+      return;
+    }
+
+    resolve(result.Data);
   });
 }

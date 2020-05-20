@@ -1,21 +1,17 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  TouchableHighlight,
-  Modal,
-  Dimensions,
-  TouchableOpacity,
-  ScrollView,
-  AsyncStorage,
-} from "react-native";
+import { View, StyleSheet, Image, Text, AsyncStorage } from "react-native";
 
-import LoginScreen from "../Components/LoginScreen/LoginScreen";
-import PerformanceChartComponent from "../Components/PerformanceChartComponent";
-import PerformanceComponent from "../Components/PerformanceComponent";
-import { getBayiList, getGenelPerformance } from "../Api/GeneralPerformance";
+import Tabs from "react-native-tabs";
+import {
+  getBayiList,
+  getGenelPerformance,
+  getCampaigns,
+  getCampaignPerformance,
+} from "../Api/GeneralPerformance";
+import { normalize } from "../HelperFunctions";
+import FilterComponent from "../Components/FilterComponent";
+import GeneralPerformanceComponent from "../Components/Performance/General/GeneralPerformanceComponent";
+import KampanyaPerformanceComponent from "../Components/Performance/Kampanya/KampanyaPerformanceComponent";
 
 export default class PerformanceContainer extends React.Component {
   constructor(props) {
@@ -23,25 +19,88 @@ export default class PerformanceContainer extends React.Component {
     this.state = {
       loggedIn: false,
       userData: null,
+      filterVisible: false,
+      campaignFilterVisible: false,
+      kampanyaSelectionVisible: false,
       performanceData: [],
+      kampanyaPerformanceData: [],
+      campaigns: global.campaigns,
+      selectedCampaign:
+        global.campaigns && global.campaigns.length > 0
+          ? global.campaigns[0]
+          : null,
+      page: "GENEL",
+      selectedPerformanceFilters: {
+        hedefTuru: 0,
+        region: 0,
+        dealerCode: "",
+        quarter: 0,
+        year: new Date().getFullYear(),
+        month: new Date().getMonth(),
+        donemTuru: 0,
+      },
     };
 
-    AsyncStorage.getItem("perff").then((localData) => {
-      if (localData) {
-        this.preparePerformanceData(JSON.parse(localData));
-        console.log("get from local");
-      } else {
-        getGenelPerformance().then((data) => {
-          if (data) {
-            AsyncStorage.setItem("perff", JSON.stringify(data));
-            this.preparePerformanceData(data);
-          }
-        });
+    getGenelPerformance(this.state.selectedPerformanceFilters).then((data) => {
+      if (data) {
+        AsyncStorage.setItem("perff", JSON.stringify(data));
+        this.preparePerformanceData(data);
       }
     });
+    if (!global.campaigns) {
+      getCampaigns().then((data) => {
+        this.setState({
+          campaigns: data,
+          selectedCampaign: data && data.length > 0 ? data[0] : null,
+        });
+      });
+    } else if (this.state.selectedCampaign) {
+      getCampaignPerformance(this.state.selectedCampaign.Id).then((data) => {
+        this.preparePerformanceData(data, true);
+      });
+    }
   }
 
-  preparePerformanceData = (serverData) => {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      nextState.selectedCampaign !== null &&
+      nextState.selectedCampaign &&
+      this.state.selectedCampaign !== nextState.selectedCampaign
+    ) {
+      getCampaignPerformance(nextState.selectedCampaign.Id).then((data) => {
+        this.preparePerformanceData(data, true);
+      });
+    }
+    return true;
+  }
+
+  changeCampaign = (campaign) => {
+    if (this.state.selectedCampaign.Id !== campaign.Id) {
+      this.setState({
+        selectedCampaign: campaign,
+        campaignFilterVisible: false,
+      });
+    } else {
+      this.setState({ campaignFilterVisible: false });
+    }
+  };
+
+  changeTab = (tab) => {
+    this.setState({ selectedTab: tab });
+  };
+
+  applyPerformanceFilter = (filters) => {
+    this.setState({ selectedPerformanceFilters: filters });
+    getGenelPerformance(filters).then((data) => {
+      //console.log(data);
+      if (data) {
+        AsyncStorage.setItem("perff", JSON.stringify(data));
+        this.preparePerformanceData(data);
+      }
+    });
+  };
+
+  preparePerformanceData = (serverData, isKampanya) => {
     let datas = {};
     for (let a = 0; a < serverData.length; a++) {
       let data = serverData[a];
@@ -53,9 +112,13 @@ export default class PerformanceContainer extends React.Component {
         tumSatis: data.PriceTotalStr,
         tabiSatis: data.PriceLinkedTargetStr,
         primeTabiSatis: data.PriceLinkedTargetStr,
+        hepsi: data.PriceLinkedTargetStr,
+        perakende: data.PriceLinkedTarget_PerakendeStr,
+        sigorta: data.PriceLinkedTarget_SigortaStr,
+        yetkili: data.PriceLinkedTarget_ServisStr,
         hedefGerceklestirme: data.TargetPercent,
       };
-      console.log(data.TargetPercentStr);
+
       if (datas[data.DealerCode]) {
         datas[data.DealerCode].push(rowData);
       } else {
@@ -88,15 +151,100 @@ export default class PerformanceContainer extends React.Component {
         regionArray.push(datas[key]);
       }
     }
-
-    console.log("data size " + dataArray.length);
-    console.log("regionArray size " + regionArray.length);
-    this.setState({ performanceData: regionArray });
+    if (isKampanya === true) {
+      this.setState({ selectedCampaignPerformance: regionArray });
+    } else this.setState({ performanceData: regionArray });
   };
 
   render() {
+    const { selectedTab, performanceData } = this.state;
     return (
-      <PerformanceChartComponent performanceData={this.state.performanceData} />
+      <View style={{ flex: 1 }}>
+        <Tabs
+          selected={this.state.page}
+          style={{
+            top: "5%",
+            zIndex: 50000,
+            backgroundColor: "#424e60",
+            color: "#9da4ad",
+          }}
+          selectedStyle={{
+            color: "white",
+            backgroundColor: "#2d3542",
+            padding: 10,
+            borderRadius: 10,
+          }}
+          onSelect={(el) => this.setState({ page: el.props.name })}
+        >
+          <Text
+            name="GENEL"
+            style={{
+              fontSize:
+                this.state.page === "tablo" ? normalize(25) : normalize(15),
+            }}
+            selectedIconStyle={{
+              height: "100%",
+              borderBottomColor: "white",
+              flex: 1,
+            }}
+          >
+            GENEL
+          </Text>
+          <Text
+            name="KAMPANYA"
+            style={{
+              fontSize:
+                this.state.page === "grafik" ? normalize(25) : normalize(15),
+            }}
+            selectedIconStyle={{
+              height: "100%",
+              fontSize: normalize(25),
+              borderBottomColor: "orange",
+              flex: 1,
+            }}
+          >
+            KAMPANYA
+          </Text>
+        </Tabs>
+
+        <View style={{ flex: 1, marginTop: "10%" }}>
+          {this.state.page === "GENEL" && (
+            <GeneralPerformanceComponent
+              applyFilters={this.applyPerformanceFilter}
+              filters={this.state.selectedPerformanceFilters}
+              performanceData={this.state.performanceData}
+            />
+          )}
+          {this.state.page === "KAMPANYA" && (
+            <KampanyaPerformanceComponent
+              campaignFilterVisible={this.state.campaignFilterVisible}
+              showCampaignFilter={() =>
+                this.setState({ campaignFilterVisible: true })
+              }
+              changeCampaign={this.changeCampaign}
+              selectedCampaignPerformance={
+                this.state.selectedCampaignPerformance
+              }
+              campaigns={this.state.campaigns}
+              selectedCampaign={this.state.selectedCampaign}
+            />
+          )}
+        </View>
+      </View>
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    display: "flex",
+  },
+  filterContainer: {
+    zIndex: 5000,
+    position: "absolute",
+    bottom: "20%",
+    alignSelf: "center",
+    width: "40%",
+    aspectRatio: 1,
+  },
+});

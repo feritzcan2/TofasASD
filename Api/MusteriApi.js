@@ -1,6 +1,6 @@
-let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
+let url = "https://b2b.opar.com/api/adminmobile/GetList_CustomerSearchASD";
 
-export function getBayiList() {
+export function searchCustomer(name, code) {
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
 
@@ -13,87 +13,17 @@ export function getBayiList() {
       },
       body: JSON.stringify({
         Token: global.userData.Token,
-        Name: "GetList_DealerASD",
 
-        Data: {
-          Name: "GetList_DealerASD",
-        },
-      }),
-    });
-
-    result = await result.json().catch((error) => {
-      resolve(null);
-      return;
-    });
-    if (result.Data === null || result.Data === undefined) {
-      resolve(null);
-      return;
-    }
-    global.bayiler = result.Data;
-
-    resolve(result.Data);
-  });
-}
-
-export function getGenelPerformance(filters) {
-  return new Promise(async function (resolve, reject) {
-    if (!global.userData || !global.userData.Token) resolve(null);
-
-    let result = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-
-        Authorization: "",
-      },
-      body: JSON.stringify({
-        Token: global.userData.Token,
         Data: {
           Parameters: {
-            Region: filters.region,
-            DealerCode: filters.dealerCode,
-            Year: filters.year,
-            PreviewType: filters.donemTuru,
-            Quarter: filters.quarter,
-            MonthNo: filters.month,
-          },
-          Name: "GetList_SalePerformanceSalesmanASD",
-        },
-      }),
-    });
-
-    result = await result.json().catch((error) => {
-      resolve(null);
-      return;
-    });
-    if (result.Data === null || result.Data === undefined) {
-      resolve(null);
-      return;
-    }
-
-    resolve(result.Data);
-  });
-}
-
-export function getCampaigns() {
-  return new Promise(async function (resolve, reject) {
-    if (!global.userData || !global.userData.Token) resolve(null);
-
-    let result = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-
-        Authorization: "",
-      },
-      body: JSON.stringify({
-        Token: global.userData.Token,
-        Data: {
-          Parameters: {
-            RegionId: 0,
             DealerCode: "",
+            CustomerCode: code,
+            CustomerName: name,
+            UserCode: "",
+            RuleCode: "",
+            MasterCep: "",
           },
-          Name: "GetList_CampaignASD",
+          Name: "GetList_CustomerSearchASD",
         },
       }),
     });
@@ -102,17 +32,17 @@ export function getCampaigns() {
       resolve(null);
       return;
     });
-    // console.log("kampanya:", result);
+    // console.log(result);
     if (result.Data === null || result.Data === undefined) {
       resolve(null);
       return;
     }
-    global.campaigns = result.Data;
 
     resolve(result.Data);
   });
 }
-export function getCampaignPerformance(id) {
+
+export function getCustomer(id) {
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
 
@@ -125,11 +55,12 @@ export function getCampaignPerformance(id) {
       },
       body: JSON.stringify({
         Token: global.userData.Token,
+
         Data: {
           Parameters: {
-            ASDCampaignId: id,
+            CustomerId: id,
           },
-          Name: "GetList_SalesmanPerformanceCampaign",
+          Name: "GetDetail_CustomerASD",
         },
       }),
     });
@@ -138,15 +69,82 @@ export function getCampaignPerformance(id) {
       resolve(null);
       return;
     });
-    // console.log("kampanya:", result);
-    if (
-      result.Data === null ||
-      result.Data === undefined ||
-      result.Data.saleListSalesman === undefined
-    ) {
+    if (result.Data === null || result.Data === undefined) {
       resolve(null);
       return;
     }
-    resolve(result.Data.saleListSalesman);
+
+    resolve(result.Data);
+  });
+}
+
+export function getCustomerNotes(id) {
+  return new Promise(async function (resolve, reject) {
+    if (!global.userData || !global.userData.Token) resolve(null);
+
+    let result = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+
+        Authorization: "",
+      },
+      body: JSON.stringify({
+        Token: global.userData.Token,
+
+        Data: {
+          Parameters: {
+            CustomerId: id,
+          },
+          Name: "GetInfo_CustomerNotes",
+        },
+      }),
+    });
+
+    result = await result.json().catch((error) => {
+      resolve(null);
+      return;
+    });
+    if (result.Data === null || result.Data === undefined) {
+      resolve(null);
+      return;
+    }
+
+    resolve(result.Data);
+  });
+}
+export function getWarehouse(id) {
+  return new Promise(async function (resolve, reject) {
+    if (!global.userData || !global.userData.Token) resolve(null);
+
+    let result = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+
+        Authorization: "",
+      },
+      body: JSON.stringify({
+        Token: global.userData.Token,
+
+        Data: {
+          Parameters: {
+            CustomerId: id,
+          },
+          Name: "GetInfo_WarehouseListASD",
+        },
+      }),
+    });
+
+    result = await result.json().catch((error) => {
+      resolve(null);
+      return;
+    });
+    if (result.Data === null || result.Data === undefined) {
+      resolve(null);
+      return;
+    }
+
+    resolve(result.Data);
   });
 }
