@@ -114,14 +114,14 @@ export default class GeneralPerformanceTableComponent extends React.Component {
             {isHeader
               ? "Hedefe Tabi Satış"
               : this.props.hedefTuru === 0
-              ? rowData.hepsi
-              : this.props.hedefTuru === 1
-              ? rowData.perakende
-              : this.props.hedefTuru === 2
-              ? rowData.sigorta
-              : this.props.hedefTuru === 3
-              ? rowData.yetkili
-              : "s" + " ₺"}
+                ? rowData.hepsi
+                : this.props.hedefTuru === 1
+                  ? rowData.perakende
+                  : this.props.hedefTuru === 2
+                    ? rowData.sigorta
+                    : this.props.hedefTuru === 3
+                      ? rowData.yetkili
+                      : "s" + " ₺"}
           </Text>
         </View>
         <View
@@ -161,7 +161,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           >
             {isHeader
               ? "Hedef Gerçekleştirme"
-              : rowData.hedefGerceklestirme + " %"}
+              : rowData.hedefGerceklestirme.toFixed(0) + " %"}
           </Text>
         </View>
       </View>

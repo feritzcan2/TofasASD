@@ -32,7 +32,8 @@ export function login(UserName, Password) {
       resolve(false);
       return;
     });
-    if (result.data === null || result.Message !== "Success") {
+    console.log("login res", result);
+    if (result.Data === null || result.Message !== "Success") {
       resolve(false);
       return;
     }

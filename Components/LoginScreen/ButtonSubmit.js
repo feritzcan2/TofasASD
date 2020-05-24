@@ -38,6 +38,7 @@ export default class ButtonSubmit extends Component {
   }
 
   _onPress() {
+    console.log(this.props.username, this.props.pw);
     if (this.state.isLoading) return;
 
     this.setState({ isLoading: true });
@@ -47,7 +48,11 @@ export default class ButtonSubmit extends Component {
       easing: Easing.linear,
     }).start();
 
+    // "TEST", "E2018RYZ"
+    //    login(this.props.username, this.props.pw).then((status) => {
+
     login("TEST", "E2018RYZ").then((status) => {
+      console.log(status);
       this._onGrow();
       this.setState({ isLoading: false });
       this.buttonAnimated.setValue(0);
@@ -100,8 +105,8 @@ export default class ButtonSubmit extends Component {
             {this.state.isLoading ? (
               <Image source={spinner} style={styles.image} />
             ) : (
-              <Text style={styles.text}>LOGIN</Text>
-            )}
+                <Text style={styles.text}>LOGIN</Text>
+              )}
           </TouchableOpacity>
           <Animated.View
             style={[styles.circle, { transform: [{ scale: changeScale }] }]}
@@ -115,7 +120,7 @@ export default class ButtonSubmit extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: -95,
+    top: 0,
     alignItems: "center",
     justifyContent: "flex-start",
   },

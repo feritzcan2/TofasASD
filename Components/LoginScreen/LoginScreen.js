@@ -7,13 +7,27 @@ import ButtonSubmit from "./ButtonSubmit";
 import SignupSection from "./SignupSection";
 
 export default class LoginScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      pw: "",
+    };
+  }
   render() {
     return (
       <Wallpaper>
         <Logo />
-        <Form />
+        <Form
+          setUsername={(username) => this.setState({ username })}
+          setPassword={(pw) => this.setState({ pw: pw })}
+        />
         <SignupSection />
-        <ButtonSubmit setLoggedIn={this.props.setLoggedIn} />
+        <ButtonSubmit
+          username={this.state.username}
+          pw={this.state.pw}
+          setLoggedIn={this.props.setLoggedIn}
+        />
       </Wallpaper>
     );
   }

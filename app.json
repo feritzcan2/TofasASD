@@ -16,7 +16,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.eryaz.tofas",
+      "bundleIdentifier": "com.eryaz.tofasadmin",
       "supportsTablet": true
     }
   }
