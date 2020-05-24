@@ -41,7 +41,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
         <View
           style={{
             height: "100%",
-            width: 125,
+            flex: 1.5,
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
@@ -60,7 +60,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
         <View
           style={{
             height: "100%",
-            width: 100,
+            flex: 1,
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
@@ -79,7 +79,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
         <View
           style={{
             height: "100%",
-            width: 100,
+            flex: 1,
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
@@ -92,13 +92,13 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
               isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
             ]}
           >
-            {isHeader ? "Tüm Satış" : rowData.tumSatis + " ₺"}
+            {isHeader ? "TÜM SATIŞ" : rowData.tumSatis + " ₺"}
           </Text>
         </View>
         <View
           style={{
             height: "100%",
-            width: 100,
+            flex: 1,
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
@@ -112,22 +112,22 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
             ]}
           >
             {isHeader
-              ? "Hedefe Tabi Satış"
+              ? "HEDEFE TABİ SATIŞ"
               : this.props.hedefTuru === 0
-              ? rowData.hepsi
-              : this.props.hedefTuru === 1
-              ? rowData.perakende
-              : this.props.hedefTuru === 2
-              ? rowData.sigorta
-              : this.props.hedefTuru === 3
-              ? rowData.yetkili
-              : "s" + " ₺"}
+                ? rowData.hepsi
+                : this.props.hedefTuru === 1
+                  ? rowData.perakende
+                  : this.props.hedefTuru === 2
+                    ? rowData.sigorta
+                    : this.props.hedefTuru === 3
+                      ? rowData.yetkili
+                      : "s" + " ₺"}
           </Text>
         </View>
         <View
           style={{
             height: "100%",
-            width: 100,
+            flex: 1,
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
@@ -140,13 +140,13 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
               isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
             ]}
           >
-            {isHeader ? "Prime Tabi Satış" : rowData.primeTabiSatis + " ₺"}
+            {isHeader ? "PRİME TABİ SATIŞ" : rowData.primeTabiSatis + " ₺"}
           </Text>
         </View>
         <View
           style={{
             height: "100%",
-            width: 100,
+            flex: 1,
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
@@ -160,8 +160,8 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
             ]}
           >
             {isHeader
-              ? "Hedef Gerçekleştirme"
-              : rowData.hedefGerceklestirme + " %"}
+              ? "HEDEF GERÇEKLEŞME"
+              : rowData.hedefGerceklestirme.toFixed(2) + " %"}
           </Text>
         </View>
       </View>
@@ -185,17 +185,12 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
             {data[0][0]["Region"] + ".BÖLGE"}
           </Text>
         </View>
-        <ScrollView
-          key={"d" + index}
-          style={styles.areaScrollContainer}
-          horizontal={true}
-        >
-          <View>
-            {data.map((data, index) => {
-              return this.renderPerformanceTable(data, index);
-            })}
-          </View>
-        </ScrollView>
+
+        <View>
+          {data.map((data, index) => {
+            return this.renderPerformanceTable(data, index);
+          })}
+        </View>
       </View>
     );
   };
@@ -233,6 +228,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   rowText: {
+    fontSize: normalize(8),
     color: "#657077",
   },
   bolgeText: {

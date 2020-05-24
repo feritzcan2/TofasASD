@@ -34,26 +34,26 @@ export default class DanismanHedefComponent extends React.Component {
       type === 0
         ? "S_YMK_T"
         : type === 1
-        ? "S_AS_T"
-        : type === 2
-        ? "S_FP_T"
-        : type === 3
-        ? "S_DS_T"
-        : type === 4
-        ? "S_SHG_T"
-        : [];
+          ? "S_AS_T"
+          : type === 2
+            ? "S_FP_T"
+            : type === 3
+              ? "S_DS_T"
+              : type === 4
+                ? "S_SHG_T"
+                : [];
     let colName2 =
       type === 0
         ? "S_YMK_E"
         : type === 1
-        ? "S_AS_E"
-        : type === 2
-        ? "S_FP_E"
-        : type === 3
-        ? "S_DS_E"
-        : type === 4
-        ? "S_SHG_E"
-        : [];
+          ? "S_AS_E"
+          : type === 2
+            ? "S_FP_E"
+            : type === 3
+              ? "S_DS_E"
+              : type === 4
+                ? "S_SHG_E"
+                : [];
     return (
       <View
         key={"r " + index}
@@ -236,7 +236,7 @@ export default class DanismanHedefComponent extends React.Component {
           <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(4)}>
               <Text style={[styles.headerText, { backgroundColor: "#B7C6E4" }]}>
-                SATIŞ HEDEFİ GERÇEKLEŞTİRME
+                SATIŞ HEDEFİ GERÇEKLEŞME
               </Text>
             </TouchableOpacity>
             {visible[4] === true && this.renderTable(4)}

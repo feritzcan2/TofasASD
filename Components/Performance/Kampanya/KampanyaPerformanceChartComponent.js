@@ -75,12 +75,12 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
     return this.props.hedefTuru === 0
       ? parseInt(data.hepsi.replace(".", "").replace(",", ""))
       : this.props.hedefTuru === 1
-      ? parseInt(data.perakende.replace(".", "").replace(",", ""))
-      : this.props.hedefTuru === 2
-      ? parseInt(data.sigorta.replace(".", "").replace(",", ""))
-      : this.props.hedefTuru === 3
-      ? parseInt(data.yetkili.replace(".", "").replace(",", ""))
-      : parseInt(data.hepsi.replace(".", "").replace(",", ""));
+        ? parseInt(data.perakende.replace(".", "").replace(",", ""))
+        : this.props.hedefTuru === 2
+          ? parseInt(data.sigorta.replace(".", "").replace(",", ""))
+          : this.props.hedefTuru === 3
+            ? parseInt(data.yetkili.replace(".", "").replace(",", ""))
+            : parseInt(data.hepsi.replace(".", "").replace(",", ""));
   }
   renderPerformanceTable = (data, index) => {
     let barData = [];
@@ -247,7 +247,7 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
                 }}
               />
               <Text style={{ marginLeft: 10, fontSize: normalize(12) }}>
-                Hedef gerçekleştirme
+                Hedef Gerçekleşme
               </Text>
             </View>
           </View>

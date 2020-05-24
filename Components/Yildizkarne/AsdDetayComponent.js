@@ -292,14 +292,14 @@ export default class AsdDetayComponent extends React.Component {
       index === 0
         ? allData.satisHedef
         : index === 1
-        ? allData.yeniMusteri
-        : index === 2
-        ? allData.aksesuarSatis
-        : index === 3
-        ? allData.firsatParca
-        : index === 4
-        ? allData.dmpSatis
-        : [];
+          ? allData.yeniMusteri
+          : index === 2
+            ? allData.aksesuarSatis
+            : index === 3
+              ? allData.firsatParca
+              : index === 4
+                ? allData.dmpSatis
+                : [];
     return (
       <ScrollView key={"d" + index} horizontal={true}>
         <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
@@ -320,7 +320,7 @@ export default class AsdDetayComponent extends React.Component {
           <View style={{ marginTop: screenHeight * 0.04 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(0)}>
               <Text style={[styles.headerText, { backgroundColor: "#F8CDA0" }]}>
-                SATIŞ HEDEFİ GERÇEKLEŞTİRME
+                SATIŞ HEDEFİ GERÇEKLEŞME
               </Text>
             </TouchableOpacity>
             {visible[0] === true && this.renderTable(0)}

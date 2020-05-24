@@ -231,7 +231,7 @@ export default class TabsContainer extends Component {
               flex: 1,
             }}
           >
-            Performans Ölçme
+            Performans Takibi
           </Text>
           <Text
             name="musteri"
