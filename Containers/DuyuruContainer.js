@@ -40,9 +40,22 @@ export default class DuyuruContainer extends React.Component {
     super(props);
     this.state = {
       data: [1, 2, 3], notificationOpen: false,
-      notifications: { read: [1, 1, 1], nonRead: [1] }
+      notifications: { read: [], nonRead: [] }
     };
-    getNotifications()
+    getNotifications(true).then(data => {
+      let notifications = this.state.notifications
+      notifications.read = data
+      this.setState({ notifications })
+    }).catch(e => {
+      console.log("notif err: ", e)
+    })
+    getNotifications(false).then(data => {
+      let notifications = this.state.notifications
+      notifications.nonRead = data
+      this.setState({ notifications })
+    }).catch(e => {
+      console.log("notif err: ", e)
+    })
   }
 
   toggleBildirim = () => {

@@ -51,21 +51,7 @@ export default class ButtonSubmit extends Component {
     // "TEST", "E2018RYZ"
     //    login(this.props.username, this.props.pw).then((status) => {
 
-    // login("TEST2", "2").then((status) => {
-    //   console.log(status);
-    //   this._onGrow();
-    //   this.setState({ isLoading: false });
-    //   this.buttonAnimated.setValue(0);
-    //   this.growAnimated.setValue(0);
-    //   if (status === true) {
-    //     this.props.setLoggedIn();
-    //   } else {
-    //     alert("Giriş bilgileri yanlış!");
-    //   }
-    // });
-
-    getCustomerList('')
-    login("TEST", "E2018RYZ").then((status) => {
+    login("TEST2", "2").then((status) => {
       console.log(status);
       this._onGrow();
       this.setState({ isLoading: false });
@@ -77,6 +63,19 @@ export default class ButtonSubmit extends Component {
         alert("Giriş bilgileri yanlış!");
       }
     });
+
+    // login("TEST", "E2018RYZ").then((status) => {
+    //   console.log(status);
+    //   this._onGrow();
+    //   this.setState({ isLoading: false });
+    //   this.buttonAnimated.setValue(0);
+    //   this.growAnimated.setValue(0);
+    //   if (status === true) {
+    //     this.props.setLoggedIn();
+    //   } else {
+    //     alert("Giriş bilgileri yanlış!");
+    //   }
+    // });
 
     // setTimeout(() => {
     //   this._onGrow();

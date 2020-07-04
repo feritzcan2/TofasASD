@@ -4,6 +4,7 @@ let customerListUrl =
   "https://puan.donmezdebriyaj.com.tr/api/user/GetCustomerList/";
 import { AsyncStorage } from "react-native";
 import { getBayiList, getCampaigns, getRegions } from "./GeneralPerformance";
+import { getNotifications } from "./Bildirim";
 export function login(UserName, Password) {
   return new Promise(async function (resolve, reject) {
     let result = await fetch(url, {

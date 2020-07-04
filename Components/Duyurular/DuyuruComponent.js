@@ -88,6 +88,8 @@ export default class DuyuruComponent extends React.Component {
                   width: "25%",
                   height: "100%",
                   alignSelf: "flex-end",
+                  alignItems: "flex-end",
+
                 }}
               >
                 <TouchableOpacity
@@ -95,16 +97,8 @@ export default class DuyuruComponent extends React.Component {
                     this.setState({ detailShown: false, detail: null })
                   }
                 >
-                  <Text
-                    style={{
-                      fontSize: normalize(40),
-                      fontWeight: "bold",
-                      color: "red",
-                      alignSelf: "flex-end",
-                    }}
-                  >
-                    X
-                  </Text>
+                  <Image style={{ resizeMode: "stretch", height: screenWidth / 11, width: screenWidth / 11 }} source={require("../../assets/cancel.png")} />
+
                 </TouchableOpacity>
               </View>
             </View>
@@ -123,7 +117,11 @@ export default class DuyuruComponent extends React.Component {
               scrollEnabled={false}
               injectedJavaScript={`const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=0.5, maximum-scale=0.5, user-scalable=2.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); `}
               scalesPageToFit={true}
-              source={{ html: this.state.detail.Content }}
+              source={{
+                html: `<style>
+    body { font-size: 200%; word-wrap: break-word; overflow-wrap: break-word; }
+</style>`+ this.state.detail.Content
+              }}
             />
             <View
               style={{

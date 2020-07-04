@@ -1,6 +1,6 @@
 let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
 
-export function getNotifications() {
+export function getNotifications(hidden) {
     return new Promise(async function (resolve, reject) {
         if (!global.userData || !global.userData.Token) resolve(null);
 
@@ -16,7 +16,7 @@ export function getNotifications() {
                 Name: "GetList_UserNotification",
                 Data: {
                     Parameters: {
-                        IsHide: false
+                        IsHide: hidden
                     },
                     Name: "GetList_UserNotification",
                 },
@@ -28,7 +28,7 @@ export function getNotifications() {
             Name: "GetList_UserNotification",
             Data: {
                 Parameters: {
-                    IsHide: true
+                    IsHide: false
                 },
                 Name: "GetList_UserNotification",
             },
