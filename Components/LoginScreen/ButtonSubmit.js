@@ -14,7 +14,7 @@ import {
 import { Actions, ActionConst } from "react-native-router-flux";
 
 import spinner from "../../assets/loading.gif";
-import { login } from "../../Api/Login";
+import { login, getCustomerList } from "../../Api/Login";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
@@ -51,6 +51,20 @@ export default class ButtonSubmit extends Component {
     // "TEST", "E2018RYZ"
     //    login(this.props.username, this.props.pw).then((status) => {
 
+    // login("TEST2", "2").then((status) => {
+    //   console.log(status);
+    //   this._onGrow();
+    //   this.setState({ isLoading: false });
+    //   this.buttonAnimated.setValue(0);
+    //   this.growAnimated.setValue(0);
+    //   if (status === true) {
+    //     this.props.setLoggedIn();
+    //   } else {
+    //     alert("Giriş bilgileri yanlış!");
+    //   }
+    // });
+
+    getCustomerList('')
     login("TEST", "E2018RYZ").then((status) => {
       console.log(status);
       this._onGrow();

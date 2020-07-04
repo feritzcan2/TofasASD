@@ -42,7 +42,7 @@ export default class GeneralPerformanceChartComponent extends React.Component {
   getMaxValue = (data) => {
     let max = 100000;
     for (let a = 0; a < data.length; a++) {
-      let value = parseInt(data[a].target.replace(".", ""));
+      let value = data[a].target;
       if (value > max) max = value;
     }
     let kalan = max % 100000;
@@ -73,20 +73,20 @@ export default class GeneralPerformanceChartComponent extends React.Component {
   }
   getTabiSatis(data) {
     return this.props.hedefTuru === 0
-      ? parseInt(data.hepsi.replace(".", "").replace(",", ""))
+      ? parseInt(data.hepsi)
       : this.props.hedefTuru === 1
-        ? parseInt(data.perakende.replace(".", "").replace(",", ""))
+        ? parseInt(data.perakende)
         : this.props.hedefTuru === 2
-          ? parseInt(data.sigorta.replace(".", "").replace(",", ""))
+          ? parseInt(data.sigorta)
           : this.props.hedefTuru === 3
-            ? parseInt(data.yetkili.replace(".", "").replace(",", ""))
-            : parseInt(data.hepsi.replace(".", "").replace(",", ""));
+            ? parseInt(data.yetkili)
+            : parseInt(data.hepsi);
   }
   renderPerformanceTable = (data, index) => {
     let barData = [];
     for (let a = 0; a < data.length; a++) {
       barData.push({
-        hedef: parseInt(data[a].target.replace(".", "").replace(",", "")),
+        hedef: parseInt(data[a].target),
         hedefeTabiSatis: this.getTabiSatis(data[a]),
         hedefGerceklestirme: data[a].hedefGerceklestirme,
       });

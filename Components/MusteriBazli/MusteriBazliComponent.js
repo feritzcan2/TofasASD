@@ -100,7 +100,7 @@ export default class MusteriBazliComponent extends React.Component {
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-          <Text style={[styles.headerText]}>Code</Text>
+          <Text style={[styles.headerText]}>Kod</Text>
           <Text style={[styles.nameText]}>{element.Code}</Text>
         </View>
       </TouchableOpacity>
@@ -351,7 +351,7 @@ export default class MusteriBazliComponent extends React.Component {
     );
   };
   render() {
-    const {} = this.props;
+    const { } = this.props;
 
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>

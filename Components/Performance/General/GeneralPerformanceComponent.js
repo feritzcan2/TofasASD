@@ -54,7 +54,7 @@ export default class GeneralPerformanceComponent extends React.Component {
         <Tabs
           selected={this.state.page}
           style={{
-            top: "5%",
+            top: "6%",
             zIndex: 50000,
             backgroundColor: "white",
             height: "10%",
@@ -62,7 +62,6 @@ export default class GeneralPerformanceComponent extends React.Component {
           }}
           selectedStyle={{
             color: "orange",
-            backgroundColor: "yellow",
             borderRadius: 10,
           }}
           onSelect={(el) => this.setState({ page: el.props.name })}

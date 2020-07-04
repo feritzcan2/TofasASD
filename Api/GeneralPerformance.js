@@ -1,5 +1,44 @@
 let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
 
+
+export function getRegions() {
+  return new Promise(async function (resolve, reject) {
+    if (!global.userData || !global.userData.Token) resolve(null);
+
+    let result = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+
+        Authorization: "",
+      },
+      body: JSON.stringify({
+        Token: global.userData.Token,
+        Name: "GetList_RegionBySalesmanRole",
+
+        Data: {
+          Name: "GetList_RegionBySalesmanRole",
+        },
+      }),
+    });
+
+
+    result = await result.json().catch((error) => {
+      resolve(null);
+      return;
+    });
+    console.log("reg resp ", result)
+    if (result.Data === null || result.Data === undefined) {
+      resolve(null);
+      return;
+    }
+    console.log("regions", result.Data)
+    global.regions = result.Data;
+
+    resolve(result.Data);
+  });
+}
+
 export function getBayiList() {
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
@@ -37,6 +76,7 @@ export function getBayiList() {
 
 export function getGenelPerformance(filters) {
   return new Promise(async function (resolve, reject) {
+    console.log("genel perf")
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -53,14 +93,29 @@ export function getGenelPerformance(filters) {
             Region: filters.region,
             DealerCode: filters.dealerCode,
             Year: filters.year,
-            PreviewType: filters.donemTuru,
-            Quarter: filters.quarter,
+            PreviewType: 1,
+            Quarter: 3,
             MonthNo: filters.month,
           },
           Name: "GetList_SalePerformanceSalesmanASD",
         },
       }),
     });
+
+    console.log("paramsi ,", JSON.stringify({
+      Token: global.userData.Token,
+      Data: {
+        Parameters: {
+          Region: filters.region,
+          DealerCode: filters.dealerCode,
+          Year: filters.year,
+          PreviewType: filters.donemTuru,
+          Quarter: filters.quarter,
+          MonthNo: filters.month,
+        },
+        Name: "GetList_SalePerformanceSalesmanASD",
+      },
+    }))
 
     result = await result.json().catch((error) => {
       resolve(null);
@@ -71,6 +126,7 @@ export function getGenelPerformance(filters) {
       return;
     }
 
+    console.log("data length: " + result.Data.length, result.Data[0])
     resolve(result.Data);
   });
 }
@@ -138,7 +194,6 @@ export function getCampaignPerformance(id) {
       resolve(null);
       return;
     });
-    // console.log("kampanya:", result);
     if (
       result.Data === null ||
       result.Data === undefined ||

@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { normalize } from "../HelperFunctions";
 import { Dropdown } from "react-native-material-dropdown";
-import { getBayiList } from "../Api/GeneralPerformance";
+import { getBayiList, getRegions } from "../Api/GeneralPerformance";
 
 export default class FilterComponent extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export default class FilterComponent extends React.Component {
       this.setState({ filters: { ...nextProps.selectedFilters } });
     return true;
   }
-  apply = () => {};
+  apply = () => { };
 
   createData = () => {
     let yilData = [];
@@ -40,6 +40,8 @@ export default class FilterComponent extends React.Component {
       {
         value: "TÜM BAYİLER",
       },
+    ];
+    let bolgeler = [
     ];
     if (global.bayiler) {
       for (let a = 0; a < global.bayiler.length; a++) {
@@ -54,32 +56,26 @@ export default class FilterComponent extends React.Component {
       });
       return;
     }
+    if (global.regions) {
+      console.log("has regions")
+      for (let a = 0; a < global.regions.length; a++) {
+        bolgeler.push({
+          value: global.regions[a].Text,
+        });
+      }
+    } else {
+      console.log("has no regions")
+
+      getRegions().then((e) => {
+        this.state = this.createData();
+        return;
+      });
+      return;
+    }
 
     return {
       filters: { ...this.props.selectedFilters },
-      bolgeData: [
-        {
-          value: "TÜM BÖLGELER",
-        },
-        {
-          value: "1.BÖLGE",
-        },
-        {
-          value: "2.BÖLGE",
-        },
-        {
-          value: "3.BÖLGE",
-        },
-        {
-          value: "4.BÖLGE",
-        },
-        {
-          value: "5.BÖLGE",
-        },
-        {
-          value: "6.BÖLGE",
-        },
-      ],
+      bolgeData: bolgeler,
       bayiData: bayiler,
       yilData: yilData,
       donemData: [
@@ -158,7 +154,7 @@ export default class FilterComponent extends React.Component {
         transparent
         animationType={"fade"}
         visible={this.props.filterVisible}
-        onRequestClose={() => function () {}}
+        onRequestClose={() => function () { }}
       >
         <View
           style={[

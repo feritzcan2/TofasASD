@@ -3,7 +3,7 @@ let getUserUrl = "https://puan.donmezdebriyaj.com.tr/api/user/GetUser/";
 let customerListUrl =
   "https://puan.donmezdebriyaj.com.tr/api/user/GetCustomerList/";
 import { AsyncStorage } from "react-native";
-import { getBayiList, getCampaigns } from "./GeneralPerformance";
+import { getBayiList, getCampaigns, getRegions } from "./GeneralPerformance";
 export function login(UserName, Password) {
   return new Promise(async function (resolve, reject) {
     let result = await fetch(url, {
@@ -26,12 +26,18 @@ export function login(UserName, Password) {
           Name: "Login",
         },
       }),
-    });
+    }).catch(function (error) {
+
+      console.log('There has been a problem with your fetch operation: ' + error.message, error);
+      // ADD THIS THROW error
+      throw error;
+    });;
 
     result = await result.json().catch((error) => {
       resolve(false);
       return;
     });
+
     console.log("login res", result);
     if (result.Data === null || result.Message !== "Success") {
       resolve(false);
@@ -43,6 +49,7 @@ export function login(UserName, Password) {
     global.userData = result.Data;
     console.log(result.Data);
     getBayiList();
+    getRegions()
     getCampaigns();
     resolve(true);
   });
