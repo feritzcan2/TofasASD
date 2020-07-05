@@ -34,13 +34,12 @@ export default class PerformanceContainer extends React.Component {
         hedefTuru: 0,
         region: 0,
         dealerCode: "",
-        quarter: 0,
+        quarter: 3,
         year: new Date().getFullYear(),
-        month: new Date().getMonth(),
+        month: new Date().getMonth() + 1,
         donemTuru: 0,
       },
     };
-
     getGenelPerformance(this.state.selectedPerformanceFilters).then((data) => {
       if (data) {
         AsyncStorage.setItem("perff", JSON.stringify(data));
@@ -56,6 +55,7 @@ export default class PerformanceContainer extends React.Component {
       });
     } else if (this.state.selectedCampaign) {
       getCampaignPerformance(this.state.selectedCampaign.Id).then((data) => {
+        //   console.log(data)
         this.preparePerformanceData(data, true);
       });
     }
@@ -68,6 +68,7 @@ export default class PerformanceContainer extends React.Component {
       this.state.selectedCampaign !== nextState.selectedCampaign
     ) {
       getCampaignPerformance(nextState.selectedCampaign.Id).then((data) => {
+
         this.preparePerformanceData(data, true);
       });
     }
@@ -104,18 +105,21 @@ export default class PerformanceContainer extends React.Component {
     let datas = {};
     for (let a = 0; a < serverData.length; a++) {
       let data = serverData[a];
+      // if (data.Region === "1" && data.DealerName === "BİRMOT BEYLİKDÜZÜ" && a === 0)
+      //   console.log("Sever:", data)
+
       let rowData = {
         DealerName: data.DealerName,
         Region: data.Region,
         name: data.SalesmanName,
-        target: data.PriceTargetStr,
-        tumSatis: data.PriceTotalStr,
-        tabiSatis: data.PriceLinkedTargetStr,
-        primeTabiSatis: data.PriceLinkedTargetStr,
-        hepsi: data.PriceLinkedTargetStr,
-        perakende: data.PriceLinkedTarget_PerakendeStr,
-        sigorta: data.PriceLinkedTarget_SigortaStr,
-        yetkili: data.PriceLinkedTarget_ServisStr,
+        target: parseInt(data.PriceTarget, 10),
+        tumSatis: parseInt(data.PriceTotal, 10),
+        tabiSatis: parseInt(data.PriceLinkedTarget, 10),
+        primeTabiSatis: parseInt(data.PriceLinkedTarget, 10),
+        hepsi: parseInt(data.PriceLinkedTarget, 10),
+        perakende: parseInt(data.PriceLinkedTarget_Perakende, 10),
+        sigorta: parseInt(data.PriceLinkedTarget_Sigorta, 10),
+        yetkili: parseInt(data.PriceLinkedTarget_Servis, 10),
         hedefGerceklestirme: data.TargetPercent,
       };
 

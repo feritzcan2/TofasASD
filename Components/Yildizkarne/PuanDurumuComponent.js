@@ -11,6 +11,7 @@ import {
   ScrollView,
 } from "react-native";
 import { normalize } from "../../HelperFunctions";
+import BestThreeComponent from "./BestThreeComponent";
 
 const screenHeight = Dimensions.get("screen").height;
 
@@ -44,7 +45,7 @@ export default class PuanDurumuComponent extends React.Component {
         <View
           style={{
             height: "100%",
-            width: 60,
+            flex: 1,
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
@@ -63,7 +64,7 @@ export default class PuanDurumuComponent extends React.Component {
         <View
           style={{
             height: "100%",
-            width: 60,
+            flex: 1,
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
@@ -83,7 +84,7 @@ export default class PuanDurumuComponent extends React.Component {
           <View
             style={{
               height: "100%",
-              width: 100,
+              flex: 1.5,
               borderColor: "#dbe0e2",
               borderWidth: 0.5,
               alignItems: "center",
@@ -104,7 +105,7 @@ export default class PuanDurumuComponent extends React.Component {
           <View
             style={{
               height: "100%",
-              width: 100,
+              flex: 1.5,
               borderColor: "#dbe0e2",
               borderWidth: 0.5,
               alignItems: "center",
@@ -121,10 +122,10 @@ export default class PuanDurumuComponent extends React.Component {
             </Text>
           </View>
         )}
-        <View
+        {/* <View
           style={{
             height: "100%",
-            width: 100,
+            flex: 1.5,
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
@@ -139,11 +140,11 @@ export default class PuanDurumuComponent extends React.Component {
           >
             {isHeader ? "KOD" : rowData.Code}
           </Text>
-        </View>
+        </View> */}
         <View
           style={{
             height: "100%",
-            width: 100,
+            flex: 1.7,
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
@@ -162,7 +163,7 @@ export default class PuanDurumuComponent extends React.Component {
         <View
           style={{
             height: "100%",
-            width: 100,
+            flex: 1,
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
@@ -187,26 +188,26 @@ export default class PuanDurumuComponent extends React.Component {
       index === 0
         ? allData.toptanYedekA
         : index === 1
-        ? allData.toptanYedekB
-        : index === 2
-        ? allData.aktifDanismanA
-        : index === 3
-        ? allData.aktifDanismanB
-        : [];
+          ? allData.toptanYedekB
+          : index === 2
+            ? allData.aktifDanismanA
+            : index === 3
+              ? allData.aktifDanismanB
+              : [];
     return (
-      <ScrollView key={"d" + index} horizontal={true}>
-        <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
-          {this.renderRow(data[0], null, true, index === 2 || index === 3)}
-          {data.map((rowData, indexX) => {
-            return this.renderRow(
-              rowData,
-              indexX,
-              false,
-              index === 2 || index === 3
-            );
-          })}
-        </View>
-      </ScrollView>
+      <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
+        {<BestThreeComponent data={data} />}
+        {this.renderRow(data[0], null, true, index === 2 || index === 3)}
+        {data.map((rowData, indexX) => {
+          if (indexX === 0 || indexX === 1 || indexX === 2) return
+          return this.renderRow(
+            rowData,
+            indexX,
+            false,
+            index === 2 || index === 3
+          );
+        })}
+      </View>
     );
   };
 
@@ -255,13 +256,14 @@ const styles = StyleSheet.create({
     marginTop: "8%",
     display: "flex",
   },
+  rowText: { fontSize: normalize(12) },
   headerText: {
     color: "#457ab2",
     fontWeight: "bold",
     textAlign: "center",
     backgroundColor: "#fceba6",
     width: "100%",
-    fontSize: normalize(20),
+    fontSize: normalize(18),
     paddingTop: 10,
     paddingBottom: 10,
   },

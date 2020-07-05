@@ -80,7 +80,7 @@ export default class YildizKarneContainer extends React.Component {
           >
             DETAY
           </Text>
-          <Text
+          {/* <Text
             name="parametreler"
             style={{
               fontSize: normalize(13),
@@ -112,7 +112,7 @@ export default class YildizKarneContainer extends React.Component {
             }}
           >
             Hedef Girişi
-          </Text>
+          </Text> */}
         </Tabs>
 
         <View style={{ flex: 1, marginTop: "15%" }}>

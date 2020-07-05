@@ -44,7 +44,7 @@ export default class TypmDetayComponent extends React.Component {
           isHeader ? { backgroundColor: "#f6f6f6" } : {},
         ]}
       >
-        <View
+        {/* <View
           style={{
             height: "100%",
             width: 60,
@@ -62,7 +62,7 @@ export default class TypmDetayComponent extends React.Component {
           >
             {isHeader ? "KOD" : rowData.Code}
           </Text>
-        </View>
+        </View> */}
         <View
           style={{
             height: "100%",
@@ -255,20 +255,20 @@ export default class TypmDetayComponent extends React.Component {
       index === 0
         ? allData.yedekParca
         : index === 1
-        ? allData.yeniMusteri
-        : index === 2
-        ? allData.oparWeb
-        : index === 3
-        ? allData.aksesuarHacmi
-        : index === 4
-        ? allData.yerelIletisim
-        : index === 5
-        ? allData.firsatParcalari
-        : index === 6
-        ? allData.stokDevir
-        : index === 7
-        ? allData.kampanyaPaneli
-        : [];
+          ? allData.yeniMusteri
+          : index === 2
+            ? allData.oparWeb
+            : index === 3
+              ? allData.aksesuarHacmi
+              : index === 4
+                ? allData.yerelIletisim
+                : index === 5
+                  ? allData.firsatParcalari
+                  : index === 6
+                    ? allData.stokDevir
+                    : index === 7
+                      ? allData.kampanyaPaneli
+                      : [];
     return (
       <ScrollView key={"d" + index} horizontal={true}>
         <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>

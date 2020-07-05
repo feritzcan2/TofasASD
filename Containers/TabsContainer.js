@@ -220,7 +220,7 @@ export default class TabsContainer extends Component {
               flex: 1,
             }}
           >
-            Duyurular
+            Ana Sayfa
           </Text>
           <Text
             name="genel"

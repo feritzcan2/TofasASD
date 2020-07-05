@@ -21,6 +21,7 @@ import PerformanceTableComponent from "./KampanyaPerformanceTableComponent";
 import { normalize } from "../../../HelperFunctions";
 import FilterComponent from "../../FilterComponent";
 import CampaignSelectorComponent from "../../CampaignSelectorComponent";
+import KampanyaDetayComponent from "./KampanyaDetayComponent";
 
 export default class KampanyaPerformanceComponent extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ export default class KampanyaPerformanceComponent extends React.Component {
       kampanyaSelectionVisible: false,
       performanceData: [],
       page: "tablo",
+      detailVisible: false
     };
   }
 
@@ -38,10 +40,18 @@ export default class KampanyaPerformanceComponent extends React.Component {
     this.setState({ selectedTab: tab });
   };
 
+  showDetail = () => {
+    this.setState({ detailVisible: true })
+  }
+
   render() {
     const { selectedTab, performanceData } = this.state;
     return (
       <View style={{ flex: 1, marginBottom: "3%" }}>
+        <KampanyaDetayComponent
+          visible={this.state.detailVisible}
+          close={() => this.setState({ detailVisible: false })}
+        />
         <CampaignSelectorComponent
           selectedCampaign={this.props.selectedCampaign}
           selectedFilters={this.props.filters}
@@ -50,6 +60,7 @@ export default class KampanyaPerformanceComponent extends React.Component {
           visible={this.props.campaignFilterVisible}
           close={() => this.setState({ kampanyaSelectionVisible: false })}
         />
+
 
         <Tabs
           selected={this.state.page}
@@ -133,6 +144,7 @@ export default class KampanyaPerformanceComponent extends React.Component {
             <PerformanceTableComponent
               performanceData={this.props.selectedCampaignPerformance}
               hedefTuru={0}
+              showDetail={this.showDetail}
             />
           )}
           {this.state.page === "grafik" && (

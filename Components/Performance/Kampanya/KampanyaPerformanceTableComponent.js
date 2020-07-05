@@ -147,22 +147,39 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
           style={{
             height: "100%",
             flex: 1,
+            flexDirection: "column",
             borderColor: "#dbe0e2",
             borderWidth: 0.5,
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "space-evenly",
           }}
         >
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : { marginTop: "15%" },
             ]}
           >
             {isHeader
-              ? "HEDEF GERÇEKLEŞME"
+              ? "Kampanya Performans"
               : rowData.hedefGerceklestirme.toFixed(2) + " %"}
+
           </Text>
+          {!isHeader && <TouchableOpacity
+            onPress={this.props.showDetail}
+            style={{
+              flex: 1,
+              alignItems: "center", justifyContent: "center", width: "80%", backgroundColor: "red", marginBottom: "5%", marginTop: "10%"
+            }}>
+            <Text
+              style={[
+                styles.rowText,
+                isHeader ? { fontWeight: "800", color: "#5a5a5a" } : { color: "white" },
+              ]}
+            >
+              İNCELE
+
+          </Text></TouchableOpacity>}
         </View>
       </View>
     );

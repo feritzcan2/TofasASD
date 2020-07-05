@@ -15,6 +15,7 @@ import { normalize } from "../../HelperFunctions";
 import { WebView } from "react-native-webview";
 import * as FileSystem from "expo-file-system";
 import { Linking } from "expo";
+import { Avatar, Badge, Icon, withBadge } from 'react-native-elements'
 
 const screenHeight = Dimensions.get("window").height;
 const screenWidth = Dimensions.get("window").width;
@@ -87,6 +88,8 @@ export default class DuyuruComponent extends React.Component {
                   width: "25%",
                   height: "100%",
                   alignSelf: "flex-end",
+                  alignItems: "flex-end",
+
                 }}
               >
                 <TouchableOpacity
@@ -94,16 +97,8 @@ export default class DuyuruComponent extends React.Component {
                     this.setState({ detailShown: false, detail: null })
                   }
                 >
-                  <Text
-                    style={{
-                      fontSize: normalize(40),
-                      fontWeight: "bold",
-                      color: "red",
-                      alignSelf: "flex-end",
-                    }}
-                  >
-                    X
-                  </Text>
+                  <Image style={{ resizeMode: "stretch", height: screenWidth / 11, width: screenWidth / 11 }} source={require("../../assets/cancel.png")} />
+
                 </TouchableOpacity>
               </View>
             </View>
@@ -122,7 +117,11 @@ export default class DuyuruComponent extends React.Component {
               scrollEnabled={false}
               injectedJavaScript={`const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=0.5, maximum-scale=0.5, user-scalable=2.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); `}
               scalesPageToFit={true}
-              source={{ html: this.state.detail.Content }}
+              source={{
+                html: `<style>
+    body { font-size: 200%; word-wrap: break-word; overflow-wrap: break-word; }
+</style>`+ this.state.detail.Content
+              }}
             />
             <View
               style={{
@@ -179,7 +178,22 @@ export default class DuyuruComponent extends React.Component {
           style={{ height: "30%", width: "100%", resizeMode: "stretch" }}
           source={require("../../assets/headerbg.png")}
         >
-          <Text style={styles.duyuruHeaderText}>DUYURULAR</Text>
+          <View style={{ flex: 1, marginTop: "7%", marginRight: "5%", alignItems: "flex-end" }}>
+            <Avatar
+              source={require("../../assets/notificationIcon.png")}
+              size="large"
+              onPress={this.props.toggleBildirim}
+
+            />
+
+            <Badge
+              value={this.props.notifCount}
+              status="success"
+              containerStyle={{ position: 'absolute', top: -4, right: -4 }}
+            />
+            <Text style={styles.duyuruHeaderText}>DUYURULAR</Text>
+
+          </View>
         </ImageBackground>
         {this.state.detailShown !== true && (
           <ScrollView style={styles.scrollContainer}>
@@ -223,9 +237,9 @@ const styles = StyleSheet.create({
   scrollContainer: {
     width: "80%",
     position: "absolute",
-    top: "15%",
+    top: "20%",
     left: "10%",
-    height: "75%",
+    height: "69%",
   },
   announcementContainer: {
     borderRadius: 10,
@@ -245,9 +259,9 @@ const styles = StyleSheet.create({
   },
   duyuruHeaderText: {
     color: "#e7ee98",
-
+    alignSelf: "center",
     fontSize: normalize(25),
-    marginTop: "15%",
+    marginTop: "0%",
     textAlign: "center",
     fontWeight: "800",
   },

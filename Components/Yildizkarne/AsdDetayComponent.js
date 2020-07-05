@@ -44,7 +44,7 @@ export default class AsdDetayComponent extends React.Component {
           isHeader ? { backgroundColor: "#f6f6f6" } : {},
         ]}
       >
-        <View
+        {/* <View
           style={{
             height: "100%",
             width: 60,
@@ -62,7 +62,7 @@ export default class AsdDetayComponent extends React.Component {
           >
             {isHeader ? "BAYİ KODU" : rowData.Dealer.Code}
           </Text>
-        </View>
+        </View> */}
         <View
           style={{
             height: "100%",
@@ -82,7 +82,7 @@ export default class AsdDetayComponent extends React.Component {
             {isHeader ? "BAYİ ADI" : rowData.Dealer.Name}
           </Text>
         </View>
-        <View
+        {/* <View
           style={{
             height: "100%",
             width: 100,
@@ -100,7 +100,7 @@ export default class AsdDetayComponent extends React.Component {
           >
             {isHeader ? "KOD" : rowData.Code}
           </Text>
-        </View>
+        </View> */}
         <View
           style={{
             height: "100%",
