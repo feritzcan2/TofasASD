@@ -11,9 +11,9 @@ import {
   FlatList,
   Dimensions,
   Alert, 
-  ToastAndroid
-} from "react-native";
+  ToastAndroid,
 
+} from "react-native";
 import {
   LineChart,
   BarChart,
@@ -38,6 +38,11 @@ import LoginScreen from "../../LoginScreen/LoginScreen";
 export default class KampanyaPerformanceChartComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state={
+      modalVisible:false,
+      modalHeader:'',
+      modalText:''
+    }
   }
   shouldComponentUpdate(nextProps) {
     if (this.props.performanceData !== nextProps.performanceData) {
@@ -49,7 +54,7 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
   getMaxValue = (data) => {
     let max = 100000;
     for (let a = 0; a < data.length; a++) {
-      let value = parseInt(data[a].target.replace(".", ""));
+      let value = data[a].target;
       if (value > max) max = value;
     }
     let kalan = max % 100000;
@@ -80,20 +85,20 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
   }
   getTabiSatis(data) {
     return this.props.hedefTuru === 0
-      ? parseInt(data.hepsi.replace(".", "").replace(",", ""))
+      ? parseInt(data.hepsi)
       : this.props.hedefTuru === 1
-        ? parseInt(data.perakende.replace(".", "").replace(",", ""))
+        ? parseInt(data.perakende)
         : this.props.hedefTuru === 2
-          ? parseInt(data.sigorta.replace(".", "").replace(",", ""))
+          ? parseInt(data.sigorta)
           : this.props.hedefTuru === 3
-            ? parseInt(data.yetkili.replace(".", "").replace(",", ""))
-            : parseInt(data.hepsi.replace(".", "").replace(",", ""));
+            ? parseInt(data.yetkili)
+            : parseInt(data.hepsi);
   }
   renderPerformanceTable = (data, index) => {
     let barData = [];
     for (let a = 0; a < data.length; a++) {
       barData.push({
-        hedef: parseInt(data[a].target.replace(".", "").replace(",", "")),
+        hedef: parseInt(data[a].target),
         hedefeTabiSatis: this.getTabiSatis(data[a]),
         hedefGerceklestirme: parseInt(data[a].hedefGerceklestirme),
       });
@@ -105,9 +110,26 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
     let maxHedef = 100;
     let minHedef = this.getMinHedefValue(data);
     let hedefInterval = (Math.abs(maxHedef) + Math.abs(minHedef)) / 6;
+    let modalVisible=true
     //.log("max: ", maxHedef, " min : ", minHedef);
     return (
       <View key={"aaaaaa" + index} style={{ marginTop: screenHeight * 0.05 }}>
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={this.state.modalVisible}
+      >
+        <TouchableOpacity
+        onPress={() => {
+          this.setState({modalVisible:false})
+        }}
+         style={{height:screenHeight,width:screenWidth,alignItems:'center',justifyContent:'center'}}>
+          <View style={{width:screenWidth*0.7,height:screenHeight*0.1,borderRadius:20,borderWidth:1,backgroundColor:'#fff',paddingVertical:20}}>
+            <Text style={{fontWeight:'bold',fontSize:20,textAlign:'center'}}>{this.state.modalHeader}</Text>
+            <Text style={{fontSize:20,flex:1,textAlign:'center'}}>{this.state.modalText}</Text>
+          </View>
+        </TouchableOpacity>
+      </Modal>
         <View style={{ marginLeft: "20%" }}>
           <Text
             style={{
@@ -129,21 +151,21 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
           }}
           horizontal={true}
         >
-          <View style={{ width: 60, height: 300 }}>
+          <View style={{ width: 70, height: 300 }}>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 6))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 6/100000)*100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 5))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 5/100000)*100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 4))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 4/100000)*100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 3))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 3/100000)*100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 2))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 2/100000)*100000)}</Text>
             </View>
             <View
               style={{
@@ -152,7 +174,7 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
                 justifyContent: "space-between",
               }}
             >
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 1))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 1/100000)*100000)}</Text>
               <Text>0</Text>
             </View>
           </View>
@@ -164,24 +186,12 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
                   <View style={{width:140,height:300,flexDirection:'row',justifyContent:'space-between',paddingHorizontal:10,alignItems:'flex-end'}}>
                      <TouchableOpacity style={{height:300*barData[index].hedef/max,width:55,backgroundColor:'#3d86c5',alignItems:'flex-end'}} 
                      onPress={()=>{
-                      ToastAndroid.showWithGravityAndOffset(
-                        data[index].name+':    Hedef: '+item.hedef,
-                        ToastAndroid.LONG,
-                        ToastAndroid.BOTTOM,
-                        25,
-                        50
-                      );
+                      this.setState({modalVisible:true,modalHeader:data[index].name,modalText:'Hedef: '+item.hedef})
                      }}>
                      </TouchableOpacity>
                      <TouchableOpacity 
                      onPress={()=>{
-                      ToastAndroid.showWithGravityAndOffset(
-                        data[index].name+':    Hedefe Tabi Satış: '+item.hedefeTabiSatis,
-                        ToastAndroid.LONG,
-                        ToastAndroid.BOTTOM,
-                        25,
-                        50
-                      );
+                      this.setState({modalVisible:true,modalHeader:data[index].name,modalText:'Hedefe Tabi Satış: '+item.hedefeTabiSatis})
                     }}
                      style={{height:300*barData[index].hedefeTabiSatis/max,width:55,backgroundColor:'#cc4728',alignItems:'flex-end'}}>
                   </TouchableOpacity>
@@ -201,13 +211,7 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
     fontSize="20"
     fontWeight="bold"
     onPress={()=>{
-      ToastAndroid.showWithGravityAndOffset(
-        data[index].name+':    Hedefe Gerçekleşme: '+item.hedefGerceklestirme,
-        ToastAndroid.LONG,
-        ToastAndroid.BOTTOM,
-        25,
-        50
-      );
+      this.setState({modalVisible:true,modalHeader:data[index].name,modalText:'Hedefe Gerçekleşme: '+item.hedefGerceklestirme})
     }}
     x="20"
     y={50+(100-item.hedefGerceklestirme)-15}
@@ -226,9 +230,7 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
   </Svg>
                 );
               })}
-        
-      
-       
+
       </View>
 
             <View
@@ -304,31 +306,45 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
               </Text>
             </View>
           </View>
-          <View style={{ width: 60, height: 300 }}>
-            <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{(minHedef + hedefInterval * 6).toFixed(1)}</Text>
+          <View style={{ width: 60, height: 300, }}>
+          <View style={{ flex: 1,  }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 8).toFixed(1)}</Text>
             </View>
-            <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{(minHedef + hedefInterval * 5).toFixed(1)}</Text>
+            <View style={{ flex: 1,  }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 7).toFixed(1)}</Text>
             </View>
-            <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{(minHedef + hedefInterval * 4).toFixed(1)}</Text>
+            <View style={{ flex: 1,  }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 6).toFixed(1)}</Text>
             </View>
-            <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{(minHedef + hedefInterval * 3).toFixed(1)}</Text>
+            <View style={{ flex: 1,  }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 5).toFixed(1)}</Text>
             </View>
-            <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{(minHedef + hedefInterval * 2).toFixed(1)}</Text>
+            <View style={{ flex: 1,  }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 4).toFixed(1)}</Text>
             </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <Text>{(minHedef + hedefInterval).toFixed(1)}</Text>
-              <Text>{minHedef.toFixed(1)}</Text>
+            <View style={{ flex: 1, }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 3).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 2).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * -2).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * -3).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * -4).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * -5).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * -6).toFixed(1)}</Text>
             </View>
           </View>
         </ScrollView>

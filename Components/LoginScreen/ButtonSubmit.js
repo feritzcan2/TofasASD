@@ -51,7 +51,7 @@ export default class ButtonSubmit extends Component {
     // "TEST", "E2018RYZ"
     //    login(this.props.username, this.props.pw).then((status) => {
 
-    login("TEST2", "2").then((status) => {
+    login("TEST", "E2018RYZ").then((status) => {
       console.log(status);
       this._onGrow();
       this.setState({ isLoading: false });
