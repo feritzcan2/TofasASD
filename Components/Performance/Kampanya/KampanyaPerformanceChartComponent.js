@@ -10,6 +10,7 @@ import {
   ScrollView,
   FlatList,
   Dimensions,
+  Alert
 } from "react-native";
 
 import {
@@ -20,6 +21,11 @@ import {
   YAxis,
   StackedBarChart,
 } from "react-native-svg-charts";
+import Svg, {
+  Text as SvgText,
+  Line,
+  Circle
+} from 'react-native-svg';
 import * as scale from "d3-scale";
 
 import { normalize } from "../../../HelperFunctions";
@@ -88,7 +94,7 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
       barData.push({
         hedef: parseInt(data[a].target.replace(".", "").replace(",", "")),
         hedefeTabiSatis: this.getTabiSatis(data[a]),
-        hedefGerceklestirme: data[a].hedefGerceklestirme,
+        hedefGerceklestirme: parseInt(data[a].hedefGerceklestirme),
       });
     }
     let keys = ["hedefeTabiSatis", "hedef"];
@@ -150,33 +156,61 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
             </View>
           </View>
           <View style={{ flex: 1 }}>
-            <StackedBarChart
-              spacingInner={0.3}
-              data={barData}
-              colors={["#CC4728", "#3d68c5"]}
-              keys={keys}
-              style={{ height: 300, width: data.length * 140 }}
-              svg={{ fill: "rgb(134, 65, 244)" }}
-              yMin={0}
-              yMax={max}
-            >
-              <Grid />
-            </StackedBarChart>
-            <LineChart
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                height: 300,
-                width: data.length * 140,
-              }}
-              data={barData}
-              yAccessor={({ item }) => item.hedefGerceklestirme}
-              yMin={minHedef}
-              contentInset={{ left: 40 }}
-              yMax={maxHedef}
-              svg={{ stroke: "#F29D39", strokeWidth: 5 }}
-            />
+              
+      <View style={{width:data.length*140,height:300,flexDirection:'row'}}>
+            {barData.map((item, index) => {
+                return (
+                  <View style={{width:140,height:300,flexDirection:'row',justifyContent:'space-between',paddingHorizontal:10,alignItems:'flex-end'}}>
+                     <TouchableOpacity style={{height:300*barData[index].hedef/max,width:55,backgroundColor:'#3d86c5',alignItems:'flex-end'}} 
+                     onPress={()=>{
+                       Alert.alert(data[index].name,'Hedef: '+item.hedef)
+                     }}>
+                     </TouchableOpacity>
+                     <TouchableOpacity 
+                     onPress={()=>{
+                      Alert.alert(data[index].name,'Hedefe Tabi Satış: '+item.hedefeTabiSatis)
+                    }}
+                     style={{height:300*barData[index].hedefeTabiSatis/max,width:55,backgroundColor:'#cc4728',alignItems:'flex-end'}}>
+                  </TouchableOpacity>
+                  </View>
+                );
+              })}
+            </View>
+            <View style={{width:data.length*140,height:200,flexDirection:'row',position:"absolute",left:40}}>
+            
+            {barData.map((item, index) => {
+                return (
+                  <Svg height="200" width={140}>
+                       
+                       <SvgText
+    fill="#2c982c"
+    stroke="#fff"
+    fontSize="20"
+    fontWeight="bold"
+    onPress={()=>{
+      Alert.alert(data[index].name,'Hedefe Gerçekleşme: '+item.hedefGerceklestirme)
+    }}
+    x="20"
+    y={50+(100-item.hedefGerceklestirme)-15}
+    textAnchor="middle"
+  >
+    {item.hedefGerceklestirme}%
+  </SvgText>
+  <Line 
+  x1="5" 
+  y1={50+(100-item.hedefGerceklestirme)} 
+  x2={index+1!=barData.length?"140":"0"} 
+  y2={index+1!=barData.length?50+(100-barData[(index+1)].hedefGerceklestirme):50+(100-item.hedefGerceklestirme)} 
+  stroke="#ff9900" 
+  strokeWidth="3" />
+  <Circle cx="7" cy={50+(100-item.hedefGerceklestirme)} r="7" fill="#ff9900" />
+  </Svg>
+                );
+              })}
+        
+      
+       
+      </View>
 
             <View
               style={{
