@@ -10,7 +10,8 @@ import {
   ScrollView,
   FlatList,
   Dimensions,
-  Alert
+  Alert, 
+  ToastAndroid
 } from "react-native";
 
 import {
@@ -165,12 +166,25 @@ export default class GeneralPerformanceChartComponent extends React.Component {
                   <View style={{width:140,height:300,flexDirection:'row',justifyContent:'space-between',paddingHorizontal:10,alignItems:'flex-end'}}>
                      <TouchableOpacity style={{height:300*barData[index].hedef/max,width:55,backgroundColor:'#3d86c5',alignItems:'flex-end'}} 
                      onPress={()=>{
-                       Alert.alert(data[index].name,'Hedef: '+item.hedef)
+                      ToastAndroid.showWithGravityAndOffset(
+                        data[index].name+':    Hedef: '+item.hedef,
+                        ToastAndroid.LONG,
+                        ToastAndroid.BOTTOM,
+                        25,
+                        50
+                      );
                      }}>
                      </TouchableOpacity>
                      <TouchableOpacity 
                      onPress={()=>{
-                      Alert.alert(data[index].name,'Hedefe Tabi Satış: '+item.hedefeTabiSatis)
+                      ToastAndroid.showWithGravityAndOffset(
+                        data[index].name+':    Hedefe Tabi Satış: '+item.hedefeTabiSatis,
+                        ToastAndroid.LONG,
+                        ToastAndroid.BOTTOM,
+                        25,
+                        50
+                      );
+                    
                     }}
                      style={{height:300*barData[index].hedefeTabiSatis/max,width:55,backgroundColor:'#cc4728',alignItems:'flex-end'}}>
                   </TouchableOpacity>
@@ -190,7 +204,13 @@ stroke="#fff"
 fontSize="20"
 fontWeight="bold"
 onPress={()=>{
- Alert.alert(data[index].name,'Hedefe Gerçekleşme: '+item.hedefGerceklestirme)
+  ToastAndroid.showWithGravityAndOffset(
+    data[index].name+':    Hedefe Gerçekleşme: '+item.hedefGerceklestirme,
+    ToastAndroid.LONG,
+    ToastAndroid.BOTTOM,
+    25,
+    50
+  );
 }}
 x="20"
 y={50+(100-item.hedefGerceklestirme)-15}
