@@ -113,7 +113,6 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
     let maxHedef = 100;
     let minHedef = this.getMinHedefValue(data);
     let hedefInterval = (Math.abs(maxHedef) + Math.abs(minHedef)) / 6;
-    let modalVisible = true
     //.log("max: ", maxHedef, " min : ", minHedef);
     return (
       <View key={"aaaaaa" + index} style={{ marginTop: screenHeight * 0.05 }}>

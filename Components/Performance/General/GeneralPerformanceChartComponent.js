@@ -11,7 +11,7 @@ import {
   FlatList,
   Dimensions,
   Alert,
-  ToastAndroid
+  ToastAndroid,
 } from "react-native";
 
 import {
@@ -38,11 +38,14 @@ export default class GeneralPerformanceChartComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalVisible: false,
+      modalHeader: '',
+      modalText: '',
       smallData: props.performanceData ? props.performanceData.slice(0, 1) : [],
       page: 1
     }
   }
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps, nextState) {
     if (this.props.performanceData !== nextProps.performanceData) {
       this.setState({ smallData: nextProps.performanceData.slice(0, nextState.page) })
     }
@@ -114,6 +117,22 @@ export default class GeneralPerformanceChartComponent extends React.Component {
     //.log("max: ", maxHedef, " min : ", minHedef);
     return (
       <View key={"aaaaaa" + index} style={{ marginTop: screenHeight * 0.05 }}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalVisible}
+        >
+          <TouchableOpacity
+            onPress={() => {
+              this.setState({ modalVisible: false })
+            }}
+            style={{ height: screenHeight, width: screenWidth, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ width: screenWidth * 0.7, height: screenHeight * 0.1, borderRadius: 20, borderWidth: 1, backgroundColor: '#fff', paddingVertical: 20 }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>{this.state.modalHeader}</Text>
+              <Text style={{ fontSize: 20, flex: 1, textAlign: 'center' }}>{this.state.modalText}</Text>
+            </View>
+          </TouchableOpacity>
+        </Modal>
         <View style={{ marginLeft: "20%" }}>
           <Text
             style={{
@@ -135,21 +154,21 @@ export default class GeneralPerformanceChartComponent extends React.Component {
           }}
           horizontal={true}
         >
-          <View style={{ width: 60, height: 300 }}>
+          <View style={{ width: 70, height: 300 }}>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 6))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 6 / 100000) * 100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 5))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 5 / 100000) * 100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 4))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 4 / 100000) * 100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 3))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 3 / 100000) * 100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 2))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 2 / 100000) * 100000)}</Text>
             </View>
             <View
               style={{
@@ -158,7 +177,7 @@ export default class GeneralPerformanceChartComponent extends React.Component {
                 justifyContent: "space-between",
               }}
             >
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 1))}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 1 / 100000) * 100000)}</Text>
               <Text>0</Text>
             </View>
           </View>
@@ -172,25 +191,12 @@ export default class GeneralPerformanceChartComponent extends React.Component {
                     style={{ width: 140, height: 300, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10, alignItems: 'flex-end' }}>
                     <TouchableOpacity style={{ height: 300 * barData[index].hedef / max, width: 55, backgroundColor: '#3d86c5', alignItems: 'flex-end' }}
                       onPress={() => {
-                        ToastAndroid.showWithGravityAndOffset(
-                          data[index].name + ':    Hedef: ' + item.hedef,
-                          ToastAndroid.LONG,
-                          ToastAndroid.BOTTOM,
-                          25,
-                          50
-                        );
+                        this.setState({ modalVisible: true, modalHeader: data[index].name, modalText: 'Hedef: ' + item.hedef })
                       }}>
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
-                        ToastAndroid.showWithGravityAndOffset(
-                          data[index].name + ':    Hedefe Tabi Satış: ' + item.hedefeTabiSatis,
-                          ToastAndroid.LONG,
-                          ToastAndroid.BOTTOM,
-                          25,
-                          50
-                        );
-
+                        this.setState({ modalVisible: true, modalHeader: data[index].name, modalText: 'Hedefe Tabi Satış: ' + item.hedefeTabiSatis })
                       }}
                       style={{ height: 300 * barData[index].hedefeTabiSatis / max, width: 55, backgroundColor: '#cc4728', alignItems: 'flex-end' }}>
                     </TouchableOpacity>
@@ -212,13 +218,7 @@ export default class GeneralPerformanceChartComponent extends React.Component {
                       fontSize="20"
                       fontWeight="bold"
                       onPress={() => {
-                        ToastAndroid.showWithGravityAndOffset(
-                          data[index].name + ':    Hedefe Gerçekleşme: ' + item.hedefGerceklestirme,
-                          ToastAndroid.LONG,
-                          ToastAndroid.BOTTOM,
-                          25,
-                          50
-                        );
+                        this.setState({ modalVisible: true, modalHeader: data[index].name, modalText: 'Hedefe Gerçekleşme: ' + item.hedefGerceklestirme })
                       }}
                       x="20"
                       y={50 + (100 - item.hedefGerceklestirme) - 15}
@@ -315,31 +315,45 @@ export default class GeneralPerformanceChartComponent extends React.Component {
               </Text>
             </View>
           </View>
-          <View style={{ width: 60, height: 300 }}>
-            <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{(minHedef + hedefInterval * 6).toFixed(1)}</Text>
+          <View style={{ width: 60, height: 300, }}>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 8).toFixed(1)}</Text>
             </View>
-            <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{(minHedef + hedefInterval * 5).toFixed(1)}</Text>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 7).toFixed(1)}</Text>
             </View>
-            <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{(minHedef + hedefInterval * 4).toFixed(1)}</Text>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 6).toFixed(1)}</Text>
             </View>
-            <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{(minHedef + hedefInterval * 3).toFixed(1)}</Text>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 5).toFixed(1)}</Text>
             </View>
-            <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{(minHedef + hedefInterval * 2).toFixed(1)}</Text>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 4).toFixed(1)}</Text>
             </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <Text>{(minHedef + hedefInterval).toFixed(1)}</Text>
-              <Text>{minHedef.toFixed(1)}</Text>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 3).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 2).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -2).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -3).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -4).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -5).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -6).toFixed(1)}</Text>
             </View>
           </View>
         </ScrollView>
