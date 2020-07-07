@@ -42,8 +42,9 @@ export default class KampanyaPerformanceComponent extends React.Component {
   };
 
   showDetail = (data) => {
-    getCampaignDetail(data, this.props.selectedCampaign.Id)
-    this.setState({ detailVisible: true })
+    getCampaignDetail(data, this.props.selectedCampaign.Id).then((dataa) => {
+      this.setState({ detailVisible: true, detailData: dataa, detailAreaData: data })
+    })
   }
 
   render() {
@@ -52,6 +53,8 @@ export default class KampanyaPerformanceComponent extends React.Component {
       <View style={{ flex: 1, marginTop: "3%" }}>
         <KampanyaDetayComponent
           visible={this.state.detailVisible}
+          detailData={this.state.detailData}
+          detailAreaData={this.state.detailAreaData}
           close={() => this.setState({ detailVisible: false })}
         />
         <CampaignSelectorComponent

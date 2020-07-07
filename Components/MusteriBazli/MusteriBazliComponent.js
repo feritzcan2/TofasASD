@@ -35,6 +35,9 @@ export default class MusteriBazliComponent extends React.Component {
       data: [],
       searchingName: "",
       searchingCode: "",
+      startDate: "",
+      endDate: "",
+      filters: { analyze: "", definition: "", typeCode: "" },
       dropDownData: this.prepareData()
     };
     this.keyboardDidShowListener = Keyboard.addListener(
@@ -47,6 +50,12 @@ export default class MusteriBazliComponent extends React.Component {
     );
   }
   pwRef = React.createRef();
+  faturaRef = React.createRef();
+  bayiKoduRef = React.createRef();
+  parcaKodRef = React.createRef();
+  miktarRef = React.createRef();
+  bayiAdiRef = React.createRef();
+  asdRef = React.createRef();
 
   prepareData = () => {
 
@@ -66,7 +75,6 @@ export default class MusteriBazliComponent extends React.Component {
       })
     }
     if (global.definition && global.definition.length > 0) {
-      console.log("def ", global.definition)
       for (let a = 0; a < global.definition.length; a++) {
         definition.push({
           value: global.definition[a].Name,
@@ -90,7 +98,6 @@ export default class MusteriBazliComponent extends React.Component {
         value: "",
       })
     }
-    console.log(analyze)
     return { analyzeData: analyze, definition: definition, typeCode: typeCode }
 
   }
@@ -161,25 +168,27 @@ export default class MusteriBazliComponent extends React.Component {
         <Dropdown
           containerStyle={{ width: "90%", flex: 1, alignSelf: "center" }}
           label="ANALİZ KODU"
-          value={this.state.dropDownData.analyzeData[0]}
+          value={this.state.dropDownData.analyzeData[0].Value}
           data={this.state.dropDownData.analyzeData}
           onChangeText={(value, index, data) => {
             let flters = this.state.filters;
-            flters.analyze = this.state.dropDownData.analyzeData[index].Value;
+            flters.analyze = "" + value;
             this.setState({ filters: flters });
           }}
         />
         <Dropdown
           containerStyle={{ width: "90%", flex: 1, alignSelf: "center" }}
           label="TANIM KODU"
-          value={this.state.dropDownData.definition[0]}
+          value={this.state.dropDownData.definition[0].Value}
           data={this.state.dropDownData.definition}
           onChangeText={(value, index, data) => {
             let flters = this.state.filters;
-            flters.definition = this.state.dropDownData.definition[index].Value;
+            flters.definition = "" + value;
             this.setState({ filters: flters });
           }}
         />
+
+
         <OutlinedTextField
           containerStyle={{
             width: "90%",
@@ -189,9 +198,9 @@ export default class MusteriBazliComponent extends React.Component {
           label="Bayi kodu giriniz"
           keyboardType="default"
           tintColor="red"
-          formatText={(text) => this.onTextEdit(text, false)}
+
           onSubmitEditing={this.onSubmit}
-          ref={this.pwRef}
+          ref={this.bayiKoduRef}
         />
         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
           <OutlinedTextField
@@ -203,9 +212,8 @@ export default class MusteriBazliComponent extends React.Component {
             label="FATURA NO"
             keyboardType="default"
             tintColor="red"
-            formatText={(text) => this.onTextEdit(text, false)}
-            onSubmitEditing={this.onSubmit}
-            ref={this.pwRef}
+
+            ref={this.faturaRef}
           />
           <OutlinedTextField
             containerStyle={{
@@ -216,9 +224,7 @@ export default class MusteriBazliComponent extends React.Component {
             label="MİKTAR"
             keyboardType="default"
             tintColor="red"
-            formatText={(text) => this.onTextEdit(text, false)}
-            onSubmitEditing={this.onSubmit}
-            ref={this.pwRef}
+            ref={this.miktarRef}
           />
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
@@ -264,11 +270,11 @@ export default class MusteriBazliComponent extends React.Component {
         <Dropdown
           containerStyle={{ width: "90%", flex: 1, alignSelf: "center" }}
           label="MAMÜL TİPİ"
-          value={this.state.dropDownData.typeCode[0]}
+          value={this.state.dropDownData.typeCode[0].Value}
           data={this.state.dropDownData.typeCode}
           onChangeText={(value, index, data) => {
             let flters = this.state.filters;
-            flters.region = this.state.dropDownData.typeCode[index].Value;
+            flters.typeCode = "" + value;
             this.setState({ filters: flters });
           }}
         />
@@ -281,9 +287,8 @@ export default class MusteriBazliComponent extends React.Component {
           label="BAYİ ADI"
           keyboardType="default"
           tintColor="red"
-          formatText={(text) => this.onTextEdit(text, false)}
-          onSubmitEditing={this.onSubmit}
-          ref={this.pwRef}
+          ref={this.bayiAdiRef}
+
         />
         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
           <OutlinedTextField
@@ -295,9 +300,8 @@ export default class MusteriBazliComponent extends React.Component {
             label="PARÇA KODU"
             keyboardType="default"
             tintColor="red"
-            formatText={(text) => this.onTextEdit(text, false)}
-            onSubmitEditing={this.onSubmit}
-            ref={this.pwRef}
+            ref={this.parcaKodRef}
+
           />
           <OutlinedTextField
             containerStyle={{
@@ -308,11 +312,30 @@ export default class MusteriBazliComponent extends React.Component {
             label="ASD"
             keyboardType="default"
             tintColor="red"
-            formatText={(text) => this.onTextEdit(text, false)}
-            onSubmitEditing={this.onSubmit}
-            ref={this.pwRef}
+            ref={this.asdRef}
+
           />
         </View>
+        <TouchableOpacity style={{ width: "80%", height: screenHeight * 0.1, backgroundColor: "red" }}
+          onPress={
+            () => {
+              let { current: field } = this.faturaRef;
+
+              let filters = {
+                bayiKodu: "" + this.bayiKoduRef.current.value(),
+                faturaNo: "" + this.faturaRef.current.value(),
+                miktar: "" + this.miktarRef.current.value(),
+                bayiAdi: "" + this.bayiAdiRef.current.value(),
+                parcaKodu: "" + this.parcaKodRef.current.value(),
+                asd: "" + this.asdRef.current.value(),
+                analyze: this.state.filters.analyze,
+                definition: this.state.filters.definition,
+                typeCode: this.state.filters.typeCode,
+
+              }
+
+            }
+          }></TouchableOpacity>
       </View>
     );
   };
@@ -454,7 +477,7 @@ export default class MusteriBazliComponent extends React.Component {
           ></View>
 
           {this.props.selectedCustomer !== null && this.renderDetail()}
-          {this.props.selectedCustomer === null &&
+          {this.props.selectedCustomer === null && this.state.data &&
             this.state.data.map((element, index) => {
               return this.renderRow(element, index);
             })}
