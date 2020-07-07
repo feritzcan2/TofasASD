@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import LoginScreen from "../Components/LoginScreen/LoginScreen";
+import { getAnalizeCode } from "../Api/MusteriApi";
 
 export default class LoginContainer extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class LoginContainer extends React.Component {
       loggedIn: false,
       userData: null,
     };
+
   }
 
   render() {

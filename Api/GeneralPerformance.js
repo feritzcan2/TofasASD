@@ -67,7 +67,6 @@ export function getBayiList() {
       return;
     }
     global.bayiler = result.Data;
-    console.log(result.Data)
     resolve(result.Data);
   });
 }
@@ -174,6 +173,70 @@ export function getCampaigns() {
     resolve(result.Data);
   });
 }
+
+export function getCampaignDetail(data, id) {
+  return new Promise(async function (resolve, reject) {
+
+    if (!global.userData || !global.userData.Token) resolve(null);
+
+    let result = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+
+        Authorization: "",
+      },
+      body: JSON.stringify({
+        Token: global.userData.Token,
+        Data: {
+          Name: "GetList_CampaignTargetActualASDDetail",
+          Parameters: {
+            CampaignId: id,
+            PriceLinkedTargetStr: data.PriceLinkedTargetStr,
+            TargetPercentStr: data.TargetPercentStr,
+            PriceTarget: data.PriceTarget,
+            TargetPercent: data.TargetPercent,
+            CampaignType: data.CampaignType,
+            PriceLinkedTarget: data.PriceLinkedTarget,
+            MinSalePercent: data.MinSalePercent,
+            MinSaleType: data.MinSaleType
+          },
+        }
+      })
+    })
+
+    console.log(JSON.stringify({
+      Token: global.userData.Token,
+      Data: {
+        Name: "GetList_CampaignTargetActualASDDetail",
+        Parameters: {
+          CampaignId: 6,
+          PriceLinkedTargetStr: data.PriceLinkedTargetStr,
+          TargetPercentStr: data.TargetPercentStr,
+          PriceTarget: data.PriceTarget,
+          TargetPercent: data.TargetPercent,
+          CampaignType: data.CampaignType,
+          PriceLinkedTarget: data.PriceLinkedTarget,
+          MinSalePercent: data.MinSalePercent,
+          MinSaleType: data.MinSaleType
+        },
+      }
+    }))
+    result = await result.json().catch((error) => {
+      resolve(null);
+      return;
+    });
+    console.log("kampanya:", result);
+    if (result.Data === null || result.Data === undefined) {
+      resolve(null);
+      return;
+    }
+    global.campaigns = result.Data;
+
+    resolve(result.Data);
+  });
+}
+
 export function getCampaignPerformance(id) {
   return new Promise(async function (resolve, reject) {
 

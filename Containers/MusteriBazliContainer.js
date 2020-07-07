@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 import MusteriBazliComponent from "../Components/MusteriBazli/MusteriBazliComponent";
-import { getCustomer, getCustomerNotes, getWarehouse } from "../Api/MusteriApi";
+import { getCustomer, getCustomerNotes, getWarehouse, getAnalizeCode } from "../Api/MusteriApi";
 import { getYildizPuanDetail } from "../Api/YildizKarneApi";
 
 export default class MusteriBazliContainer extends React.Component {
@@ -42,6 +42,7 @@ export default class MusteriBazliContainer extends React.Component {
     getWarehouse(customer.Id)
       .then((d) => console.log("ware", d))
       .catch((e) => console.log(e));
+    getAnalizeCode(customer.Id)
   };
 
   render() {
