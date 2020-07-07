@@ -127,9 +127,9 @@ export default class GeneralPerformanceChartComponent extends React.Component {
               this.setState({ modalVisible: false })
             }}
             style={{ height: screenHeight, width: screenWidth, alignItems: 'center', justifyContent: 'center' }}>
-            <View style={{ width: screenWidth * 0.7, height: screenHeight * 0.1, borderRadius: 20, borderWidth: 1, backgroundColor: '#fff', paddingVertical: 20 }}>
+            <View style={{ width: screenWidth * 0.8, alignItems:'center',justifyContent:'center',borderRadius: 20, borderWidth: 1, backgroundColor: '#fff', paddingVertical: 20 }}>
               <Text style={{ fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>{this.state.modalHeader}</Text>
-              <Text style={{ fontSize: 20, flex: 1, textAlign: 'center' }}>{this.state.modalText}</Text>
+              <Text style={{ fontSize: 20, textAlign: 'center' }}>{this.state.modalText}</Text>
             </View>
           </TouchableOpacity>
         </Modal>
