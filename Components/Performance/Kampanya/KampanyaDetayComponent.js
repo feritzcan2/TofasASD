@@ -52,11 +52,11 @@ export default class KampanyaDetayComponent extends React.Component {
                             styles.rowText,
                             isHeader ? {
                                 fontWeight: "800", color: "#5a5a5a",
-                                fontSize: normalize(10)
+                                fontSize: normalize(8)
                             } : {},
                         ]}
                     >
-                        {isHeader ? "HEDEF" : "100%"}
+                        {isHeader ? "HEDEF" : rowData.TargetValue}
                     </Text>
                 </View>
                 <View
@@ -74,11 +74,11 @@ export default class KampanyaDetayComponent extends React.Component {
                             styles.rowText,
                             isHeader ? {
                                 fontWeight: "800", color: "#5a5a5a",
-                                fontSize: normalize(10)
+                                fontSize: normalize(8)
                             } : {},
                         ]}
                     >
-                        {isHeader ? "PERFORMANS" : "100%"}
+                        {isHeader ? "PERFORMANS" : rowData.Performance}
                     </Text>
                 </View>
                 <View
@@ -92,20 +92,19 @@ export default class KampanyaDetayComponent extends React.Component {
                         justifyContent: "center",
                     }}
                 >
-                    {!isHeader && <View style={{ height: "30%", aspectRatio: 1 }}>
-                        <Image style={{ resizeMode: "stretch", flex: 1, height: undefined, width: undefined }} source={require("../../../assets/success.png")} />
-                    </View>}
+
                     <Text
                         style={[
 
                             styles.rowText,
                             isHeader ? {
+
                                 fontWeight: "800", color: "#5a5a5a",
-                                fontSize: normalize(10)
-                            } : { flex: 1 },
+                                fontSize: normalize(8)
+                            } : { flex: 1, fontWeight: "500", marginLeft: "5%", color: (rowData && rowData.Goal) === "Hedef Tamamlandı" ? "green" : "red" },
                         ]}
                     >
-                        {isHeader ? "HEDEFE KALAN CİRO" : "TAMAMLANDI"}
+                        {isHeader ? "HEDEFE KALAN CİRO" : rowData.Goal}
 
                     </Text>
                 </View>
@@ -124,11 +123,11 @@ export default class KampanyaDetayComponent extends React.Component {
                             styles.rowText,
                             isHeader ? {
                                 fontWeight: "800", color: "#5a5a5a",
-                                fontSize: normalize(10)
+                                fontSize: normalize(8)
                             } : {},
                         ]}
                     >
-                        {isHeader ? "HAKEDİŞ" : " ₺"}
+                        {isHeader ? "HAKEDİŞ" : rowData.Progress}
                     </Text>
                 </View>
             </View>
@@ -179,8 +178,8 @@ export default class KampanyaDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>Birmot Beylikdüzü
-                                </Text>
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.region : ""}
+                                    </Text>
                                 </View>
                             </View>
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
@@ -208,8 +207,8 @@ export default class KampanyaDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>Birmot Beylikdüzü
-                                </Text>
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.dealerName : ""}
+                                    </Text>
                                 </View>
                             </View>
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
@@ -236,11 +235,11 @@ export default class KampanyaDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>Birmot Beylikdüzü
-                                </Text>
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.name : ""}
+                                    </Text>
                                 </View>
                             </View>
-                            <View style={{ flexDirection: "row", marginBottom: 3 }}>
+                            {/* <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
                                     flex: 1, backgroundColor: "#473e54",
@@ -267,14 +266,14 @@ export default class KampanyaDetayComponent extends React.Component {
                                 }}>Birmot Beylikdüzü
                                 </Text>
                                 </View>
-                            </View>
+                            </View> */}
 
                         </View>
                         <ScrollView style={{ maxHeight: screenHeight * 0.4 }}>
                             {this.renderRow(null, null, true)}
                             {
 
-                                this.state.data.map((data, index) => {
+                                this.props.detailData && this.props.detailData.map((data, index) => {
                                     return this.renderRow(data, index);
                                 })
                             }

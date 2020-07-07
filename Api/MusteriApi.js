@@ -228,7 +228,6 @@ export function getTypeCode() {
       body: JSON.stringify({
         Token: global.userData.Token,
         Data: {
-
           Name: "GetList_TypeCode",
         },
       }),

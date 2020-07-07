@@ -33,7 +33,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
     return true
   }
 
-  renderRow = (rowData, index, isHeader, isSummary) => {
+  renderRow = (rowData, index, isHeader, isSummary, region) => {
     return (
       <View
         key={"r " + index}
@@ -188,7 +188,15 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
 
           </Text>
           {!isHeader && <TouchableOpacity
-            onPress={() => this.props.showDetail(rowData.campaignDetail)}
+            onPress={() => {
+
+              let detail = rowData.campaignDetail
+              detail.dealerName = rowData.DealerName
+              detail.name = rowData.name
+              detail.region = region
+              console.log(detail)
+              this.props.showDetail(detail)
+            }}
             style={{
               flex: 1,
               alignItems: "center", justifyContent: "center", width: "80%", backgroundColor: "red", marginBottom: "5%", marginTop: "10%"
@@ -237,14 +245,14 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
     }
     return summary
   }
-  renderPerformanceTable = (data, index) => {
+  renderPerformanceTable = (data, index, region) => {
     let summary = this.CalculateSumary(data)
 
     return (
       <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
         {this.renderRow(data[0], null, true)}
         {data.map((rowData, index) => {
-          return this.renderRow(rowData, index);
+          return this.renderRow(rowData, index, false, false, region);
         })}
         {this.renderRow(summary, 10220, false, true)}
 
@@ -252,17 +260,18 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
     );
   };
   renderArea = (data, index) => {
+    let region = data[0][0]["Region"] + ".BÖLGE"
     return (
       <View key={"a:" + index} style={styles.areaContainer}>
         <View style={styles.bolgeTextContainer}>
           <Text style={styles.bolgeText}>
-            {data[0][0]["Region"] + ".BÖLGE"}
+            {region}
           </Text>
         </View>
 
         <View>
           {data.map((data, index) => {
-            return this.renderPerformanceTable(data, index);
+            return this.renderPerformanceTable(data, index, region);
           })}
         </View>
       </View>
