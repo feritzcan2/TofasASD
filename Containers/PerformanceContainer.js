@@ -105,6 +105,17 @@ export default class PerformanceContainer extends React.Component {
       // if (data.Region === "1" && data.DealerName === "BİRMOT BEYLİKDÜZÜ" && a === 0)
       //   console.log("Sever:", data)
 
+      let campaignTarget = {
+        PriceLinkedTarget: data.PriceLinkedTargetStr,
+        TargetPercentStr: data.TargetPercentStr,
+        PriceTarget: data.PriceTarget,
+        TargetPercent: data.TargetPercent,
+        CampaignType: 1,
+        PriceLinkedTarget: data.PriceLinkedTarget,
+        PriceLinkedTargetStr: data.PriceLinkedTargetStr,
+        MinSalePercent: 100,
+        MinSaleType: 2
+      }
       let rowData = {
         DealerName: data.DealerName,
         Region: data.Region,
@@ -118,6 +129,7 @@ export default class PerformanceContainer extends React.Component {
         sigorta: parseInt(data.PriceLinkedTarget_Sigorta, 10),
         yetkili: parseInt(data.PriceLinkedTarget_Servis, 10),
         hedefGerceklestirme: data.TargetPercent,
+        campaignDetail: campaignTarget
       };
 
       if (datas[data.DealerCode]) {

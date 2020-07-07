@@ -49,7 +49,6 @@ export function login(UserName, Password) {
     await AsyncStorage.setItem("Password", "" + Password);
     await AsyncStorage.setItem("userStored", "true");
     global.userData = result.Data;
-    console.log(result.Data);
     global.genelPerformance = {}
     global.campaignPerformance = {}
     getBayiList();

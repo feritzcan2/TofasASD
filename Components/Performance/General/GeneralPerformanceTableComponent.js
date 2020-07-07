@@ -173,8 +173,17 @@ export default class GeneralPerformanceTableComponent extends React.Component {
             ]}
           >
             {isHeader
-              ? "HEDEF GERÇEKLEŞME"
-              : rowData.hedefGerceklestirme.toFixed(2) + " %"}
+              ? "HEDEF GERÇEKLEŞME" :
+              isSummary ? this.props.hedefTuru === 0
+                ? (rowData.hepsi / rowData.target * 100).toFixed(2).toLocaleString('tr') + " %"
+                : this.props.hedefTuru === 1
+                  ? (rowData.perakende / rowData.target * 100).toFixed(2).toLocaleString('tr') + " %"
+                  : this.props.hedefTuru === 2
+                    ? (rowData.sigorta / rowData.target * 100).toFixed(2).toLocaleString('tr') + " %"
+                    : this.props.hedefTuru === 3
+                      ? (rowData.yetkili / rowData.target * 100).toFixed(2).toLocaleString('tr') + " %"
+                      : "s" + " ₺"
+                : rowData.hedefGerceklestirme.toFixed(2).toLocaleString('tr') + " %"}
           </Text>
         </View>
       </View>

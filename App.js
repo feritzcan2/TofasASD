@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import LoginContainer from "./Containers/LoginContainer";
 import TabsContainer from "./Containers/TabsContainer";
 import { Asset } from "expo-asset";
+import { getAnalizeCode, getTypeCode, getDefinition } from "./Api/MusteriApi";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -43,6 +44,18 @@ export default class App extends React.Component {
     });
   };
   setLoggedIn = () => {
+    getAnalizeCode().then(data => {
+      global.analyzeCode = data
+      console.log("analyze set")
+    })
+    getTypeCode().then(data => {
+      global.typeCode = data
+      console.log("analyze set")
+    })
+    getDefinition().then(data => {
+      global.definition = data
+      console.log("analyze set")
+    })
     this.setState({ loggedIn: true });
   };
   render() {

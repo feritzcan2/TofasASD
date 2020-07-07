@@ -30,10 +30,12 @@ export default class MusteriBazliComponent extends React.Component {
     super(props);
     this.state = {
       customerCode: "",
+      selectedAnalyzeFilters: {},
       keyboardShown: false,
       data: [],
       searchingName: "",
       searchingCode: "",
+      dropDownData: this.prepareData()
     };
     this.keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
@@ -46,6 +48,52 @@ export default class MusteriBazliComponent extends React.Component {
   }
   pwRef = React.createRef();
 
+  prepareData = () => {
+
+    let analyze = []
+    let definition = []
+    let typeCode = []
+    if (global.analyzeCode && global.analyzeCode.length > 0) {
+      for (let a = 0; a < global.analyzeCode.length; a++) {
+        analyze.push({
+          value: global.analyzeCode[a].Name,
+        })
+      }
+    }
+    else {
+      analyze.push({
+        value: "",
+      })
+    }
+    if (global.definition && global.definition.length > 0) {
+      console.log("def ", global.definition)
+      for (let a = 0; a < global.definition.length; a++) {
+        definition.push({
+          value: global.definition[a].Name,
+        })
+      }
+    }
+    else {
+      definition.push({
+        value: "",
+      })
+    }
+    if (global.typeCode && global.typeCode.length > 0) {
+      for (let a = 0; a < global.typeCode.length; a++) {
+        typeCode.push({
+          value: global.typeCode[a].Name,
+        })
+      }
+    }
+    else {
+      typeCode.push({
+        value: "",
+      })
+    }
+    console.log(analyze)
+    return { analyzeData: analyze, definition: definition, typeCode: typeCode }
+
+  }
   onTextEdit = (text, isUsername) => {
     if (isUsername === true) {
       this.setState({ searchingName: text });
@@ -113,22 +161,22 @@ export default class MusteriBazliComponent extends React.Component {
         <Dropdown
           containerStyle={{ width: "90%", flex: 1, alignSelf: "center" }}
           label="ANALİZ KODU"
-          value="tesstt"
-          data={[]}
+          value={this.state.dropDownData.analyzeData[0]}
+          data={this.state.dropDownData.analyzeData}
           onChangeText={(value, index, data) => {
             let flters = this.state.filters;
-            flters.region = index;
+            flters.analyze = this.state.dropDownData.analyzeData[index].Value;
             this.setState({ filters: flters });
           }}
         />
         <Dropdown
           containerStyle={{ width: "90%", flex: 1, alignSelf: "center" }}
           label="TANIM KODU"
-          value="tesstt"
-          data={[]}
+          value={this.state.dropDownData.definition[0]}
+          data={this.state.dropDownData.definition}
           onChangeText={(value, index, data) => {
             let flters = this.state.filters;
-            flters.region = index;
+            flters.definition = this.state.dropDownData.definition[index].Value;
             this.setState({ filters: flters });
           }}
         />
@@ -216,11 +264,11 @@ export default class MusteriBazliComponent extends React.Component {
         <Dropdown
           containerStyle={{ width: "90%", flex: 1, alignSelf: "center" }}
           label="MAMÜL TİPİ"
-          value="tesstt"
-          data={[]}
+          value={this.state.dropDownData.typeCode[0]}
+          data={this.state.dropDownData.typeCode}
           onChangeText={(value, index, data) => {
             let flters = this.state.filters;
-            flters.region = index;
+            flters.region = this.state.dropDownData.typeCode[index].Value;
             this.setState({ filters: flters });
           }}
         />

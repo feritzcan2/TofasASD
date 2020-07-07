@@ -22,6 +22,7 @@ import { normalize } from "../../../HelperFunctions";
 import FilterComponent from "../../FilterComponent";
 import CampaignSelectorComponent from "../../CampaignSelectorComponent";
 import KampanyaDetayComponent from "./KampanyaDetayComponent";
+import { getCampaignDetail } from "../../../Api/GeneralPerformance";
 
 export default class KampanyaPerformanceComponent extends React.Component {
   constructor(props) {
@@ -40,7 +41,8 @@ export default class KampanyaPerformanceComponent extends React.Component {
     this.setState({ selectedTab: tab });
   };
 
-  showDetail = () => {
+  showDetail = (data) => {
+    getCampaignDetail(data, this.props.selectedCampaign.Id)
     this.setState({ detailVisible: true })
   }
 

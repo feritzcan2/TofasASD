@@ -38,7 +38,6 @@ export default class ButtonSubmit extends Component {
   }
 
   _onPress() {
-    console.log(this.props.username, this.props.pw);
     if (this.state.isLoading) return;
 
     this.setState({ isLoading: true });

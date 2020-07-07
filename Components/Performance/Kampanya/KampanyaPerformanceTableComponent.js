@@ -174,12 +174,21 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
             ]}
           >
             {isHeader
-              ? "Kampanya Performans"
-              : rowData.hedefGerceklestirme.toFixed(2) + " %"}
+              ? "Kampanya Performans" :
+              isSummary ? this.props.hedefTuru === 0
+                ? (rowData.hepsi / rowData.target * 100).toFixed(2).toLocaleString('tr') + " %"
+                : this.props.hedefTuru === 1
+                  ? (rowData.perakende / rowData.target * 100).toFixed(2).toLocaleString('tr') + " %"
+                  : this.props.hedefTuru === 2
+                    ? (rowData.sigorta / rowData.target * 100).toFixed(2).toLocaleString('tr') + " %"
+                    : this.props.hedefTuru === 3
+                      ? (rowData.yetkili / rowData.target * 100).toFixed(2).toLocaleString('tr') + " %"
+                      : "s" + " ₺"
+                : rowData.hedefGerceklestirme.toFixed(2).toLocaleString('tr') + " %"}
 
           </Text>
           {!isHeader && <TouchableOpacity
-            onPress={this.props.showDetail}
+            onPress={() => this.props.showDetail(rowData.campaignDetail)}
             style={{
               flex: 1,
               alignItems: "center", justifyContent: "center", width: "80%", backgroundColor: "red", marginBottom: "5%", marginTop: "10%"
@@ -197,6 +206,8 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
       </View>
     );
   };
+
+
   CalculateSumary = (data) => {
     let summary = {
       DealerName: "TEST1",
