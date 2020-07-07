@@ -121,12 +121,10 @@ export function getWarehouse(id) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-
         Authorization: "",
       },
       body: JSON.stringify({
         Token: global.userData.Token,
-
         Data: {
           Parameters: {
             CustomerId: id,
@@ -140,6 +138,15 @@ export function getWarehouse(id) {
       resolve(null);
       return;
     });
+    console.log("wareee ", result, JSON.stringify({
+      Token: global.userData.Token,
+      Data: {
+        Parameters: {
+          CustomerId: id,
+        },
+        Name: "GetInfo_WarehouseListASD",
+      },
+    }))
     if (result.Data === null || result.Data === undefined) {
       resolve(null);
       return;

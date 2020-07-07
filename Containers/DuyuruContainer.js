@@ -39,27 +39,40 @@ export default class DuyuruContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [1, 2, 3], notificationOpen: false,
+      data: global.duyurular ? global.duyurular : [], notificationOpen: false,
       notifications: { read: [], nonRead: [] }
     };
     getNotifications(true).then(data => {
       let notifications = this.state.notifications
       notifications.read = data
-      this.setState({ notifications })
+      if (this.mounted === true)
+
+        this.setState({ notifications })
     }).catch(e => {
       console.log("notif err: ", e)
     })
     getNotifications(false).then(data => {
       let notifications = this.state.notifications
       notifications.nonRead = data
-      this.setState({ notifications })
+      if (this.mounted === true)
+
+        this.setState({ notifications })
     }).catch(e => {
       console.log("notif err: ", e)
     })
   }
 
+  componentDidMount = () => {
+    this.mounted = true
+
+  }
+  componentWillUnmount = () => {
+    this.mounted = false
+  }
+
   toggleBildirim = () => {
-    this.setState({ notificationOpen: !this.state.notificationOpen })
+    if (this.mounted === true)
+      this.setState({ notificationOpen: !this.state.notificationOpen })
   }
 
   render() {

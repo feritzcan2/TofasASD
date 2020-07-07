@@ -26,9 +26,10 @@ export default class TabsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: "yildiz",
+      mounted: true,
+      page: "duyurular",
       performanceData: [],
-      duyuruData: [],
+      duyuruData: global.duyurular ? global.duyurular : [],
       yildizData: {
         hedef: { bayiHedef: [], danismanHedef: [] },
         puanDurumu: {
@@ -60,19 +61,26 @@ export default class TabsContainer extends Component {
       },
       yildizKarneData: null,
     };
+
     getAnnouncements().then((d) => {
-      this.setState({ duyuruData: d });
+      if (this.mounted === true)
+        this.setState({ duyuruData: d });
     });
     getYildizPuanDetail().then((data) => {
-      this.prepareYildizData(data);
+      if (this.mounted === true)
+        this.prepareYildizData(data);
     });
     getYildizKarneDetails().then((data) => {
-      this.prepareYildizKarneDetailData(data);
+      if (this.mounted === true)
+
+        this.prepareYildizKarneDetailData(data);
     });
     getYildizKarneBayiParams().then((data) => {
       let yildizData = this.state.yildizData;
       yildizData.params.bayi = data;
-      this.setState({ yildizData: yildizData });
+      if (this.mounted === true)
+
+        this.setState({ yildizData: yildizData });
     });
     getYildizKarneTympParams().then((data) => {
       this.prepareYildizKarneParamsData(data);
@@ -80,14 +88,26 @@ export default class TabsContainer extends Component {
     getHedef("0").then((data) => {
       let yildizData = this.state.yildizData;
       yildizData.hedef.bayiHedef = data;
-      this.setState({ yildizData: yildizData });
+      if (this.mounted === true)
+
+        this.setState({ yildizData: yildizData });
     });
     getHedef("1").then((data) => {
       let yildizData = this.state.yildizData;
       yildizData.hedef.danismanHedef = data;
-      this.setState({ yildizData: yildizData });
+      if (this.mounted === true)
+
+        this.setState({ yildizData: yildizData });
     });
   }
+  componentWillUnmount = () => {
+    this.mounted = false
+  }
+  componentDidMount = () => {
+    this.mounted = true
+
+  }
+
   prepareYildizKarneParamsData = (data) => {
     let yildizData = this.state.yildizData;
 
@@ -101,8 +121,9 @@ export default class TabsContainer extends Component {
 
     yildizData.params.typm = typm;
     yildizData.params.asd = asd;
+    if (this.mounted === true)
 
-    this.setState({ yildizData: yildizData });
+      this.setState({ yildizData: yildizData });
   };
   prepareYildizKarneDetailData = (data) => {
     let yildizData = this.state.yildizData;
@@ -148,8 +169,9 @@ export default class TabsContainer extends Component {
     }
 
     yildizData.karneDetail = karneDetail;
+    if (this.mounted === true)
 
-    this.setState({ yildizData: yildizData });
+      this.setState({ yildizData: yildizData });
   };
   prepareYildizData = (data) => {
     let yildizData = this.state.yildizData;
@@ -185,14 +207,17 @@ export default class TabsContainer extends Component {
       return a.Index - b.Index;
     });
     yildizData.puanDurumu = puanDurumu;
+    if (this.mounted === true)
 
-    this.setState({ yildizData: yildizData });
+      this.setState({ yildizData: yildizData });
   };
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.state.page !== "duyurular" && nextState.page === "duyurular") {
       getAnnouncements().then((d) => {
-        this.setState({ duyuruData: d });
+        if (this.mounted === true)
+
+          this.setState({ duyuruData: d });
       });
     }
     return true;

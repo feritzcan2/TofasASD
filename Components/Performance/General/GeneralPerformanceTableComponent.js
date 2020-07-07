@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
-  Dimensions,
+  Dimensions
 } from "react-native";
 
 import { normalize } from "../../../HelperFunctions";
@@ -21,6 +21,16 @@ import LoginScreen from "../../LoginScreen/LoginScreen";
 export default class GeneralPerformanceTableComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      smallData: props.performanceData ? props.performanceData.slice(0, 1) : [],
+      page: 1
+    }
+  }
+  shouldComponentUpdate = (nextProps, nextState) => {
+    if (this.props.performanceData !== nextProps.performanceData) {
+      this.setState({ smallData: nextProps.performanceData.slice(0, nextState.page) })
+    }
+    return true
   }
 
   renderRow = (rowData, index, isHeader, isSummary) => {
@@ -213,7 +223,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
   };
   renderArea = (data, index) => {
     return (
-      <View key={"a:" + index} style={styles.areaContainer}>
+      <View key={"a:" + data[0][0]["Region"]} style={styles.areaContainer}>
         <View style={styles.bolgeTextContainer}>
           <Text style={styles.bolgeText}>
             {data[0][0]["Region"] + ".BÖLGE"}
@@ -228,16 +238,26 @@ export default class GeneralPerformanceTableComponent extends React.Component {
       </View>
     );
   };
+  renderFlatList = () => {
+    return <FlatList data={this.state.smallData}
+      onEndReached={() => {
+        if (this.props.performanceData.length > this.state.page) {
+          this.setState({
+            page: this.state.page + 1,
+            smallData: this.props.performanceData.slice(0, this.state.page + 1)
+          })
+        }
+      }}
+      onEndReachedThreshold={.7}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item, index }) => {
+        return this.renderArea(item, index)
+      }}
+    ></FlatList>
+  }
 
   render() {
-    return (
-      <ScrollView style={styles.container}>
-        {this.props.performanceData &&
-          this.props.performanceData.map((data, index) => {
-            return this.renderArea(data, index);
-          })}
-      </ScrollView>
-    );
+    return this.renderFlatList()
   }
 }
 
@@ -248,7 +268,7 @@ const styles = StyleSheet.create({
   },
   areaContainer: {
     flex: 1,
-    marginTop: screenHeight * 0.05,
+    marginTop: screenHeight * 0.02,
   },
   areaScrollContainer: {
     backgroundColor: "white",

@@ -10,7 +10,7 @@ import {
   ScrollView,
   FlatList,
   Dimensions,
-  Alert, 
+  Alert,
   ToastAndroid,
 
 } from "react-native";
@@ -38,16 +38,19 @@ import LoginScreen from "../../LoginScreen/LoginScreen";
 export default class KampanyaPerformanceChartComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
-      modalVisible:false,
-      modalHeader:'',
-      modalText:''
+    this.state = {
+      modalVisible: false,
+      modalHeader: '',
+      modalText: '',
+      smallData: props.performanceData ? props.performanceData.slice(0, 1) : [],
+      page: 1
     }
   }
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps, nextState) {
     if (this.props.performanceData !== nextProps.performanceData) {
-      this.render();
+      this.setState({ smallData: nextProps.performanceData.slice(0, nextState.page) })
     }
+
     return true;
   }
 
@@ -110,26 +113,26 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
     let maxHedef = 100;
     let minHedef = this.getMinHedefValue(data);
     let hedefInterval = (Math.abs(maxHedef) + Math.abs(minHedef)) / 6;
-    let modalVisible=true
+    let modalVisible = true
     //.log("max: ", maxHedef, " min : ", minHedef);
     return (
       <View key={"aaaaaa" + index} style={{ marginTop: screenHeight * 0.05 }}>
         <Modal
-        animationType="slide"
-        transparent={true}
-        visible={this.state.modalVisible}
-      >
-        <TouchableOpacity
-        onPress={() => {
-          this.setState({modalVisible:false})
-        }}
-         style={{height:screenHeight,width:screenWidth,alignItems:'center',justifyContent:'center'}}>
-          <View style={{width:screenWidth*0.7,height:screenHeight*0.1,borderRadius:20,borderWidth:1,backgroundColor:'#fff',paddingVertical:20}}>
-            <Text style={{fontWeight:'bold',fontSize:20,textAlign:'center'}}>{this.state.modalHeader}</Text>
-            <Text style={{fontSize:20,flex:1,textAlign:'center'}}>{this.state.modalText}</Text>
-          </View>
-        </TouchableOpacity>
-      </Modal>
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalVisible}
+        >
+          <TouchableOpacity
+            onPress={() => {
+              this.setState({ modalVisible: false })
+            }}
+            style={{ height: screenHeight, width: screenWidth, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ width: screenWidth * 0.7, height: screenHeight * 0.1, borderRadius: 20, borderWidth: 1, backgroundColor: '#fff', paddingVertical: 20 }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>{this.state.modalHeader}</Text>
+              <Text style={{ fontSize: 20, flex: 1, textAlign: 'center' }}>{this.state.modalText}</Text>
+            </View>
+          </TouchableOpacity>
+        </Modal>
         <View style={{ marginLeft: "20%" }}>
           <Text
             style={{
@@ -153,19 +156,19 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
         >
           <View style={{ width: 70, height: 300 }}>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 6/100000)*100000)}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 6 / 100000) * 100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 5/100000)*100000)}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 5 / 100000) * 100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 4/100000)*100000)}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 4 / 100000) * 100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 3/100000)*100000)}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 3 / 100000) * 100000)}</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 2/100000)*100000)}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 2 / 100000) * 100000)}</Text>
             </View>
             <View
               style={{
@@ -174,64 +177,64 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
                 justifyContent: "space-between",
               }}
             >
-              <Text>{this.numberWithCommas(parseInt((max / 6) * 1/100000)*100000)}</Text>
+              <Text>{this.numberWithCommas(parseInt((max / 6) * 1 / 100000) * 100000)}</Text>
               <Text>0</Text>
             </View>
           </View>
           <View style={{ flex: 1 }}>
-              
-      <View style={{width:data.length*140,height:300,flexDirection:'row'}}>
-            {barData.map((item, index) => {
+
+            <View style={{ width: data.length * 140, height: 300, flexDirection: 'row' }}>
+              {barData.map((item, index) => {
                 return (
-                  <View style={{width:140,height:300,flexDirection:'row',justifyContent:'space-between',paddingHorizontal:10,alignItems:'flex-end'}}>
-                     <TouchableOpacity style={{height:300*barData[index].hedef/max,width:55,backgroundColor:'#3d86c5',alignItems:'flex-end'}} 
-                     onPress={()=>{
-                      this.setState({modalVisible:true,modalHeader:data[index].name,modalText:'Hedef: '+item.hedef})
-                     }}>
-                     </TouchableOpacity>
-                     <TouchableOpacity 
-                     onPress={()=>{
-                      this.setState({modalVisible:true,modalHeader:data[index].name,modalText:'Hedefe Tabi Satış: '+item.hedefeTabiSatis})
-                    }}
-                     style={{height:300*barData[index].hedefeTabiSatis/max,width:55,backgroundColor:'#cc4728',alignItems:'flex-end'}}>
-                  </TouchableOpacity>
+                  <View style={{ width: 140, height: 300, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10, alignItems: 'flex-end' }}>
+                    <TouchableOpacity style={{ height: 300 * barData[index].hedef / max, width: 55, backgroundColor: '#3d86c5', alignItems: 'flex-end' }}
+                      onPress={() => {
+                        this.setState({ modalVisible: true, modalHeader: data[index].name, modalText: 'Hedef: ' + item.hedef })
+                      }}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.setState({ modalVisible: true, modalHeader: data[index].name, modalText: 'Hedefe Tabi Satış: ' + item.hedefeTabiSatis })
+                      }}
+                      style={{ height: 300 * barData[index].hedefeTabiSatis / max, width: 55, backgroundColor: '#cc4728', alignItems: 'flex-end' }}>
+                    </TouchableOpacity>
                   </View>
                 );
               })}
             </View>
-            <View style={{width:data.length*140,height:200,flexDirection:'row',position:"absolute",left:40}}>
-            
-            {barData.map((item, index) => {
+            <View style={{ width: data.length * 140, height: 200, flexDirection: 'row', position: "absolute", left: 40 }}>
+
+              {barData.map((item, index) => {
                 return (
                   <Svg height="200" width={140}>
-                       
-                       <SvgText
-    fill="#2c982c"
-    stroke="#fff"
-    fontSize="20"
-    fontWeight="bold"
-    onPress={()=>{
-      this.setState({modalVisible:true,modalHeader:data[index].name,modalText:'Hedefe Gerçekleşme: '+item.hedefGerceklestirme})
-    }}
-    x="20"
-    y={50+(100-item.hedefGerceklestirme)-15}
-    textAnchor="middle"
-  >
-    {item.hedefGerceklestirme}%
+
+                    <SvgText
+                      fill="#2c982c"
+                      stroke="#fff"
+                      fontSize="20"
+                      fontWeight="bold"
+                      onPress={() => {
+                        this.setState({ modalVisible: true, modalHeader: data[index].name, modalText: 'Hedefe Gerçekleşme: ' + item.hedefGerceklestirme })
+                      }}
+                      x="20"
+                      y={50 + (100 - item.hedefGerceklestirme) - 15}
+                      textAnchor="middle"
+                    >
+                      {item.hedefGerceklestirme}%
   </SvgText>
-  <Line 
-  x1="5" 
-  y1={50+(100-item.hedefGerceklestirme)} 
-  x2={index+1!=barData.length?"140":"0"} 
-  y2={index+1!=barData.length?50+(100-barData[(index+1)].hedefGerceklestirme):50+(100-item.hedefGerceklestirme)} 
-  stroke="#ff9900" 
-  strokeWidth="3" />
-  <Circle cx="7" cy={50+(100-item.hedefGerceklestirme)} r="7" fill="#ff9900" />
-  </Svg>
+                    <Line
+                      x1="5"
+                      y1={50 + (100 - item.hedefGerceklestirme)}
+                      x2={index + 1 != barData.length ? "140" : "0"}
+                      y2={index + 1 != barData.length ? 50 + (100 - barData[(index + 1)].hedefGerceklestirme) : 50 + (100 - item.hedefGerceklestirme)}
+                      stroke="#ff9900"
+                      strokeWidth="3" />
+                    <Circle cx="7" cy={50 + (100 - item.hedefGerceklestirme)} r="7" fill="#ff9900" />
+                  </Svg>
                 );
               })}
 
-      </View>
+            </View>
 
             <View
               style={{
@@ -307,44 +310,44 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
             </View>
           </View>
           <View style={{ width: 60, height: 300, }}>
-          <View style={{ flex: 1,  }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 8).toFixed(1)}</Text>
-            </View>
-            <View style={{ flex: 1,  }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 7).toFixed(1)}</Text>
-            </View>
-            <View style={{ flex: 1,  }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 6).toFixed(1)}</Text>
-            </View>
-            <View style={{ flex: 1,  }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 5).toFixed(1)}</Text>
-            </View>
-            <View style={{ flex: 1,  }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 4).toFixed(1)}</Text>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 8).toFixed(1)}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 3).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 7).toFixed(1)}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * 2).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 6).toFixed(1)}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 5).toFixed(1)}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * -2).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 4).toFixed(1)}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * -3).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 3).toFixed(1)}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * -4).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 2).toFixed(1)}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * -5).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef).toFixed(1)}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{textAlign:'center',textAlignVertical:'top'}}>{(minHedef + hedefInterval * -6).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -2).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -3).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -4).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -5).toFixed(1)}</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -6).toFixed(1)}</Text>
             </View>
           </View>
         </ScrollView>
@@ -369,15 +372,29 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
     );
   };
 
+  renderFlatList = () => {
+    return <FlatList data={this.state.smallData}
+      onEndReached={() => {
+        if (this.props.performanceData.length > this.state.page) {
+          console.log("load ")
+          this.setState({
+            page: this.state.page + 1,
+            smallData: this.props.performanceData.slice(0, this.state.page + 1)
+          })
+        }
+      }}
+      onEndReachedThreshold={.7}
+      keyExtractor={(item, index) => index.toString()}
+
+      renderItem={({ item, index }) => {
+        return this.renderArea(item, index)
+      }}
+    ></FlatList>
+  }
+
   render() {
-    return (
-      <ScrollView style={styles.container}>
-        {this.props.performanceData &&
-          this.props.performanceData.map((data, index) => {
-            return this.renderArea(data, index);
-          })}
-      </ScrollView>
-    );
+    return this.renderFlatList()
+
   }
 }
 
@@ -388,7 +405,7 @@ const styles = StyleSheet.create({
   },
   areaContainer: {
     flex: 1,
-    marginTop: screenHeight * 0.05,
+    marginTop: screenHeight * 0.02,
   },
   areaScrollContainer: {
     backgroundColor: "white",

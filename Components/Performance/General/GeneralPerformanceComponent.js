@@ -99,7 +99,7 @@ export default class GeneralPerformanceComponent extends React.Component {
           </Text>
         </Tabs>
 
-        <View style={{ flex: 1, marginTop: "12%" }}>
+        <View style={{ flex: 1, marginTop: "15%" }}>
           <TouchableOpacity
             onPress={() => this.setState({ filterVisible: true })}
           >
@@ -107,12 +107,12 @@ export default class GeneralPerformanceComponent extends React.Component {
               style={{
                 width: "70%",
                 textAlign: "center",
-                padding: 10,
+                padding: 5,
                 backgroundColor: "#FFCCCB",
                 color: "white",
                 alignSelf: "center",
                 marginTop: "15%",
-                fontSize: normalize(25),
+                fontSize: normalize(20),
               }}
             >
               FİLTRE SEÇ

@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import LoginContainer from "./Containers/LoginContainer";
 import TabsContainer from "./Containers/TabsContainer";
+import { Asset } from "expo-asset";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -10,7 +11,37 @@ export default class App extends React.Component {
       loggedIn: false,
       userData: null,
     };
+    this.loadAssets()
   }
+  loadAssets = async () => {
+    return new Promise(async function (resolve, reject) {
+      await Asset.loadAsync([
+        //BUTTON
+        require("./assets/cancel.png"),
+        require("./assets/eye_black.png"),
+        require("./assets/first.png"),
+        require("./assets/headerbg.jpg"),
+        require("./assets/headerbg.png"),
+        require("./assets/icon.png"),
+        require("./assets/left-arrow.png"),
+        require("./assets/loading.gif"),
+        require("./assets/logo.png"),
+        require("./assets/notificationIcon.png"),
+        require("./assets/password.png"),
+        require("./assets/second.png"),
+        require("./assets/splash.png"),
+        require("./assets/success.png"),
+        require("./assets/third.png"),
+        require("./assets/username.png"),
+        require("./assets/wallpaper.png"),
+
+
+
+      ]);
+      resolve();
+      return;
+    });
+  };
   setLoggedIn = () => {
     this.setState({ loggedIn: true });
   };

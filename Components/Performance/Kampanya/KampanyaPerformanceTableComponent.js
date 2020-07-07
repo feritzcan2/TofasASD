@@ -21,9 +21,19 @@ import LoginScreen from "../../LoginScreen/LoginScreen";
 export default class KampanyaPerformanceTableComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      smallData: props.performanceData ? props.performanceData.slice(0, 1) : [],
+      page: 1
+    }
+  }
+  shouldComponentUpdate = (nextProps, nextState) => {
+    if (this.props.performanceData !== nextProps.performanceData) {
+      this.setState({ smallData: nextProps.performanceData.slice(0, nextState.page) })
+    }
+    return true
   }
 
-  renderRow = (rowData, index, isHeader) => {
+  renderRow = (rowData, index, isHeader, isSummary) => {
     return (
       <View
         key={"r " + index}
@@ -51,7 +61,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader || isSummary ? { fontWeight: "800", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? rowData.DealerName : rowData.name}
@@ -71,9 +81,10 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
             style={[
               styles.rowText,
               isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isSummary ? { fontWeight: "800", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
             ]}
           >
-            {isHeader ? "HEDEF" : rowData.target + " ₺"}
+            {isHeader ? "HEDEF" : rowData.target.toLocaleString('tr') + " ₺"}
           </Text>
         </View>
         <View
@@ -92,7 +103,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
               isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
             ]}
           >
-            {isHeader ? "TÜM SATIŞ" : rowData.tumSatis + " ₺"}
+            {isHeader ? "TÜM SATIŞ" : rowData.tumSatis.toLocaleString('tr') + " ₺"}
           </Text>
         </View>
         <View
@@ -109,18 +120,20 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
             style={[
               styles.rowText,
               isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isSummary ? { fontWeight: "800", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
+
             ]}
           >
             {isHeader
               ? "HEDEFE TABİ SATIŞ"
               : this.props.hedefTuru === 0
-                ? rowData.hepsi
+                ? rowData.hepsi.toLocaleString('tr') + " ₺"
                 : this.props.hedefTuru === 1
-                  ? rowData.perakende
+                  ? rowData.perakende.toLocaleString('tr') + " ₺"
                   : this.props.hedefTuru === 2
-                    ? rowData.sigorta
+                    ? rowData.sigorta.toLocaleString('tr') + " ₺"
                     : this.props.hedefTuru === 3
-                      ? rowData.yetkili
+                      ? rowData.yetkili.toLocaleString('tr') + " ₺"
                       : "s" + " ₺"}
           </Text>
         </View>
@@ -140,7 +153,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
               isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
             ]}
           >
-            {isHeader ? "PRİME TABİ SATIŞ" : rowData.primeTabiSatis + " ₺"}
+            {isHeader ? "PRİME TABİ SATIŞ" : rowData.primeTabiSatis.toLocaleString('tr') + " ₺"}
           </Text>
         </View>
         <View
@@ -184,13 +197,46 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
       </View>
     );
   };
+  CalculateSumary = (data) => {
+    let summary = {
+      DealerName: "TEST1",
+      Region: "TEST2",
+      name: "BAYİ TOPLAMI",
+      target: 0,
+      tumSatis: 0,
+      tabiSatis: 0,
+      primeTabiSatis: 0,
+      hepsi: 0,
+      perakende: 0,
+      sigorta: 0,
+      yetkili: 0,
+      hedefGerceklestirme: 0,
+    };
+    for (let a = 0; a < data.length; a++) {
+      let item = data[a]
+      summary.hedefGerceklestirme += item.hedefGerceklestirme
+      summary.yetkili += item.yetkili
+      summary.sigorta += item.sigorta
+      summary.perakende += item.perakende
+      summary.hepsi += item.hepsi
+      summary.primeTabiSatis += item.primeTabiSatis
+      summary.tabiSatis += item.tabiSatis
+      summary.tumSatis += item.tumSatis
+      summary.target += item.target
+    }
+    return summary
+  }
   renderPerformanceTable = (data, index) => {
+    let summary = this.CalculateSumary(data)
+
     return (
       <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
         {this.renderRow(data[0], null, true)}
         {data.map((rowData, index) => {
           return this.renderRow(rowData, index);
         })}
+        {this.renderRow(summary, 10220, false, true)}
+
       </View>
     );
   };
@@ -211,16 +257,29 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
       </View>
     );
   };
+  renderFlatList = () => {
+    return <FlatList data={this.state.smallData}
+      onEndReached={() => {
+        if (this.props.performanceData.length > this.state.page) {
+          console.log("load ")
+          this.setState({
+            page: this.state.page + 1,
+            smallData: this.props.performanceData ?
+              this.props.performanceData.slice(0, this.state.page + 1) : []
+          })
+        }
+      }}
+      onEndReachedThreshold={.7}
+      keyExtractor={(item, index) => index.toString()}
 
+      renderItem={({ item, index }) => {
+        return this.renderArea(item, index)
+      }}
+    ></FlatList>
+  }
   render() {
-    return (
-      <ScrollView style={styles.container}>
-        {this.props.performanceData &&
-          this.props.performanceData.map((data, index) => {
-            return this.renderArea(data, index);
-          })}
-      </ScrollView>
-    );
+    return this.renderFlatList()
+
   }
 }
 
@@ -231,7 +290,7 @@ const styles = StyleSheet.create({
   },
   areaContainer: {
     flex: 1,
-    marginTop: screenHeight * 0.05,
+    marginTop: screenHeight * 0.02,
   },
   areaScrollContainer: {
     backgroundColor: "white",

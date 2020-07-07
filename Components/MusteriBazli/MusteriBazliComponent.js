@@ -313,7 +313,6 @@ export default class MusteriBazliComponent extends React.Component {
         />
         <OutlinedTextField
           containerStyle={{
-            textAlign: "center",
             width: "100%",
             alignSelf: "center",
             marginTop: screenHeight * 0.03,
