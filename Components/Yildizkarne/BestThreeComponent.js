@@ -24,7 +24,6 @@ export default class BestThreeComponent extends React.Component {
         let first = this.props.data[0]
         let second = this.props.data[1]
         let third = this.props.data[2]
-        console.log(third)
         return <View style={{ flexDirection: "row", height: screenHeight * 0.3, marginRight: "3%", marginLeft: "3%", marginBottom: "3%" }}>
             <View style={{ flex: 1, flexDirection: "column" }}>
                 <View style={{ height: "5%" }}></View>

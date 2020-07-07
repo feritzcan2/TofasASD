@@ -3,8 +3,9 @@ let getUserUrl = "https://puan.donmezdebriyaj.com.tr/api/user/GetUser/";
 let customerListUrl =
   "https://puan.donmezdebriyaj.com.tr/api/user/GetCustomerList/";
 import { AsyncStorage } from "react-native";
-import { getBayiList, getCampaigns, getRegions } from "./GeneralPerformance";
+import { getBayiList, getCampaigns, getRegions, getGenelPerformance } from "./GeneralPerformance";
 import { getNotifications } from "./Bildirim";
+import { getAnnouncements } from "./Duyuru";
 export function login(UserName, Password) {
   return new Promise(async function (resolve, reject) {
     let result = await fetch(url, {
@@ -49,9 +50,23 @@ export function login(UserName, Password) {
     await AsyncStorage.setItem("userStored", "true");
     global.userData = result.Data;
     console.log(result.Data);
+    global.genelPerformance = {}
+    global.campaignPerformance = {}
     getBayiList();
     getRegions()
     getCampaigns();
+    getAnnouncements()
+    getGenelPerformance({
+
+      hedefTuru: 0,
+      region: 0,
+      dealerCode: "",
+      quarter: 3,
+      year: new Date().getFullYear(),
+      month: new Date().getMonth() + 1,
+      donemTuru: 0,
+
+    })
     resolve(true);
   });
 }

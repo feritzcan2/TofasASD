@@ -47,7 +47,7 @@ export default class KampanyaPerformanceComponent extends React.Component {
   render() {
     const { selectedTab, performanceData } = this.state;
     return (
-      <View style={{ flex: 1, marginBottom: "3%" }}>
+      <View style={{ flex: 1, marginTop: "3%" }}>
         <KampanyaDetayComponent
           visible={this.state.detailVisible}
           close={() => this.setState({ detailVisible: false })}
@@ -111,13 +111,13 @@ export default class KampanyaPerformanceComponent extends React.Component {
           </Text>
         </Tabs>
 
-        <View style={{ flex: 1, marginTop: "5%" }}>
+        <View style={{ flex: 1, marginTop: "15%", marginBottom: "2%" }}>
           <TouchableOpacity onPress={this.props.showCampaignFilter}>
             <Text
               style={{
                 width: "70%",
                 textAlign: "center",
-                padding: 10,
+                padding: 5,
                 backgroundColor: "#FFCCCB",
                 color: "white",
                 alignSelf: "center",

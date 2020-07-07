@@ -27,12 +27,10 @@ export function getRegions() {
       resolve(null);
       return;
     });
-    console.log("reg resp ", result)
     if (result.Data === null || result.Data === undefined) {
       resolve(null);
       return;
     }
-    console.log("regions", result.Data)
     global.regions = result.Data;
 
     resolve(result.Data);
@@ -69,15 +67,22 @@ export function getBayiList() {
       return;
     }
     global.bayiler = result.Data;
-
+    console.log(result.Data)
     resolve(result.Data);
   });
 }
 
 export function getGenelPerformance(filters) {
   return new Promise(async function (resolve, reject) {
-    console.log("genel perf")
-    if (!global.userData || !global.userData.Token) resolve(null);
+
+    if (global.genelPerformance[JSON.stringify(filters)]) {
+      resolve(global.genelPerformance[JSON.stringify(filters)])
+      return
+    }
+    if (!global.userData || !global.userData.Token) {
+      resolve(null)
+
+    }
 
     let result = await fetch(url, {
       method: "POST",
@@ -95,27 +100,28 @@ export function getGenelPerformance(filters) {
             Year: filters.year,
             PreviewType: 1,
             Quarter: 3,
-            MonthNo: filters.month,
+            MonthNo: filters.month + 1,
           },
           Name: "GetList_SalePerformanceSalesmanASD",
         },
       }),
     });
 
-    console.log("paramsi ,", JSON.stringify({
+    console.log("Perf params: ", JSON.stringify({
       Token: global.userData.Token,
       Data: {
         Parameters: {
           Region: filters.region,
           DealerCode: filters.dealerCode,
           Year: filters.year,
-          PreviewType: filters.donemTuru,
-          Quarter: filters.quarter,
+          PreviewType: 1,
+          Quarter: 3,
           MonthNo: filters.month,
         },
         Name: "GetList_SalePerformanceSalesmanASD",
       },
     }))
+
 
     result = await result.json().catch((error) => {
       resolve(null);
@@ -125,14 +131,14 @@ export function getGenelPerformance(filters) {
       resolve(null);
       return;
     }
-
-    console.log("data length: " + result.Data.length, result.Data[0])
+    global.genelPerformance[JSON.stringify(filters)] = result.Data
     resolve(result.Data);
   });
 }
 
 export function getCampaigns() {
   return new Promise(async function (resolve, reject) {
+
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -170,6 +176,12 @@ export function getCampaigns() {
 }
 export function getCampaignPerformance(id) {
   return new Promise(async function (resolve, reject) {
+
+    if (global.campaignPerformance[id]) {
+      console.log("return from cache")
+      resolve(global.campaignPerformance[id])
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -202,6 +214,7 @@ export function getCampaignPerformance(id) {
       resolve(null);
       return;
     }
+    global.campaignPerformance[id] = result.Data.saleListSalesman
     resolve(result.Data.saleListSalesman);
   });
 }

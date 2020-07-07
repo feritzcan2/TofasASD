@@ -40,7 +40,7 @@ export default class MusteriBazliContainer extends React.Component {
       .then((d) => console.log(d))
       .catch((e) => console.log(e));
     getWarehouse(customer.Id)
-      .then((d) => console.log(d))
+      .then((d) => console.log("ware", d))
       .catch((e) => console.log(e));
   };
 

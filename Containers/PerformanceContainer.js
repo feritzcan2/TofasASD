@@ -36,15 +36,13 @@ export default class PerformanceContainer extends React.Component {
         dealerCode: "",
         quarter: 3,
         year: new Date().getFullYear(),
-        month: new Date().getMonth() + 1,
+        month: new Date().getMonth(),
         donemTuru: 0,
       },
     };
     getGenelPerformance(this.state.selectedPerformanceFilters).then((data) => {
-      if (data) {
-        AsyncStorage.setItem("perff", JSON.stringify(data));
-        this.preparePerformanceData(data);
-      }
+      this.preparePerformanceData(data);
+
     });
     if (!global.campaigns) {
       getCampaigns().then((data) => {
@@ -94,10 +92,9 @@ export default class PerformanceContainer extends React.Component {
     this.setState({ selectedPerformanceFilters: filters });
     getGenelPerformance(filters).then((data) => {
       //console.log(data);
-      if (data) {
-        AsyncStorage.setItem("perff", JSON.stringify(data));
-        this.preparePerformanceData(data);
-      }
+
+      this.preparePerformanceData(data);
+
     });
   };
 
@@ -115,7 +112,7 @@ export default class PerformanceContainer extends React.Component {
         target: parseInt(data.PriceTarget, 10),
         tumSatis: parseInt(data.PriceTotal, 10),
         tabiSatis: parseInt(data.PriceLinkedTarget, 10),
-        primeTabiSatis: parseInt(data.PriceLinkedTarget, 10),
+        primeTabiSatis: parseInt(data.PricePrim, 10),
         hepsi: parseInt(data.PriceLinkedTarget, 10),
         perakende: parseInt(data.PriceLinkedTarget_Perakende, 10),
         sigorta: parseInt(data.PriceLinkedTarget_Sigorta, 10),

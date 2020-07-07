@@ -31,12 +31,15 @@ export default class CampaignSelectorComponent extends React.Component {
   }
 
   render() {
+    console.log("camp:"
+
+      , this.state.selectedCampaign)
     return (
       <Modal
         transparent
         animationType={"fade"}
         visible={this.props.visible}
-        onRequestClose={() => function () {}}
+        onRequestClose={() => function () { }}
       >
         <View
           style={[
@@ -49,39 +52,40 @@ export default class CampaignSelectorComponent extends React.Component {
               <Text style={styles.headerText}>KAMPANYA BİLGİLERİ</Text>
             </View>
             <Text style={styles.text}>
-              {this.state.selectedCampaign.Header}
+              {this.state.selectedCampaign ? this.state.selectedCampaign.Header : ""}
             </Text>
             <View style={styles.smallSeperator} />
 
             <View style={styles.doubleTextContainer}>
               <Text style={styles.textBold}>Kampanya Kodu {"  "}</Text>
               <Text style={styles.text}>
-                {this.state.selectedCampaign.Code}
+                {this.state.selectedCampaign ? this.state.selectedCampaign.Code : ""}
               </Text>
             </View>
             <View style={styles.smallSeperator} />
             <Text style={styles.textBold}>Kampanya Ana Koşulu</Text>
             <Text style={styles.text}>
-              ASD kendi satış hedefini asgari 100 % gerçekleştirilmiş olmalıdır.
-            </Text>
+              Toplam hedef tüm ASD ekibi tarafından {this.state.selectedCampaign ? this.state.selectedCampaign.MinSalePercent : ""} % gerçekleştirilmiş olmalıdır.
+
+</Text>
             <View style={styles.smallSeperator} />
 
             <Text style={styles.textBold}>Kampanya Tarihi</Text>
-            <Text style={styles.text}>01/03/2019 - 31/03/2019</Text>
+            <Text style={styles.text}>{this.state.selectedCampaign ? this.state.selectedCampaign.StartDate.split("T")[0] : ""} / {this.state.selectedCampaign ? this.state.selectedCampaign.EndDate.split("T")[0] : ""}</Text>
             <View style={styles.smallSeperator} />
 
             <View style={styles.seperator}></View>
             <Dropdown
               containerStyle={{ width: "90%", alignSelf: "center" }}
               label="KAMPANYALAR"
-              value={this.state.selectedCampaign.Header}
+              value={this.state.selectedCampaign ? this.state.selectedCampaign.Header : ""}
               valueExtractor={(item, index) => {
-                return this.state.campaigns[index].value.Header;
+                return this.state.campaigns ? this.state.campaigns[index].value.Header : "";
               }}
               data={this.state.campaigns}
               onChangeText={(value, index, data) => {
                 this.setState({
-                  selectedCampaign: this.state.campaigns[index].value,
+                  selectedCampaign: this.state.campaigns ? this.state.campaigns[index].value : "",
                 });
               }}
             />

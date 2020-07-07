@@ -10,7 +10,7 @@ import {
   ScrollView,
   FlatList,
   Dimensions,
-  Alert, 
+  Alert,
   ToastAndroid
 } from "react-native";
 
@@ -38,18 +38,23 @@ import LoginScreen from "../../LoginScreen/LoginScreen";
 export default class KampanyaPerformanceChartComponent extends React.Component {
   constructor(props) {
     super(props);
-  }
-  shouldComponentUpdate(nextProps) {
-    if (this.props.performanceData !== nextProps.performanceData) {
-      this.render();
+    this.state = {
+      smallData: props.performanceData ? props.performanceData.slice(0, 1) : [],
+      page: 1
     }
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.performanceData !== nextProps.performanceData) {
+      this.setState({ smallData: nextProps.performanceData.slice(0, nextState.page) })
+    }
+
     return true;
   }
 
   getMaxValue = (data) => {
     let max = 100000;
     for (let a = 0; a < data.length; a++) {
-      let value = parseInt(data[a].target.replace(".", ""));
+      let value = parseInt(data[a].target);
       if (value > max) max = value;
     }
     let kalan = max % 100000;
@@ -80,20 +85,20 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
   }
   getTabiSatis(data) {
     return this.props.hedefTuru === 0
-      ? parseInt(data.hepsi.replace(".", "").replace(",", ""))
+      ? parseInt(data.hepsi)
       : this.props.hedefTuru === 1
-        ? parseInt(data.perakende.replace(".", "").replace(",", ""))
+        ? parseInt(data.perakende)
         : this.props.hedefTuru === 2
-          ? parseInt(data.sigorta.replace(".", "").replace(",", ""))
+          ? parseInt(data.sigorta)
           : this.props.hedefTuru === 3
-            ? parseInt(data.yetkili.replace(".", "").replace(",", ""))
-            : parseInt(data.hepsi.replace(".", "").replace(",", ""));
+            ? parseInt(data.yetkili)
+            : parseInt(data.hepsi);
   }
   renderPerformanceTable = (data, index) => {
     let barData = [];
     for (let a = 0; a < data.length; a++) {
       barData.push({
-        hedef: parseInt(data[a].target.replace(".", "").replace(",", "")),
+        hedef: parseInt(data[a].target),
         hedefeTabiSatis: this.getTabiSatis(data[a]),
         hedefGerceklestirme: parseInt(data[a].hedefGerceklestirme),
       });
@@ -157,79 +162,81 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
             </View>
           </View>
           <View style={{ flex: 1 }}>
-              
-      <View style={{width:data.length*140,height:300,flexDirection:'row'}}>
-            {barData.map((item, index) => {
+
+            <View style={{ width: data.length * 140, height: 300, flexDirection: 'row' }}>
+              {barData.map((item, index) => {
                 return (
-                  <View style={{width:140,height:300,flexDirection:'row',justifyContent:'space-between',paddingHorizontal:10,alignItems:'flex-end'}}>
-                     <TouchableOpacity style={{height:300*barData[index].hedef/max,width:55,backgroundColor:'#3d86c5',alignItems:'flex-end'}} 
-                     onPress={()=>{
-                      ToastAndroid.showWithGravityAndOffset(
-                        data[index].name+':    Hedef: '+item.hedef,
-                        ToastAndroid.LONG,
-                        ToastAndroid.BOTTOM,
-                        25,
-                        50
-                      );
-                     }}>
-                     </TouchableOpacity>
-                     <TouchableOpacity 
-                     onPress={()=>{
-                      ToastAndroid.showWithGravityAndOffset(
-                        data[index].name+':    Hedefe Tabi Satış: '+item.hedefeTabiSatis,
-                        ToastAndroid.LONG,
-                        ToastAndroid.BOTTOM,
-                        25,
-                        50
-                      );
-                    }}
-                     style={{height:300*barData[index].hedefeTabiSatis/max,width:55,backgroundColor:'#cc4728',alignItems:'flex-end'}}>
-                  </TouchableOpacity>
+                  <View
+                    key={"dsadsaaa" + index}
+                    style={{ width: 140, height: 300, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10, alignItems: 'flex-end' }}>
+                    <TouchableOpacity style={{ height: 300 * barData[index].hedef / max, width: 55, backgroundColor: '#3d86c5', alignItems: 'flex-end' }}
+                      onPress={() => {
+                        ToastAndroid.showWithGravityAndOffset(
+                          data[index].name + ':    Hedef: ' + item.hedef,
+                          ToastAndroid.LONG,
+                          ToastAndroid.BOTTOM,
+                          25,
+                          50
+                        );
+                      }}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        ToastAndroid.showWithGravityAndOffset(
+                          data[index].name + ':    Hedefe Tabi Satış: ' + item.hedefeTabiSatis,
+                          ToastAndroid.LONG,
+                          ToastAndroid.BOTTOM,
+                          25,
+                          50
+                        );
+                      }}
+                      style={{ height: 300 * barData[index].hedefeTabiSatis / max, width: 55, backgroundColor: '#cc4728', alignItems: 'flex-end' }}>
+                    </TouchableOpacity>
                   </View>
                 );
               })}
             </View>
-            <View style={{width:data.length*140,height:200,flexDirection:'row',position:"absolute",left:40}}>
-            
-            {barData.map((item, index) => {
+            <View style={{ width: data.length * 140, height: 200, flexDirection: 'row', position: "absolute", left: 40 }}>
+
+              {barData.map((item, index) => {
                 return (
-                  <Svg height="200" width={140}>
-                       
-                       <SvgText
-    fill="#2c982c"
-    stroke="#fff"
-    fontSize="20"
-    fontWeight="bold"
-    onPress={()=>{
-      ToastAndroid.showWithGravityAndOffset(
-        data[index].name+':    Hedefe Gerçekleşme: '+item.hedefGerceklestirme,
-        ToastAndroid.LONG,
-        ToastAndroid.BOTTOM,
-        25,
-        50
-      );
-    }}
-    x="20"
-    y={50+(100-item.hedefGerceklestirme)-15}
-    textAnchor="middle"
-  >
-    {item.hedefGerceklestirme}%
+                  <Svg key={"dsadasda" + index} height="200" width={140}>
+
+                    <SvgText
+                      fill="#2c982c"
+                      stroke="#fff"
+                      fontSize="20"
+                      fontWeight="bold"
+                      onPress={() => {
+                        ToastAndroid.showWithGravityAndOffset(
+                          data[index].name + ':    Hedefe Gerçekleşme: ' + item.hedefGerceklestirme,
+                          ToastAndroid.LONG,
+                          ToastAndroid.BOTTOM,
+                          25,
+                          50
+                        );
+                      }}
+                      x="20"
+                      y={50 + (100 - item.hedefGerceklestirme) - 15}
+                      textAnchor="middle"
+                    >
+                      {item.hedefGerceklestirme}%
   </SvgText>
-  <Line 
-  x1="5" 
-  y1={50+(100-item.hedefGerceklestirme)} 
-  x2={index+1!=barData.length?"140":"0"} 
-  y2={index+1!=barData.length?50+(100-barData[(index+1)].hedefGerceklestirme):50+(100-item.hedefGerceklestirme)} 
-  stroke="#ff9900" 
-  strokeWidth="3" />
-  <Circle cx="7" cy={50+(100-item.hedefGerceklestirme)} r="7" fill="#ff9900" />
-  </Svg>
+                    <Line
+                      x1="5"
+                      y1={50 + (100 - item.hedefGerceklestirme)}
+                      x2={index + 1 != barData.length ? "140" : "0"}
+                      y2={index + 1 != barData.length ? 50 + (100 - barData[(index + 1)].hedefGerceklestirme) : 50 + (100 - item.hedefGerceklestirme)}
+                      stroke="#ff9900"
+                      strokeWidth="3" />
+                    <Circle cx="7" cy={50 + (100 - item.hedefGerceklestirme)} r="7" fill="#ff9900" />
+                  </Svg>
                 );
               })}
-        
-      
-       
-      </View>
+
+
+
+            </View>
 
             <View
               style={{
@@ -353,15 +360,29 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
     );
   };
 
+  renderFlatList = () => {
+    return <FlatList data={this.state.smallData}
+      onEndReached={() => {
+        if (this.props.performanceData.length > this.state.page) {
+          console.log("load ")
+          this.setState({
+            page: this.state.page + 1,
+            smallData: this.props.performanceData.slice(0, this.state.page + 1)
+          })
+        }
+      }}
+      onEndReachedThreshold={.7}
+      keyExtractor={(item, index) => index.toString()}
+
+      renderItem={({ item, index }) => {
+        return this.renderArea(item, index)
+      }}
+    ></FlatList>
+  }
+
   render() {
-    return (
-      <ScrollView style={styles.container}>
-        {this.props.performanceData &&
-          this.props.performanceData.map((data, index) => {
-            return this.renderArea(data, index);
-          })}
-      </ScrollView>
-    );
+    return this.renderFlatList()
+
   }
 }
 
@@ -372,7 +393,7 @@ const styles = StyleSheet.create({
   },
   areaContainer: {
     flex: 1,
-    marginTop: screenHeight * 0.05,
+    marginTop: screenHeight * 0.02,
   },
   areaScrollContainer: {
     backgroundColor: "white",

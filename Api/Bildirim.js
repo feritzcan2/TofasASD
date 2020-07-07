@@ -23,22 +23,12 @@ export function getNotifications(hidden) {
             }),
         });
 
-        console.log("params ", JSON.stringify({
-            Token: global.userData.Token,
-            Name: "GetList_UserNotification",
-            Data: {
-                Parameters: {
-                    IsHide: false
-                },
-                Name: "GetList_UserNotification",
-            },
-        }))
+
         result = await result.json().catch((error) => {
             console.log("null res")
             resolve(null);
             return;
         });
-        console.log(result)
         if (result.Data === null || result.Data === undefined) {
             resolve(null);
             return;

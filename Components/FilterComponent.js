@@ -51,10 +51,10 @@ export default class FilterComponent extends React.Component {
       }
     } else {
       getBayiList().then((e) => {
-        this.state = this.createData();
+        this.setState(this.createData())
         return;
       });
-      return;
+      return { notReady: true };
     }
     if (global.regions) {
       console.log("has regions")
@@ -67,10 +67,10 @@ export default class FilterComponent extends React.Component {
       console.log("has no regions")
 
       getRegions().then((e) => {
-        this.state = this.createData();
+        this.setState(this.createData())
         return;
       });
-      return;
+      return { notReady: true };
     }
 
     return {
@@ -149,6 +149,7 @@ export default class FilterComponent extends React.Component {
   render() {
     let selectedFilters = this.state.filters;
 
+    if (this.state.notReady === true) return <View></View>
     return (
       <Modal
         transparent
