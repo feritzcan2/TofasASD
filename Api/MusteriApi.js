@@ -13,6 +13,7 @@ export function searchCustomer(name, code) {
       },
       body: JSON.stringify({
         Token: global.userData.Token,
+        Name: "GetList_CustomerSearchASD",
 
         Data: {
           Parameters: {
@@ -240,6 +241,46 @@ export function getTypeCode() {
 
     console.log("analizy: ", result.Data.length)
     if (result.Data === null || result.Data === undefined) {
+      resolve(null);
+      return;
+    }
+
+    resolve(result.Data);
+  });
+}
+
+export function getListInvoice(params) {
+  return new Promise(async function (resolve, reject) {
+    if (!global.userData || !global.userData.Token) resolve(null);
+
+    let result = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "",
+      },
+      body: JSON.stringify({
+        Token: global.userData.Token,
+        Data: {
+          Name: "GetList_InvoiceASD",
+          Parameters: params
+        },
+      }),
+    });
+
+    result = await result.json().catch((error) => {
+      resolve(null);
+      return;
+    });
+
+    console.log("analizy: ", JSON.stringify({
+      Token: global.userData.Token,
+      Data: {
+        Name: "GetList_InvoiceASD",
+        Parameters: params
+      },
+    }))
+    if (!result || result.Data === null || result.Data === undefined) {
       resolve(null);
       return;
     }

@@ -19,10 +19,10 @@ import {
   OutlinedTextField,
 } from "react-native-material-textfield";
 import { Dropdown } from "react-native-material-dropdown";
-
+import MusteriBazliTableComponent from "./MusteriBazliTableComponent"
 import { getCustomerList } from "../../Api/Login";
 import { normalize } from "../../HelperFunctions";
-import { searchCustomer } from "../../Api/MusteriApi";
+import { searchCustomer, getListInvoice } from "../../Api/MusteriApi";
 const screenHeight = Dimensions.get("window").height;
 
 export default class MusteriBazliComponent extends React.Component {
@@ -230,12 +230,11 @@ export default class MusteriBazliComponent extends React.Component {
         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
           <DatePicker
             style={{ width: "40%" }}
-            date={this.state.date}
+            date={this.state.startDate}
             mode="date"
             placeholder="BAŞLANGIÇ"
             format="YYYY-MM-DD"
-            minDate="2016-05-01"
-            maxDate="2016-06-01"
+
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
             customStyles={
@@ -244,17 +243,16 @@ export default class MusteriBazliComponent extends React.Component {
               }
             }
             onDateChange={(date) => {
-              this.setState({ date: date });
+              this.setState({ startDate: date });
             }}
           />
           <DatePicker
             style={{ width: "40%" }}
-            date={this.state.date}
+            date={this.state.endDate}
             mode="date"
             placeholder="BİTİŞ"
             format="YYYY-MM-DD"
-            minDate="2016-05-01"
-            maxDate="2016-06-01"
+
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
             customStyles={
@@ -263,7 +261,7 @@ export default class MusteriBazliComponent extends React.Component {
               }
             }
             onDateChange={(date) => {
-              this.setState({ date: date });
+              this.setState({ endDate: date });
             }}
           />
         </View>
@@ -322,18 +320,25 @@ export default class MusteriBazliComponent extends React.Component {
               let { current: field } = this.faturaRef;
 
               let filters = {
-                bayiKodu: "" + this.bayiKoduRef.current.value(),
-                faturaNo: "" + this.faturaRef.current.value(),
-                miktar: "" + this.miktarRef.current.value(),
-                bayiAdi: "" + this.bayiAdiRef.current.value(),
-                parcaKodu: "" + this.parcaKodRef.current.value(),
-                asd: "" + this.asdRef.current.value(),
-                analyze: this.state.filters.analyze,
-                definition: this.state.filters.definition,
-                typeCode: this.state.filters.typeCode,
-
+                DateStart: this.state.startDate,
+                DateEnd: this.state.endDate,
+                DealerCode: "" + this.bayiKoduRef.current.value(),
+                FactorNOSearch: "" + this.faturaRef.current.value(),
+                AmountSearch: "" + this.miktarRef.current.value(),
+                DealerName: "" + this.bayiAdiRef.current.value(),
+                ProductCodeSearch: "" + this.parcaKodRef.current.value(),
+                ASDSearch: "" + this.asdRef.current.value(),
+                SelectedAnalize: this.state.filters.analyze,
+                SelectedDefinition: this.state.filters.definition,
+                SelectedType: this.state.filters.typeCode,
+                CustomerCode: this.props.selectedCustomer.CustomerCode,
+                RowFrom: "0",
+                RowTo: "10"
               }
-
+              getListInvoice(filters).then(datta => {
+                console.log(datta)
+                this.setState({ tableData: datta })
+              })
             }
           }></TouchableOpacity>
       </View>
@@ -341,6 +346,9 @@ export default class MusteriBazliComponent extends React.Component {
   };
 
   renderDetail = () => {
+
+    let peopleContact = this.props.selectedCustomer && this.props.selectedCustomer.MemberList
+      && this.props.selectedCustomer.MemberList.length > 0 ? this.props.selectedCustomer.MemberList[0] : null
     return (
       <View>
         <Text style={styles.headerText}> Müşteri Bilgileri </Text>
@@ -372,7 +380,7 @@ export default class MusteriBazliComponent extends React.Component {
             alignSelf: "center",
             marginTop: screenHeight * 0.03,
           }}
-          value="fsda"
+          value={peopleContact ? peopleContact.BirthDate.split("T")[0] : ""}
           editable={false}
           label="Firma Sahibi Doğum Tarihi"
           baseColor="#69747a"
@@ -388,7 +396,7 @@ export default class MusteriBazliComponent extends React.Component {
             alignSelf: "center",
             marginTop: screenHeight * 0.03,
           }}
-          value="fsda"
+          value={peopleContact ? peopleContact.Name + " " + peopleContact.Surname : ""}
           editable={false}
           label="İletişim Kurulacak Kişi Ad Soyad"
           baseColor="#69747a"
@@ -404,7 +412,7 @@ export default class MusteriBazliComponent extends React.Component {
             alignSelf: "center",
             marginTop: screenHeight * 0.03,
           }}
-          value="fsda"
+          value={peopleContact ? peopleContact.BirthDate.split("T")[0] : ""}
           editable={false}
           label="İletişim Kurulacak Kişi Doğum Tarihi"
           baseColor="#69747a"
@@ -481,7 +489,10 @@ export default class MusteriBazliComponent extends React.Component {
             this.state.data.map((element, index) => {
               return this.renderRow(element, index);
             })}
+
         </ScrollView>
+        {this.state.tableData && <MusteriBazliTableComponent
+          performanceData={this.state.tableData} />}
       </KeyboardAvoidingView>
     );
   }

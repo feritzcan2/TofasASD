@@ -191,6 +191,8 @@ export function getCampaignDetail(data, id) {
         Data: {
           Name: "GetList_CampaignTargetActualASDDetail",
           Parameters: {
+            Name: "GetList_InvoiceASD",
+
             CampaignId: id,
             PriceLinkedTargetStr: data.PriceLinkedTargetStr,
             TargetPercentStr: data.TargetPercentStr,
