@@ -262,13 +262,29 @@ export function getListInvoice(params) {
       body: JSON.stringify({
         Token: global.userData.Token,
         Data: {
-          Name: "GetList_InvoiceASD",
-          Parameters: params
-        },
+          "Name": "GetList_InvoiceASD",
+          "Parameters": {
+            "DateStart": "01/01/2020",
+            "CustomerCode": "0050521062",
+            "DateEnd": "07/07/2020",
+            "DealerName": "",
+            "SelectedDefinition": "",
+            "SelectedAnalize": "",
+            "SelectedType": "",
+            "DealerCode": "",
+            "FactorNOSearch": "",
+            "AmountSearch": "",
+            "ASDSearch": "",
+            "ProductCodeSearch": "",
+            "RowFrom": "0",
+            "RowTo": "10"
+          }
+        }
       }),
     });
 
     result = await result.json().catch((error) => {
+      console.log("error:", error)
       resolve(null);
       return;
     });

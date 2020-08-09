@@ -102,10 +102,12 @@ export default class MusteriBazliComponent extends React.Component {
 
   }
   onTextEdit = (text, isUsername) => {
+
+    this.props.setCustomerNull()
     if (isUsername === true) {
-      this.setState({ searchingName: text });
+      this.setState({ searchingName: text, data: null, tableData: null });
     } else {
-      this.setState({ searchingCode: text });
+      this.setState({ searchingCode: text, data: null, tableData: null });
     }
     let name = isUsername === true ? text : this.state.searchingName;
     let code = isUsername === false ? text : this.state.searchingCode;
@@ -314,7 +316,7 @@ export default class MusteriBazliComponent extends React.Component {
 
           />
         </View>
-        <TouchableOpacity style={{ width: "80%", height: screenHeight * 0.1, backgroundColor: "red" }}
+        <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", width: "80%", height: screenHeight * 0.07, backgroundColor: "#74b566" }}
           onPress={
             () => {
               let { current: field } = this.faturaRef;
@@ -336,11 +338,11 @@ export default class MusteriBazliComponent extends React.Component {
                 RowTo: "10"
               }
               getListInvoice(filters).then(datta => {
-                console.log(datta)
+                console.log("dd:", datta)
                 this.setState({ tableData: datta })
               })
             }
-          }></TouchableOpacity>
+          }><Text style={{ fontSize: normalize(18), color: "white" }}>ARAMA YAP</Text></TouchableOpacity>
       </View>
     );
   };
@@ -428,6 +430,10 @@ export default class MusteriBazliComponent extends React.Component {
       </View>
     );
   };
+
+  renderDetails = () => {
+
+  }
   render() {
     const { } = this.props;
 
@@ -445,7 +451,7 @@ export default class MusteriBazliComponent extends React.Component {
           <View
             style={{
               height:
-                this.state.keyboardShown || this.state.data.length > 0
+                this.state.keyboardShown || (this.state.data && this.state.data.length > 0)
                   ? screenHeight * 0.1
                   : screenHeight * 0.05,
             }}
@@ -478,7 +484,7 @@ export default class MusteriBazliComponent extends React.Component {
           <View
             style={{
               height:
-                this.state.keyboardShown || this.state.data.length > 0
+                this.state.keyboardShown || (this.state.data && this.state.data.length > 0)
                   ? screenHeight * 0.1
                   : screenHeight * 0.05,
             }}
@@ -489,10 +495,10 @@ export default class MusteriBazliComponent extends React.Component {
             this.state.data.map((element, index) => {
               return this.renderRow(element, index);
             })}
-
+          {this.state.tableData && <MusteriBazliTableComponent
+            performanceData={this.state.tableData} />}
         </ScrollView>
-        {this.state.tableData && <MusteriBazliTableComponent
-          performanceData={this.state.tableData} />}
+
       </KeyboardAvoidingView>
     );
   }

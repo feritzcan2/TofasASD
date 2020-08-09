@@ -21,6 +21,10 @@ export default class MusteriBazliContainer extends React.Component {
     this.state = { selectedCustomer: null, customerId: null };
   }
 
+  setCustomerNull = () => {
+    this.setState({ selectedCustomer: null })
+  }
+
   selectCustomer = (customer) => {
     if (this.state.inProgress === true) return;
     this.setState({ inProgress: true });
@@ -48,6 +52,7 @@ export default class MusteriBazliContainer extends React.Component {
   render() {
     return (
       <MusteriBazliComponent
+        setCustomerNull={this.setCustomerNull}
         selectedCustomer={this.state.selectedCustomer}
         selectCustomer={this.selectCustomer}
         data={this.props.data}

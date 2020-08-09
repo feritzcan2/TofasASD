@@ -50,7 +50,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                 <View
                     style={{
                         height: "100%",
-                        flex: 1.5,
+                        flex: 1,
                         borderColor: "#dbe0e2",
                         borderWidth: 0.5,
                         alignItems: "center",
@@ -63,13 +63,13 @@ export default class MusteriBazliTableComponent extends React.Component {
                             isHeader || isSummary ? { fontWeight: "800", color: "#5a5a5a" } : {},
                         ]}
                     >
-                        {isHeader ? "BAYİ KODU" : rowData.BAYI_KODU}
+                        {isHeader ? "BAYİ\nKODU" : rowData.BAYI_KODU}
                     </Text>
                 </View>
                 <View
                     style={{
                         height: "100%",
-                        flex: 1,
+                        flex: 1.5,
                         borderColor: "#dbe0e2",
                         borderWidth: 0.5,
                         alignItems: "center",
@@ -83,7 +83,26 @@ export default class MusteriBazliTableComponent extends React.Component {
                             isSummary ? { fontWeight: "800", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
                         ]}
                     >
-                        {isHeader ? "BAYİ ADI" : rowData.BAYI}
+                        {isHeader ? "BAYİ\nADI" : rowData.BAYI}
+                    </Text>
+                </View>
+                <View
+                    style={{
+                        height: "100%",
+                        flex: 1.2,
+                        borderColor: "#dbe0e2",
+                        borderWidth: 0.5,
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    <Text
+                        style={[
+                            styles.rowText,
+                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                        ]}
+                    >
+                        {isHeader ? "FATURA\nNO" : rowData.FATURA_NO}
                     </Text>
                 </View>
                 <View
@@ -102,13 +121,13 @@ export default class MusteriBazliTableComponent extends React.Component {
                             isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
                         ]}
                     >
-                        {isHeader ? "FATURA NO" : rowData.FATURA_NO}
+                        {isHeader ? "FATURA\nTARİHİ" : rowData.FATURA_TARIHI.split("T")[0]}
                     </Text>
                 </View>
                 <View
                     style={{
                         height: "100%",
-                        flex: 1,
+                        flex: 1.5,
                         borderColor: "#dbe0e2",
                         borderWidth: 0.5,
                         alignItems: "center",
@@ -121,26 +140,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                             isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
                         ]}
                     >
-                        {isHeader ? "FATURA TARİHİ" : rowData.FATURA_TARIHI.split("T")[0]}
-                    </Text>
-                </View>
-                <View
-                    style={{
-                        height: "100%",
-                        flex: 1,
-                        borderColor: "#dbe0e2",
-                        borderWidth: 0.5,
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                >
-                    <Text
-                        style={[
-                            styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
-                        ]}
-                    >
-                        {isHeader ? "PARÇA KODU" : rowData.PARCA_KODU}
+                        {isHeader ? "PARÇA\nKODU" : rowData.PARCA_KODU}
                     </Text>
                 </View>
                 <View
@@ -178,7 +178,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                             isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
                         ]}
                     >
-                        {isHeader ? "BİRİM FİYAT" : rowData.BIRIM_FIYAT}
+                        {isHeader ? "BİRİM\nFİYAT" : rowData.BIRIM_FIYAT}
                     </Text>
                 </View>
                 <View
@@ -267,24 +267,27 @@ export default class MusteriBazliTableComponent extends React.Component {
         );
     };
     renderFlatList = () => {
-        return <FlatList data={this.state.smallData}
-            onEndReached={() => {
-                if (this.props.performanceData.length > this.state.page) {
-                    console.log("load ")
-                    this.setState({
-                        page: this.state.page + 1,
-                        smallData: this.props.performanceData ?
-                            this.props.performanceData.slice(0, this.state.page + 1) : []
-                    })
-                }
-            }}
-            onEndReachedThreshold={.7}
-            keyExtractor={(item, index) => index.toString()}
+        return <React.Fragment>
+            {this.renderRow(null, 0, true)}
+            <FlatList data={this.state.smallData}
+                onEndReached={() => {
+                    if (this.props.performanceData.length > this.state.page) {
+                        console.log("load ")
+                        this.setState({
+                            page: this.state.page + 1,
+                            smallData: this.props.performanceData ?
+                                this.props.performanceData.slice(0, this.state.page + 1) : []
+                        })
+                    }
+                }}
+                onEndReachedThreshold={.7}
+                keyExtractor={(item, index) => index.toString()}
 
-            renderItem={({ item, index }) => {
-                return this.renderRow(item, index)
-            }}
-        ></FlatList>
+                renderItem={({ item, index }) => {
+                    return this.renderRow(item, index)
+                }}
+            ></FlatList>
+        </React.Fragment>
     }
     render() {
         return this.renderFlatList()
