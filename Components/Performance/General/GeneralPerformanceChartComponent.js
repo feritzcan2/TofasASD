@@ -317,43 +317,43 @@ export default class GeneralPerformanceChartComponent extends React.Component {
           </View>
           <View style={{ width: 60, height: 300, }}>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 8).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 8).toFixed(0)+' %' }</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 7).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 7).toFixed(0)+' %'}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 6).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 6).toFixed(0)+' %'}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 5).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 5).toFixed(0)+' %'}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 4).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 4).toFixed(0)+' %'}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 3).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 3).toFixed(0)+' %'}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 2).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 2).toFixed(0)+' %'}</Text>
             </View>
             <View style={{ flex: 1, }}>
               <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef).toFixed(1)}</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -2).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}></Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -3).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}></Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -4).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}></Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -5).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}></Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * -6).toFixed(1)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}></Text>
             </View>
           </View>
         </ScrollView>

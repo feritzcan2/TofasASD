@@ -23,7 +23,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     super(props);
     this.state = {
       smallData: props.performanceData ? props.performanceData.slice(0, 1) : [],
-      page: 1
+      page: 1, 
     }
   }
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -34,6 +34,8 @@ export default class GeneralPerformanceTableComponent extends React.Component {
   }
 
   renderRow = (rowData, index, isHeader, isSummary) => {
+    console.log(rowData)
+    console.log('row')
     return (
       <View
         key={"r " + index}
@@ -173,7 +175,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
             ]}
           >
             {isHeader
-              ? "HEDEF GERÇEKLEŞME" :
+              ? "PERFORMANS %" :
               isSummary ? this.props.hedefTuru === 0
                 ? (rowData.hepsi / rowData.target * 100).toFixed(2).toLocaleString('tr') + " %"
                 : this.props.hedefTuru === 1
@@ -185,6 +187,29 @@ export default class GeneralPerformanceTableComponent extends React.Component {
                       : "s" + " ₺"
                 : rowData.hedefGerceklestirme.toFixed(2).toLocaleString('tr') + " %"}
           </Text>
+          {!isHeader &&this.props.isDetail&& <TouchableOpacity
+            onPress={() => {
+
+              let detail = rowData.campaignDetail
+              detail.dealerName = rowData.DealerName
+              detail.name = rowData.name
+              detail.region = rowData.Region
+              detail.PriceTargetStr=rowData.campaignDetail.PriceTarget.toLocaleString('tr') + " ₺"
+              this.props.showDetail(detail)
+            }}
+            style={{
+              flex: 1,
+              alignItems: "center", justifyContent: "center", width: "80%", backgroundColor: "red", marginBottom: "5%", marginTop: "10%"
+            }}>
+            <Text
+              style={[
+                styles.rowText,
+                isHeader ? { fontWeight: "800", color: "#5a5a5a" } : { color: "white" },
+              ]}
+            >
+              İNCELE
+
+          </Text></TouchableOpacity>}
         </View>
       </View>
     );
@@ -204,6 +229,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
       yetkili: 0,
       hedefGerceklestirme: 0,
     };
+    
     for (let a = 0; a < data.length; a++) {
       let item = data[a]
       summary.hedefGerceklestirme += item.hedefGerceklestirme
@@ -218,7 +244,49 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     }
     return summary
   }
+  CalculateTotal = (data,renderTotalArea) => {
+    let summary = {
+      DealerName: "TEST1",
+      Region: "TEST2",
+      name: renderTotalArea?"BÖLGE TOPLAMLARI":data[0][0].Region+". BÖLGE TOPLAMI",
+      target: 0,
+      tumSatis: 0,
+      tabiSatis: 0,
+      primeTabiSatis: 0,
+      hepsi: 0,
+      perakende: 0,
+      sigorta: 0,
+      yetkili: 0,
+      hedefGerceklestirme: 0,
+    };
+    for (let i = 0; i < data.length; i++) {
+    for (let j = 0; j < data[i].length; j++) {
+      let item = data[i][j]
+      summary.hedefGerceklestirme += item.hedefGerceklestirme
+      summary.yetkili += item.yetkili
+      summary.sigorta += item.sigorta
+      summary.perakende += item.perakende
+      summary.hepsi += item.hepsi
+      summary.primeTabiSatis += item.primeTabiSatis
+      summary.tabiSatis += item.tabiSatis
+      summary.tumSatis += item.tumSatis
+      summary.target += item.target
+    }
+  }
+    return summary
+  }
+  CalculateTotalSumaries =  (data) => {
+    let summary=[]
+    for (let i = 0; i < data.length; i++) {
+     summary.push(this.CalculateTotal(data[i],true))
+    }
+    return summary
+  }
   renderPerformanceTable = (data, index) => {
+    console.log(data)
+    console.log('per')
+    if(data.length==0)
+    return
     let summary = this.CalculateSumary(data)
     return (
       <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
@@ -230,7 +298,18 @@ export default class GeneralPerformanceTableComponent extends React.Component {
       </View>
     );
   };
+  renderPerformanceTotalTable = (data, index) => {
+    let summary = this.CalculateTotal(data,false) 
+    return (
+      <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
+        {this.renderRow(data[0], null, true)}
+        {this.renderRow(summary, 100, false, true)}
+      </View>
+    );
+  };
   renderArea = (data, index) => {
+    console.log(data)
+    console.log('summary')
     return (
       <View key={"a:" + data[0][0]["Region"]} style={styles.areaContainer}>
         <View style={styles.bolgeTextContainer}>
@@ -244,8 +323,28 @@ export default class GeneralPerformanceTableComponent extends React.Component {
             return this.renderPerformanceTable(data, index);
           })}
         </View>
+        <View>
+             {this.renderPerformanceTotalTable(data, index)}
+        </View>
       </View>
     );
+  };
+  renderTotalArea = (data) => {
+    let summary = this.CalculateTotalSumaries(data) 
+    console.log(summary)
+    console.log('summary')
+      return (
+        <View style={styles.areaContainer}>
+          <View style={styles.bolgeTextContainer}>
+            <Text style={styles.bolgeText}>
+              {"BÖLGE TOPLAMLARI"}
+            </Text>
+          </View>
+         <View style={{backgroundColor:'blue'}}>
+              {this.renderPerformanceTable(summary,0)}
+          </View>
+        </View>
+      );
   };
   renderFlatList = () => {
     return <FlatList data={this.state.smallData}
@@ -278,6 +377,7 @@ const styles = StyleSheet.create({
   areaContainer: {
     flex: 1,
     marginTop: screenHeight * 0.02,
+    backgroundColor:'red'
   },
   areaScrollContainer: {
     backgroundColor: "white",

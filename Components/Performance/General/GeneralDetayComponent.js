@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { normalize } from "../../../HelperFunctions";
 let screenHeight = Dimensions.get("window").height
-export default class KampanyaDetayComponent extends React.Component {
+export default class GeneralDetayComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -239,7 +239,7 @@ export default class KampanyaDetayComponent extends React.Component {
                                     </Text>
                                 </View>
                             </View>
-                            {/* <View style={{ flexDirection: "row", marginBottom: 3 }}>
+                            <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
                                     flex: 1, backgroundColor: "#473e54",
@@ -250,7 +250,7 @@ export default class KampanyaDetayComponent extends React.Component {
                                         marginBottom: 5,
                                         color: "white",
                                         fontWeight: "bold"
-                                    }}>TARİH
+                                    }}>HEDEF
                                 </Text>
                                 </View>
                                 <View style={{
@@ -263,21 +263,70 @@ export default class KampanyaDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>Birmot Beylikdüzü
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.PriceTargetStr : ""}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{ flexDirection: "row", marginBottom: 3 }}>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 1, backgroundColor: "#473e54",
+                                }}>
+                                    <Text style={{
+                                        fontSize: normalize(11),
+                                        marginTop: 5,
+                                        marginBottom: 5,
+                                        color: "white",
+                                        fontWeight: "bold"
+                                    }}>HEDEFE TABİ SATIŞ TUTARI
                                 </Text>
                                 </View>
-                            </View> */}
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
+
+                                }}><Text style={{
+                                    fontSize: normalize(11),
+                                    marginTop: 5,
+                                    marginBottom: 5,
+                                    color: "#667077",
+                                    fontWeight: "bold"
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.PriceLinkedTargetStr : ""}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{ flexDirection: "row", marginBottom: 3 }}>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 1, backgroundColor: "#473e54",
+                                }}>
+                                    <Text style={{
+                                        fontSize: normalize(11),
+                                        marginTop: 5,
+                                        marginBottom: 5,
+                                        color: "white",
+                                        fontWeight: "bold"
+                                    }}>PERFORMANS
+                                </Text>
+                                </View>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
+
+                                }}><Text style={{
+                                    fontSize: normalize(11),
+                                    marginTop: 5,
+                                    marginBottom: 5,
+                                    color: "#667077",
+                                    fontWeight: "bold"
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.TargetPercentStr : ""}
+                                    </Text>
+                                </View>
+                            </View>
+                            
 
                         </View>
-                        <ScrollView style={{ maxHeight: screenHeight * 0.4 }}>
-                            {this.renderRow(null, null, true)}
-                            {
-
-                                this.props.detailData && this.props.detailData.map((data, index) => {
-                                    return this.renderRow(data, index);
-                                })
-                            }
-                        </ScrollView>
+                       
                         <TouchableOpacity
                             onPress={this.props.close}
                             style={{ justifyContent: "center", alignItems: "center", height: "10%", backgroundColor: "#473e54" }}>

@@ -43,19 +43,21 @@ export default class DuyuruContainer extends React.Component {
       notifications: { read: [], nonRead: [] }
     };
     getNotifications(true).then(data => {
+      console.log(data)
+      console.log('data')
       let notifications = this.state.notifications
       notifications.read = data
       if (this.mounted === true)
-
         this.setState({ notifications })
     }).catch(e => {
       console.log("notif err: ", e)
     })
     getNotifications(false).then(data => {
+      console.log(data)
+      console.log('data')
       let notifications = this.state.notifications
       notifications.nonRead = data
       if (this.mounted === true)
-
         this.setState({ notifications })
     }).catch(e => {
       console.log("notif err: ", e)
@@ -89,7 +91,6 @@ export default class DuyuruContainer extends React.Component {
           drawerContent={
             <NotificationsComponent
               notifications={this.state.notifications}
-
             />
           }
           drawerPercentage={100}
@@ -97,7 +98,6 @@ export default class DuyuruContainer extends React.Component {
           overlay={true}
           opacity={0.4}
         >
-
           <DuyuruComponent notifCount={this.state.notifications.nonRead.length}
             toggleBildirim={this.toggleBildirim} data={this.props.data} />
         </MenuDrawer>

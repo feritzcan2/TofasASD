@@ -4751,6 +4751,11 @@ react-native-animatable@^1.1.0:
   dependencies:
     prop-types "^15.7.2"
 
+react-native-confetti-cannon@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-confetti-cannon/-/react-native-confetti-cannon-1.5.1.tgz#c4f15b8ccb2823fb4785d6896743865be6df58a4"
+  integrity sha512-4yjnIqMsPFiiicVkICGVZqC+ZZiXmryQ4wxHSRbRtaYv4QuK/IWccXXA/wJq72kiefuh41cakG1HVEu8AgflQQ==
+
 react-native-data-table@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/react-native-data-table/-/react-native-data-table-0.2.1.tgz#86b0d613a9da40eb048ec21a05ece6bdf95b0177"

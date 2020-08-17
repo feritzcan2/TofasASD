@@ -159,6 +159,26 @@ export default class MusteriBazliTableComponent extends React.Component {
                             isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
                         ]}
                     >
+                        {console.log(rowData)}
+                        {isHeader ? "ASD" : rowData.PERAKENDECI_ADI+' '+rowData.PERAKENDECI_SOYADI}
+                    </Text>
+                </View>
+                <View
+                    style={{
+                        height: "100%",
+                        flex: 1,
+                        borderColor: "#dbe0e2",
+                        borderWidth: 0.5,
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    <Text
+                        style={[
+                            styles.rowText,
+                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                        ]}
+                    >
                         {isHeader ? "MİKTAR" : rowData.FAT_MIKTAR}
                     </Text>
                 </View>

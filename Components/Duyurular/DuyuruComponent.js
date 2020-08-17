@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ImageBackground,
+  Animated
 } from "react-native";
 import { normalize } from "../../HelperFunctions";
 import { WebView } from "react-native-webview";
@@ -24,6 +25,7 @@ export default class DuyuruComponent extends React.Component {
     super(props);
     this.state = {
       detailShown: false,
+      startValue: this.props.notifCount>0?new Animated.Value(0.3):new Animated.Value(1),
     };
   }
 
@@ -33,7 +35,14 @@ export default class DuyuruComponent extends React.Component {
       detail: data,
     });
   };
-
+componentDidMount(){
+  if(this.props.notifCount>0){
+    Animated.spring(this.state.startValue, {
+    toValue: 1,
+    friction:1
+  }).start();
+}
+}
   renderAnnouncement = (data, index) => {
     return (
       <TouchableOpacity
@@ -178,22 +187,27 @@ export default class DuyuruComponent extends React.Component {
           style={{ height: "30%", width: "100%", resizeMode: "stretch" }}
           source={require("../../assets/headerbg.png")}
         >
-          <View style={{ flex: 1, marginTop: "7%", marginRight: "5%", alignItems: "flex-end" }}>
-            <Avatar
-              source={require("../../assets/notificationIcon.png")}
-              size="large"
-              onPress={this.props.toggleBildirim}
-
-            />
-
-            <Badge
-              value={this.props.notifCount}
-              status="success"
-              containerStyle={{ position: 'absolute', top: -4, right: -4 }}
-            />
-            <Text style={styles.duyuruHeaderText}>DUYURULAR</Text>
-
+          <View style={{ width: screenWidth, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '7%', paddingTop: '7%', paddingBottom: '3%',
+            }} >
+            <Image source={require('../../assets/logoo.png')} style={{ resizeMode: 'contain', width: screenWidth * 0.5, height: screenHeight * 0.1, }} />
+            <Animated.View style={{ flex: 1, alignItems: 'flex-end',transform: [
+                {
+                  scale: this.state.startValue,
+                },
+              ], }}>
+              <Avatar
+                source={require("../../assets/notificationIcon.png")}
+                size="large"
+                onPress={this.props.toggleBildirim}
+              />
+              <Badge
+                value={this.props.notifCount}
+                status="success"
+                containerStyle={{ position: 'absolute', top: -4, right: -4 }}
+              />
+            </Animated.View>
           </View>
+          <Text style={styles.duyuruHeaderText}>DUYURULAR</Text>
         </ImageBackground>
         {this.state.detailShown !== true && (
           <ScrollView style={styles.scrollContainer}>

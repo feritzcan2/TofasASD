@@ -27,7 +27,7 @@ export default class PerformanceContainer extends React.Component {
       campaigns: global.campaigns,
       selectedCampaign:
         global.campaigns && global.campaigns.length > 0
-          ? global.campaigns[0]
+          ? global.campaigns[global.campaigns.length-1]
           : null,
       page: "GENEL",
       selectedPerformanceFilters: {
@@ -39,6 +39,7 @@ export default class PerformanceContainer extends React.Component {
         month: new Date().getMonth(),
         donemTuru: 0,
       },
+      isDetail:false
     };
     getGenelPerformance(this.state.selectedPerformanceFilters).then((data) => {
       this.preparePerformanceData(data);
@@ -48,7 +49,7 @@ export default class PerformanceContainer extends React.Component {
       getCampaigns().then((data) => {
         this.setState({
           campaigns: data,
-          selectedCampaign: data && data.length > 0 ? data[0] : null,
+          selectedCampaign: data && data.length > 0 ? data[data.length-1] : null,
         });
       });
     } else if (this.state.selectedCampaign) {
@@ -90,11 +91,13 @@ export default class PerformanceContainer extends React.Component {
 
   applyPerformanceFilter = (filters) => {
     this.setState({ selectedPerformanceFilters: filters });
+    if(filters.donemTuru==1){
+      this.setState({isDetail:true})
+    }else{
+      this.setState({isDetail:false})
+    }
     getGenelPerformance(filters).then((data) => {
-      //console.log(data);
-
       this.preparePerformanceData(data);
-
     });
   };
 
@@ -102,9 +105,6 @@ export default class PerformanceContainer extends React.Component {
     let datas = {};
     for (let a = 0; a < serverData.length; a++) {
       let data = serverData[a];
-      // if (data.Region === "1" && data.DealerName === "BİRMOT BEYLİKDÜZÜ" && a === 0)
-      //   console.log("Sever:", data)
-
       let campaignTarget = {
         PriceLinkedTarget: data.PriceLinkedTargetStr,
         TargetPercentStr: data.TargetPercentStr,
@@ -226,6 +226,7 @@ export default class PerformanceContainer extends React.Component {
               applyFilters={this.applyPerformanceFilter}
               filters={this.state.selectedPerformanceFilters}
               performanceData={this.state.performanceData}
+              isDetail={this.state.isDetail}
             />
           )}
           {this.state.page === "KAMPANYA" && (

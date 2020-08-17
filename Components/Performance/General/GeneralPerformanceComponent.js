@@ -23,7 +23,7 @@ import {
 } from "../../../Api/GeneralPerformance";
 import { normalize } from "../../../HelperFunctions";
 import FilterComponent from "../../FilterComponent";
-
+import GeneralDetayComponent from "./GeneralDetayComponent";
 export default class GeneralPerformanceComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -33,17 +33,25 @@ export default class GeneralPerformanceComponent extends React.Component {
       filterVisible: false,
       performanceData: [],
       page: "tablo",
+      detailVisible:false
     };
   }
 
   changeTab = (tab) => {
     this.setState({ selectedTab: tab });
   };
-
+  showDetail = (data) => {
+      this.setState({ detailVisible: true, detailAreaData: data })
+  }
   render() {
     const { selectedTab, performanceData } = this.state;
     return (
       <View style={{ flex: 1, marginBottom: "3%" }}>
+        <GeneralDetayComponent
+          visible={this.state.detailVisible}
+          detailAreaData={this.state.detailAreaData}
+          close={() => this.setState({ detailVisible: false })}
+        />
         <FilterComponent
           selectedFilters={this.props.filters}
           apply={this.props.applyFilters}
@@ -122,6 +130,8 @@ export default class GeneralPerformanceComponent extends React.Component {
             <GeneralPerformanceTableComponent
               performanceData={this.props.performanceData}
               hedefTuru={this.props.filters.hedefTuru}
+              isDetail={this.props.isDetail}
+              showDetail={this.showDetail}
             />
           )}
           {this.state.page === "grafik" && (

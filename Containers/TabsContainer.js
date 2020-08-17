@@ -259,17 +259,6 @@ export default class TabsContainer extends Component {
             Performans Takibi
           </Text>
           <Text
-            name="musteri"
-            selectedIconStyle={{
-              height: "100%",
-              borderTopWidth: 2,
-              borderTopColor: "green",
-              flex: 1,
-            }}
-          >
-            Müşteri Bazlı Satışlar
-          </Text>
-          <Text
             name="yildiz"
             selectedIconStyle={{
               height: "100%",
@@ -280,6 +269,18 @@ export default class TabsContainer extends Component {
           >
             Yıldız Karne
           </Text>
+          <Text
+            name="musteri"
+            selectedIconStyle={{
+              height: "100%",
+              borderTopWidth: 2,
+              borderTopColor: "green",
+              flex: 1,
+            }}
+          >
+            Müşteri Bazlı Satışlar
+          </Text>
+          
         </Tabs>
         {this.state.page === "duyurular" && (
           <DuyuruContainer data={this.state.duyuruData} />

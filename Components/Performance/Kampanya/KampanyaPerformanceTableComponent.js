@@ -189,7 +189,6 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
           </Text>
           {!isHeader && <TouchableOpacity
             onPress={() => {
-
               let detail = rowData.campaignDetail
               detail.dealerName = rowData.DealerName
               detail.name = rowData.name
