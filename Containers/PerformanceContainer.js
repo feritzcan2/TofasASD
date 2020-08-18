@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image, Text, AsyncStorage } from "react-native";
+import { View, StyleSheet, Image, Text, AsyncStorage, Platform } from "react-native";
 
 import Tabs from "react-native-tabs";
 import {
@@ -27,7 +27,7 @@ export default class PerformanceContainer extends React.Component {
       campaigns: global.campaigns,
       selectedCampaign:
         global.campaigns && global.campaigns.length > 0
-          ? global.campaigns[global.campaigns.length-1]
+          ? global.campaigns[global.campaigns.length - 1]
           : null,
       page: "GENEL",
       selectedPerformanceFilters: {
@@ -39,7 +39,7 @@ export default class PerformanceContainer extends React.Component {
         month: new Date().getMonth(),
         donemTuru: 0,
       },
-      isDetail:false
+      isDetail: false
     };
     getGenelPerformance(this.state.selectedPerformanceFilters).then((data) => {
       this.preparePerformanceData(data);
@@ -49,7 +49,7 @@ export default class PerformanceContainer extends React.Component {
       getCampaigns().then((data) => {
         this.setState({
           campaigns: data,
-          selectedCampaign: data && data.length > 0 ? data[data.length-1] : null,
+          selectedCampaign: data && data.length > 0 ? data[data.length - 1] : null,
         });
       });
     } else if (this.state.selectedCampaign) {
@@ -91,10 +91,10 @@ export default class PerformanceContainer extends React.Component {
 
   applyPerformanceFilter = (filters) => {
     this.setState({ selectedPerformanceFilters: filters });
-    if(filters.donemTuru==1){
-      this.setState({isDetail:true})
-    }else{
-      this.setState({isDetail:false})
+    if (filters.donemTuru == 1) {
+      this.setState({ isDetail: true })
+    } else {
+      this.setState({ isDetail: false })
     }
     getGenelPerformance(filters).then((data) => {
       this.preparePerformanceData(data);
@@ -176,7 +176,7 @@ export default class PerformanceContainer extends React.Component {
         <Tabs
           selected={this.state.page}
           style={{
-            top: "5%",
+            top: Platform.OS == 'android' ? "3%" : "5%",
             zIndex: 50000,
             backgroundColor: "#424e60",
             color: "#9da4ad",

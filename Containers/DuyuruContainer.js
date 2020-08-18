@@ -79,30 +79,30 @@ export default class DuyuruContainer extends React.Component {
 
   render() {
 
-    return <TouchableWithoutFeedback
-      disabled={!this.state.notificationOpen}
-      onPress={() => {
-        console.log("cloe")
-        if (this.state.notificationOpen) this.toggleBildirim();
-      }}
-    ><View>
-        <MenuDrawer
-          open={this.state.notificationOpen}
-          drawerContent={
-            <NotificationsComponent
-              notifications={this.state.notifications}
-            />
-          }
-          drawerPercentage={100}
-          animationTime={250}
-          overlay={true}
-          opacity={0.4}
+    return <View>
+      <MenuDrawer
+        open={this.state.notificationOpen}
+        drawerContent={
+          <NotificationsComponent
+            notifications={this.state.notifications}
+          />
+        }
+        drawerPercentage={100}
+        animationTime={250}
+        overlay={true}
+        opacity={0.4}
+      >
+        <TouchableWithoutFeedback
+          disabled={!this.state.notificationOpen}
+          onPress={() => {
+            console.log("cloe")
+            if (this.state.notificationOpen) this.toggleBildirim();
+          }}
         >
           <DuyuruComponent notifCount={this.state.notifications.nonRead.length}
             toggleBildirim={this.toggleBildirim} data={this.props.data} />
-        </MenuDrawer>
-      </View>
-    </TouchableWithoutFeedback>
-
+        </TouchableWithoutFeedback>
+      </MenuDrawer>
+    </View>
   }
 }

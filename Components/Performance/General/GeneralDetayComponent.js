@@ -151,7 +151,7 @@ export default class GeneralDetayComponent extends React.Component {
                 >
                     <View style={styles.contentContainer}>
                         <View style={styles.headerTextContainer}>
-                            <Text style={styles.headerText}>KAMPANYA DETAY</Text>
+                            <Text style={styles.headerText}>GENEL DETAY</Text>
                         </View>
                         <View style={{ margin: "5%" }}>
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
@@ -323,10 +323,10 @@ export default class GeneralDetayComponent extends React.Component {
                                     </Text>
                                 </View>
                             </View>
-                            
+
 
                         </View>
-                       
+
                         <TouchableOpacity
                             onPress={this.props.close}
                             style={{ justifyContent: "center", alignItems: "center", height: "10%", backgroundColor: "#473e54" }}>
