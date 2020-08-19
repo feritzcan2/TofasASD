@@ -34,7 +34,7 @@ export default class PerformanceContainer extends React.Component {
         hedefTuru: 0,
         region: 0,
         dealerCode: "",
-        quarter: 3,
+        quarter: 1,
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
         donemTuru: 0,
@@ -90,6 +90,8 @@ export default class PerformanceContainer extends React.Component {
   };
 
   applyPerformanceFilter = (filters) => {
+    console.log('filters')
+    console.log(filters)
     this.setState({ selectedPerformanceFilters: filters });
     if (filters.donemTuru == 1) {
       this.setState({ isDetail: true })
@@ -98,6 +100,7 @@ export default class PerformanceContainer extends React.Component {
     }
     getGenelPerformance(filters).then((data) => {
       this.preparePerformanceData(data);
+      console.log(data)
     });
   };
 

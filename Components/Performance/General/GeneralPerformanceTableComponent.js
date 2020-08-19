@@ -34,8 +34,6 @@ export default class GeneralPerformanceTableComponent extends React.Component {
   }
 
   renderRow = (rowData, index, isHeader, isSummary) => {
-    console.log(rowData)
-    console.log('row')
     return (
       <View
         key={"r " + index}
@@ -283,8 +281,6 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     return summary
   }
   renderPerformanceTable = (data, index) => {
-    console.log(data)
-    console.log('per')
     if (data.length == 0)
       return
     let summary = this.CalculateSumary(data)
@@ -308,8 +304,6 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     );
   };
   renderArea = (data, index) => {
-    console.log(data)
-    console.log('summary')
     return (
       <View key={"a:" + data[0][0]["Region"]} style={styles.areaContainer}>
         <View style={styles.bolgeTextContainer}>
@@ -331,8 +325,6 @@ export default class GeneralPerformanceTableComponent extends React.Component {
   };
   renderTotalArea = (data) => {
     let summary = this.CalculateTotalSumaries(data)
-    console.log(summary)
-    console.log('summary')
     return (
       <View style={styles.areaContainer}>
         <View style={styles.bolgeTextContainer}>

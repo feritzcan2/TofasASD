@@ -60,6 +60,7 @@ export default class TabsContainer extends Component {
         params: { bayi: [], typm: [], asd: [] },
       },
       yildizKarneData: null,
+      menuOpen: false
     };
 
     getAnnouncements().then((d) => {
@@ -222,7 +223,9 @@ export default class TabsContainer extends Component {
     }
     return true;
   }
-
+  toggleMenu = () => {
+    this.setState({ menuOpen: !this.state.menuOpen })
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -234,7 +237,9 @@ export default class TabsContainer extends Component {
             height: "10%",
           }}
           selectedStyle={{ color: "red" }}
-          onSelect={(el) => this.setState({ page: el.props.name })}
+          onSelect={(el) => {
+            this.setState({ page: el.props.name, menuOpen: false })
+          }}
         >
           <Text
             name="duyurular"
@@ -280,10 +285,10 @@ export default class TabsContainer extends Component {
           >
             Müşteri Bazlı Satışlar
           </Text>
-          
+
         </Tabs>
         {this.state.page === "duyurular" && (
-          <DuyuruContainer data={this.state.duyuruData} />
+          <DuyuruContainer data={this.state.duyuruData} menuOpen={this.state.menuOpen} toggleMenu={this.toggleMenu} />
         )}
         {this.state.page === "genel" && (
           <PerformanceContainer performanceData={this.state.performanceData} />

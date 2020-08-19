@@ -27,7 +27,6 @@ export default class FilterComponent extends React.Component {
       this.setState({ filters: { ...nextProps.selectedFilters } });
     return true;
   }
-  apply = () => { };
 
   createData = () => {
     let yilData = [];
@@ -45,9 +44,12 @@ export default class FilterComponent extends React.Component {
     ];
     if (global.bayiler) {
       for (let a = 0; a < global.bayiler.length; a++) {
-        bayiler.push({
-          value: global.bayiler[a],
-        });
+        if (global.bayiler[a].ShortName != '') {
+          bayiler.push({
+            value: global.bayiler[a],
+          });
+        }
+
       }
     } else {
       getBayiList().then((e) => {
@@ -90,6 +92,20 @@ export default class FilterComponent extends React.Component {
         },
         {
           value: "AY YTD",
+        },
+      ],
+      quarterData: [
+        {
+          value: "1. Çeyrek",
+        },
+        {
+          value: "2. Çeyrek",
+        },
+        {
+          value: "3. Çeyrek",
+        },
+        {
+          value: "4. Çeyrek",
         },
       ],
       ayData: [
@@ -147,8 +163,6 @@ export default class FilterComponent extends React.Component {
     };
   };
   render() {
-    let selectedFilters = this.state.filters;
-
     if (this.state.notReady === true) return <View></View>
     return (
       <Modal
@@ -170,7 +184,7 @@ export default class FilterComponent extends React.Component {
             <Dropdown
               containerStyle={{ width: "90%", alignSelf: "center" }}
               label="BÖLGELER"
-              value={this.state.bolgeData[selectedFilters.region].value}
+              value={this.state.bolgeData[this.state.filters.region].value}
               data={this.state.bolgeData}
               onChangeText={(value, index, data) => {
                 let flters = this.state.filters;
@@ -188,7 +202,7 @@ export default class FilterComponent extends React.Component {
               }
               valueExtractor={(item, index) => {
                 if (index === 0) return "TÜM BAYİLER";
-                return this.state.bayiData[index].value.ShortName;
+                return this.state.bayiData[index].value.ShortName != '' ? this.state.bayiData[index].value.ShortName : this.state.bayiData[index].value.Name;
               }}
               data={this.state.bayiData}
               onChangeText={(value, index, data) => {
@@ -209,7 +223,7 @@ export default class FilterComponent extends React.Component {
             <Dropdown
               containerStyle={{ width: "90%", alignSelf: "center" }}
               label="YIL"
-              value={selectedFilters.year}
+              value={this.state.filters.year}
               data={this.state.yilData}
               onChangeText={(value, index, data) => {
                 let flters = this.state.filters;
@@ -220,7 +234,7 @@ export default class FilterComponent extends React.Component {
             <Dropdown
               containerStyle={{ width: "90%", alignSelf: "center" }}
               label="DÖNEM"
-              value={this.state.donemData[selectedFilters.donemTuru].value}
+              value={this.state.donemData[this.state.filters.donemTuru].value}
               data={this.state.donemData}
               onChangeText={(value, index, data) => {
                 let flters = this.state.filters;
@@ -228,10 +242,21 @@ export default class FilterComponent extends React.Component {
                 this.setState({ filters: flters });
               }}
             />
+            {this.state.filters.donemTuru == 1 ? <Dropdown
+              containerStyle={{ width: "90%", alignSelf: "center" }}
+              label="ÇEYREK"
+              value={this.state.quarterData[this.state.filters.quarter - 1].value}
+              data={this.state.quarterData}
+              onChangeText={(value, index, data) => {
+                let flters = this.state.filters;
+                flters.quarter = index + 1;
+                this.setState({ filters: flters });
+              }}
+            /> : null}
             <Dropdown
               containerStyle={{ width: "90%", alignSelf: "center" }}
               label="AY"
-              value={this.state.ayData[selectedFilters.month].value}
+              value={this.state.ayData[this.state.filters.month].value}
               onChangeText={(value, index, data) => {
                 let flters = this.state.filters;
                 flters.month = index;
@@ -242,7 +267,7 @@ export default class FilterComponent extends React.Component {
             <Dropdown
               containerStyle={{ width: "90%", alignSelf: "center" }}
               label="HEDEFE TABİ SATIŞ"
-              value={this.state.hedefData[selectedFilters.hedefTuru].value}
+              value={this.state.hedefData[this.state.filters.hedefTuru].value}
               onChangeText={(value, index, data) => {
                 let flters = this.state.filters;
                 flters.hedefTuru = index;

@@ -72,16 +72,11 @@ export default class DuyuruContainer extends React.Component {
     this.mounted = false
   }
 
-  toggleBildirim = () => {
-    if (this.mounted === true)
-      this.setState({ notificationOpen: !this.state.notificationOpen })
-  }
-
   render() {
 
     return <View>
       <MenuDrawer
-        open={this.state.notificationOpen}
+        open={this.props.menuOpen}
         drawerContent={
           <NotificationsComponent
             notifications={this.state.notifications}
@@ -95,12 +90,11 @@ export default class DuyuruContainer extends React.Component {
         <TouchableWithoutFeedback
           disabled={!this.state.notificationOpen}
           onPress={() => {
-            console.log("cloe")
-            if (this.state.notificationOpen) this.toggleBildirim();
+            this.props.toggleMenu();
           }}
         >
           <DuyuruComponent notifCount={this.state.notifications.nonRead.length}
-            toggleBildirim={this.toggleBildirim} data={this.props.data} />
+            toggleBildirim={this.props.toggleMenu} data={this.props.data} />
         </TouchableWithoutFeedback>
       </MenuDrawer>
     </View>
