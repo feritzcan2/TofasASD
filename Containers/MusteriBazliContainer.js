@@ -41,7 +41,12 @@ export default class MusteriBazliContainer extends React.Component {
       });
 
     getCustomerNotes(customer.Id)
-      .then((d) => console.log(d))
+      .then((d) => {
+        this.setState({
+          customerNote: d,
+        });
+      }
+      )
       .catch((e) => console.log(e));
     getWarehouse(customer.Id)
       .then((d) => console.log("ware", d))
@@ -55,6 +60,7 @@ export default class MusteriBazliContainer extends React.Component {
         setCustomerNull={this.setCustomerNull}
         selectedCustomer={this.state.selectedCustomer}
         selectCustomer={this.selectCustomer}
+        customerNote={this.state.customerNote}
         data={this.props.data}
       />
     );

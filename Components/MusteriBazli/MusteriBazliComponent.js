@@ -10,6 +10,7 @@ import {
   Keyboard,
   TouchableOpacity,
   Dimensions,
+  TextInput
 } from "react-native";
 import DatePicker from "react-native-datepicker";
 
@@ -22,7 +23,7 @@ import { Dropdown } from "react-native-material-dropdown";
 import MusteriBazliTableComponent from "./MusteriBazliTableComponent"
 import { getCustomerList } from "../../Api/Login";
 import { normalize } from "../../HelperFunctions";
-import { searchCustomer, getListInvoice } from "../../Api/MusteriApi";
+import { searchCustomer, getListInvoice, setCustomerNotes, sendCustomerNotes } from "../../Api/MusteriApi";
 const screenHeight = Dimensions.get("window").height;
 
 export default class MusteriBazliComponent extends React.Component {
@@ -38,7 +39,8 @@ export default class MusteriBazliComponent extends React.Component {
       startDate: "",
       endDate: "",
       filters: { analyze: "", definition: "", typeCode: "" },
-      dropDownData: this.prepareData()
+      dropDownData: this.prepareData(),
+      note: ''
     };
     this.keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
@@ -351,6 +353,7 @@ export default class MusteriBazliComponent extends React.Component {
 
     let peopleContact = this.props.selectedCustomer && this.props.selectedCustomer.MemberList
       && this.props.selectedCustomer.MemberList.length > 0 ? this.props.selectedCustomer.MemberList[0] : null
+    console.log(this.props.selectedCustomer)
     return (
       <View>
         <Text style={styles.headerText}> Müşteri Bilgileri </Text>
@@ -424,9 +427,36 @@ export default class MusteriBazliComponent extends React.Component {
           onSubmitEditing={this.onSubmit}
           ref={this.pwRef}
         />
-
+        <Text style={styles.headerText}> Müşteri Notu </Text>
+        <TextInput
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          onChangeText={text => this.setState({ note: text })}
+          value={this.state.note}
+          placeholder='Müşteri Notu'
+          multiline
+        />
+        <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", width: "80%", height: screenHeight * 0.07, backgroundColor: "#74b566", marginVertical: 5 }}
+          onPress={
+            () => {
+              setCustomerNotes(this.props.selectedCustomer.Id, this.state.note).then(data => {
+                console.log("dd:", data)
+              })
+            }
+          }><Text style={{ fontSize: normalize(18), color: "white" }}>Notu Kaydet</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", width: "80%", height: screenHeight * 0.07, backgroundColor: "#74b566", marginVertical: 5 }}
+          onPress={
+            () => {
+              sendCustomerNotes(this.props.selectedCustomer.Email, this.state.note).then(data => {
+                console.log("dd:", data)
+              })
+            }
+          }><Text style={{ fontSize: normalize(18), color: "white" }}>Notu Mail At</Text>
+        </TouchableOpacity>
         <Text style={styles.headerText}> Müşteriye Satışlar </Text>
         {this.renderSatislar()}
+
+
       </View>
     );
   };

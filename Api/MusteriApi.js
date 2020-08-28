@@ -82,7 +82,7 @@ export function getCustomer(id) {
 export function getCustomerNotes(id) {
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
-
+    console.log(global.userData.Token)
     let result = await fetch(url, {
       method: "POST",
       headers: {
@@ -98,6 +98,78 @@ export function getCustomerNotes(id) {
             CustomerId: id,
           },
           Name: "GetInfo_CustomerNotes",
+        },
+      }),
+    });
+
+    result = await result.json().catch((error) => {
+      resolve(null);
+      return;
+    });
+    if (result.Data === null || result.Data === undefined) {
+      resolve(null);
+      return;
+    }
+
+    resolve(result.Data);
+  });
+}
+
+export function setCustomerNotes(id, message) {
+  return new Promise(async function (resolve, reject) {
+    if (!global.userData || !global.userData.Token) resolve(null);
+
+    let result = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "",
+      },
+      body: JSON.stringify({
+        Token: global.userData.Token,
+        Data: {
+          Parameters: {
+            "CustomerId": id,
+            "Note": message
+          },
+          Name: "InsertOrUpdate_CustomerNoteASD",
+        },
+      }),
+    });
+
+    result = await result.json().catch((error) => {
+      resolve(null);
+      return;
+    });
+    if (result.Data === null || result.Data === undefined) {
+      resolve(null);
+      return;
+    }
+
+    resolve(result.Data);
+  });
+}
+export function sendCustomerNotes(mail, message) {
+  return new Promise(async function (resolve, reject) {
+    if (!global.userData || !global.userData.Token) resolve(null);
+
+    let result = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+
+        Authorization: "",
+      },
+      body: JSON.stringify({
+        Token: global.userData.Token,
+
+        Data: {
+          "Name": "SendAsdEmail",
+          "Parameters": {
+            "Header": "Müşteri Notu gönderimi",
+            "EmailAddress": mail,
+            "Body": message
+          }
         },
       }),
     });
