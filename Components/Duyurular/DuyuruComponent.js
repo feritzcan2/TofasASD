@@ -25,7 +25,7 @@ export default class DuyuruComponent extends React.Component {
     super(props);
     this.state = {
       detailShown: false,
-      startValue: this.props.notifCount>0?new Animated.Value(0.3):new Animated.Value(1),
+      startValue: this.props.notifCount > 0 ? new Animated.Value(0.3) : new Animated.Value(1),
     };
   }
 
@@ -35,14 +35,14 @@ export default class DuyuruComponent extends React.Component {
       detail: data,
     });
   };
-componentDidMount(){
-  if(this.props.notifCount>0){
-    Animated.spring(this.state.startValue, {
-    toValue: 1,
-    friction:1
-  }).start();
-}
-}
+  componentDidMount() {
+    if (this.props.notifCount > 0) {
+      Animated.spring(this.state.startValue, {
+        toValue: 1,
+        friction: 1
+      }).start();
+    }
+  }
   renderAnnouncement = (data, index) => {
     return (
       <TouchableOpacity
@@ -170,7 +170,7 @@ componentDidMount(){
                   { color: "blue", textAlign: "center" },
                 ]}
               >
-                {this.state.detail.FileName}
+                {this.state.detail.FileName ? this.state.detail.FileName : 'İsimsiz'}
               </Text>
             </TouchableOpacity>
           </View>
@@ -187,14 +187,17 @@ componentDidMount(){
           style={{ height: "30%", width: "100%", resizeMode: "stretch" }}
           source={require("../../assets/headerbg.png")}
         >
-          <View style={{ width: screenWidth, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '7%', paddingTop: '7%', paddingBottom: '3%',
-            }} >
+          <View style={{
+            width: screenWidth, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '7%', paddingTop: '7%', paddingBottom: '3%',
+          }} >
             <Image source={require('../../assets/logoo.png')} style={{ resizeMode: 'contain', width: screenWidth * 0.5, height: screenHeight * 0.1, }} />
-            <Animated.View style={{ flex: 1, alignItems: 'flex-end',transform: [
+            <Animated.View style={{
+              flex: 1, alignItems: 'flex-end', transform: [
                 {
                   scale: this.state.startValue,
                 },
-              ], }}>
+              ],
+            }}>
               <Avatar
                 source={require("../../assets/notificationIcon.png")}
                 size="large"

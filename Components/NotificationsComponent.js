@@ -139,48 +139,53 @@ export default class NotificationsComponent extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Tabs
-                    selected={this.state.page}
-                    style={{
-                        top: "0%",
-                        zIndex: 500000,
-                        backgroundColor: "#1f2832",
-                        height: "10%",
-                        flex: 1,
-                    }}
-                    selectedStyle={{ color: "white" }}
-                    onSelect={(el) => this.setState({ page: el.props.name })}
-                >
-                    <Text
-                        name="duyurular"
-                        selectedIconStyle={{
-                            height: "100%",
-                            borderBottomWidth: 3,
-                            borderBottomColor: "#538ac5",
+            <View style={{ flexDirection: 'row' }}>
+                <View style={styles.container}>
+                    <Tabs
+                        selected={this.state.page}
+                        style={{
+                            top: "0%",
+                            zIndex: 500000,
+                            backgroundColor: "#1f2832",
+                            height: "10%",
                             flex: 1,
                         }}
+                        selectedStyle={{ color: "white" }}
+                        onSelect={(el) => this.setState({ page: el.props.name })}
                     >
-                        OKUNMAMIŞ
+                        <Text
+                            name="duyurular"
+                            selectedIconStyle={{
+                                height: "100%",
+                                borderBottomWidth: 3,
+                                borderBottomColor: "#538ac5",
+                                flex: 1,
+                            }}
+                        >
+                            OKUNMAMIŞ
                  </Text>
-                    <Text
-                        name="genel"
-                        selectedIconStyle={{
-                            height: "100%",
-                            borderBottomWidth: 3,
-                            borderBottomColor: "#538ac5",
-                            flex: 1,
-                        }}
-                    >
-                        OKUNMUŞ
+                        <Text
+                            name="genel"
+                            selectedIconStyle={{
+                                height: "100%",
+                                borderBottomWidth: 3,
+                                borderBottomColor: "#538ac5",
+                                flex: 1,
+                            }}
+                        >
+                            OKUNMUŞ
                     </Text>
-                </Tabs>
-                {this.state.page === "duyurular" &&
-                    this.renderNotifications(this.props.notifications.nonRead, false)}
-                {this.state.page === "genel" &&
-                    this.renderNotifications(this.props.notifications.read, false)}
-                <View style={{ backgroundColor: "white" }}></View>
-                {this.state.detailShown === true && this.renderDetail()}
+                    </Tabs>
+                    {this.state.page === "duyurular" &&
+                        this.renderNotifications(this.props.notifications.nonRead, false)}
+                    {this.state.page === "genel" &&
+                        this.renderNotifications(this.props.notifications.read, false)}
+                    <View style={{ backgroundColor: "white" }}></View>
+                    {this.state.detailShown === true && this.renderDetail()}
+
+                </View>
+                <TouchableOpacity style={styles.closeContainer} onPress={this.props.toggleBildirim} />
+
 
             </View>
         );
@@ -192,6 +197,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#1f2832",
         width: "75%",
+        marginTop: 13,
+        display: "flex",
+    },
+    closeContainer: {
+        backgroundColor: "rgba(255, 255, 255, 0.15)",
+        width: "25%",
         marginTop: 13,
         display: "flex",
     },

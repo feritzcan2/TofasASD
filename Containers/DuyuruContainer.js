@@ -80,6 +80,7 @@ export default class DuyuruContainer extends React.Component {
         drawerContent={
           <NotificationsComponent
             notifications={this.state.notifications}
+            toggleBildirim={this.props.toggleMenu}
           />
         }
         drawerPercentage={100}

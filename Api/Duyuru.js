@@ -31,6 +31,7 @@ export function getAnnouncements() {
     }
     global.duyurular = result.Data;
     console.log("duyurular geldi")
+    console.log(result.Data)
 
     resolve(result.Data.reverse());
   });
