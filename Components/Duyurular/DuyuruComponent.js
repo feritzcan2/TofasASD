@@ -182,36 +182,32 @@ export default class DuyuruComponent extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ImageBackground
-          imageStyle={{ width: "100%", height: "100%" }}
-          style={{ height: "30%", width: "100%", resizeMode: "stretch" }}
-          source={require("../../assets/headerbg.png")}
-        >
-          <View style={{
-            width: screenWidth, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '7%', paddingTop: '7%', paddingBottom: '3%',
-          }} >
-            <Image source={require('../../assets/logoo.png')} style={{ resizeMode: 'contain', width: screenWidth * 0.5, height: screenHeight * 0.1, }} />
-            <Animated.View style={{
-              flex: 1, alignItems: 'flex-end', transform: [
-                {
-                  scale: this.state.startValue,
-                },
-              ],
-            }}>
-              <Avatar
-                source={require("../../assets/notificationIcon.png")}
-                size="large"
-                onPress={this.props.toggleBildirim}
-              />
-              <Badge
-                value={this.props.notifCount}
-                status="success"
-                containerStyle={{ position: 'absolute', top: -4, right: -4 }}
-              />
-            </Animated.View>
-          </View>
-          <Text style={styles.duyuruHeaderText}>DUYURULAR</Text>
-        </ImageBackground>
+
+        <View style={{
+          width: screenWidth, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '7%', paddingTop: '7%', paddingBottom: '3%',
+        }} >
+          <Image source={require('../../assets/logoDuyuru.png')} style={{ resizeMode: 'contain', width: screenWidth * 0.5, height: screenHeight * 0.1, }} />
+          <Animated.View style={{
+            flex: 1, alignItems: 'flex-end', transform: [
+              {
+                scale: this.state.startValue,
+              },
+            ],
+          }}>
+            <Avatar
+              source={require("../../assets/notificationIcon.png")}
+              size="large"
+              onPress={this.props.toggleBildirim}
+            />
+            <Badge
+              value={this.props.notifCount}
+              status="success"
+              containerStyle={{ position: 'absolute', top: -4, right: -4 }}
+            />
+          </Animated.View>
+        </View>
+        <Text style={styles.duyuruHeaderText}>DUYURULAR</Text>
+
         {this.state.detailShown !== true && (
           <ScrollView style={styles.scrollContainer}>
             {this.props.data.map((data, index) => {
@@ -239,7 +235,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#f0f3f6",
+    backgroundColor: "#f0f0f0",
   },
   welcome: {
     fontSize: 20,
@@ -271,16 +267,16 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     textAlign: "center",
-    fontWeight: "600",
+    fontWeight: "bold",
     fontSize: normalize(15),
   },
   duyuruHeaderText: {
-    color: "#e7ee98",
+    color: "#46BAA7",
     alignSelf: "center",
-    fontSize: normalize(25),
+    fontSize: normalize(30),
     marginTop: "0%",
     textAlign: "center",
-    fontWeight: "800",
+    fontWeight: "bold",
   },
   dateHeaderText: {
     color: "#bbbbbb",

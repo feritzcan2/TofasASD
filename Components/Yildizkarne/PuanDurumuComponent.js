@@ -184,7 +184,6 @@ export default class PuanDurumuComponent extends React.Component {
   };
   renderTable = (index) => {
     const allData = this.props.data;
-    console.log(allData)
     let data =
       index === 0
         ? allData.toptanYedekA
@@ -200,7 +199,6 @@ export default class PuanDurumuComponent extends React.Component {
         <View >
           <BestThreeComponent data={data} />
         </View>
-
         <View >
           {this.renderRow(data[0], null, true, index === 2 || index === 3)}
           {data.map((rowData, indexX) => {

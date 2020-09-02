@@ -21,6 +21,7 @@ import {
   getYildizKarneTympParams,
   getHedef,
 } from "../Api/YildizKarneApi";
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class TabsContainer extends Component {
   constructor(props) {
@@ -228,77 +229,79 @@ export default class TabsContainer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Tabs
-          selected={this.state.page}
-          style={{
-            zIndex: 50000,
-            backgroundColor: "white",
-            height: "10%",
-          }}
-          selectedStyle={{ color: "red" }}
-          onSelect={(el) => {
-            if (this.state.menuOpen) {
-              this.toggleMenu()
-            }
-            this.setState({ page: el.props.name, menuOpen: false })
-          }}
-        >
-          <Text
-            name="duyurular"
-            selectedIconStyle={{
-              height: "100%",
-              borderTopWidth: 2,
-              borderTopColor: "green",
-              flex: 1,
+        <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={[this.state.page === "duyurular" ? '#5dffa0' : '#F5FCFF', this.state.page === "duyurular" ? '#1f16b5' : '#F5FCFF']} style={[styles.container, { paddingTop: this.state.page === "duyurular" ? 10 : 0 }]}>
+          <Tabs
+            selected={this.state.page}
+            style={{
+              zIndex: 50000,
+              backgroundColor: "white",
+              height: "10%",
+            }}
+            selectedStyle={{ color: "red" }}
+            onSelect={(el) => {
+              if (this.state.menuOpen) {
+                this.toggleMenu()
+              }
+              this.setState({ page: el.props.name, menuOpen: false })
             }}
           >
-            Ana Sayfa
+            <Text
+              name="duyurular"
+              selectedIconStyle={{
+                height: "100%",
+                borderTopWidth: 2,
+                borderTopColor: "green",
+                flex: 1,
+              }}
+            >
+              Ana Sayfa
           </Text>
-          <Text
-            name="genel"
-            selectedIconStyle={{
-              height: "100%",
-              borderTopWidth: 2,
-              borderTopColor: "green",
-              flex: 1,
-            }}
-          >
-            Performans Takibi
+            <Text
+              name="genel"
+              selectedIconStyle={{
+                height: "100%",
+                borderTopWidth: 2,
+                borderTopColor: "green",
+                flex: 1,
+              }}
+            >
+              Performans Takibi
           </Text>
-          <Text
-            name="yildiz"
-            selectedIconStyle={{
-              height: "100%",
-              borderTopWidth: 2,
-              borderTopColor: "green",
-              flex: 1,
-            }}
-          >
-            Yıldız Karne
+            <Text
+              name="yildiz"
+              selectedIconStyle={{
+                height: "100%",
+                borderTopWidth: 2,
+                borderTopColor: "green",
+                flex: 1,
+              }}
+            >
+              Yıldız Karne
           </Text>
-          <Text
-            name="musteri"
-            selectedIconStyle={{
-              height: "100%",
-              borderTopWidth: 2,
-              borderTopColor: "green",
-              flex: 1,
-            }}
-          >
-            Müşteri Bazlı Satışlar
+            <Text
+              name="musteri"
+              selectedIconStyle={{
+                height: "100%",
+                borderTopWidth: 2,
+                borderTopColor: "green",
+                flex: 1,
+              }}
+            >
+              Müşteri Bazlı Satışlar
           </Text>
 
-        </Tabs>
-        {this.state.page === "duyurular" && (
-          <DuyuruContainer data={this.state.duyuruData} menuOpen={this.state.menuOpen} toggleMenu={this.toggleMenu} />
-        )}
-        {this.state.page === "genel" && (
-          <PerformanceContainer performanceData={this.state.performanceData} />
-        )}
-        {this.state.page === "yildiz" && (
-          <YildizKarneContainer yildizData={this.state.yildizData} />
-        )}
-        {this.state.page === "musteri" && <MusteriBazliContainer />}
+          </Tabs>
+          {this.state.page === "duyurular" && (
+            <DuyuruContainer data={this.state.duyuruData} menuOpen={this.state.menuOpen} toggleMenu={this.toggleMenu} />
+          )}
+          {this.state.page === "genel" && (
+            <PerformanceContainer performanceData={this.state.performanceData} />
+          )}
+          {this.state.page === "yildiz" && (
+            <YildizKarneContainer yildizData={this.state.yildizData} />
+          )}
+          {this.state.page === "musteri" && <MusteriBazliContainer />}
+        </LinearGradient>
       </View>
     );
   }
@@ -308,6 +311,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F5FCFF",
+
   },
   welcome: {
     fontSize: 20,

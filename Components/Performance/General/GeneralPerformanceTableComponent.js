@@ -277,7 +277,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
       totalTable[data[0][0].Region] = summary
       this.setState({ totalTable })
     }
-    console.log(summary)
+
     return summary
   }
   CalculateTotalSumaries = (data) => {
@@ -288,8 +288,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     return summary
   }
   renderPerformanceTable = (data, index, total) => {
-    console.log('dataTable')
-    console.log(data)
+
     if (data.length == 0)
       return
     let summary = this.CalculateSumary(data, total)
@@ -334,7 +333,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     );
   };
   renderTotalArea = (data) => {
-    console.log(data)
+
     if (this.state.isEnd) {
       // let summary = this.CalculateTotal(this.state.totalTable.filter(item => item), false)
       let data = this.state.totalTable.filter(item => item)
@@ -359,8 +358,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
 
   }
   renderFlatList = () => {
-    console.log('data')
-    console.log(this.state.totalTable.filter(item => item))
+
     return <FlatList data={this.state.smallData}
       onEndReached={() => {
         if (this.props.performanceData.length > this.state.page) {
