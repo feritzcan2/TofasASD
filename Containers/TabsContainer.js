@@ -229,7 +229,7 @@ export default class TabsContainer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={[this.state.page === "duyurular" ? '#5dffa0' : '#F5FCFF', this.state.page === "duyurular" ? '#1f16b5' : '#F5FCFF']} style={[styles.container, { paddingTop: this.state.page === "duyurular" ? 10 : 0 }]}>
+        <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={[this.state.page === "duyurular" ? '#5dffa0' : '#F5FCFF', this.state.page === "duyurular" ? '#1f16b5' : '#F5FCFF']} style={[styles.container, { paddingTop: this.state.page === "duyurular" ? 20 : 0 }]}>
           <Tabs
             selected={this.state.page}
             style={{
