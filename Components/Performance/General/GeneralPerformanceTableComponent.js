@@ -24,6 +24,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     this.state = {
       smallData: props.performanceData ? props.performanceData.slice(0, 1) : [],
       page: 1,
+      totalTable: []
     }
   }
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -212,11 +213,11 @@ export default class GeneralPerformanceTableComponent extends React.Component {
       </View>
     );
   };
-  CalculateSumary = (data) => {
+  CalculateSumary = (data, total) => {
     let summary = {
-      DealerName: "TEST1",
+      DealerName: "BÖLGELER",
       Region: "TEST2",
-      name: "BAYİ TOPLAMI",
+      name: total ? "TÜRKİYE" : "BAYİ TOPLAMI",
       target: 0,
       tumSatis: 0,
       tabiSatis: 0,
@@ -242,11 +243,11 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     }
     return summary
   }
-  CalculateTotal = (data, renderTotalArea) => {
+  CalculateTotal = (data) => {
     let summary = {
-      DealerName: "TEST1",
+      DealerName: "BÖLGELER",
       Region: "TEST2",
-      name: renderTotalArea ? "BÖLGE TOPLAMLARI" : data[0][0].Region + ". BÖLGE TOPLAMI",
+      name: data[0][0].Region + ". BÖLGE",
       target: 0,
       tumSatis: 0,
       tabiSatis: 0,
@@ -271,6 +272,12 @@ export default class GeneralPerformanceTableComponent extends React.Component {
         summary.target += item.target
       }
     }
+    if (!this.state.totalTable[data[0][0].Region]) {
+      const totalTable = this.state.totalTable;
+      totalTable[data[0][0].Region] = summary
+      this.setState({ totalTable })
+    }
+    console.log(summary)
     return summary
   }
   CalculateTotalSumaries = (data) => {
@@ -280,10 +287,12 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     }
     return summary
   }
-  renderPerformanceTable = (data, index) => {
+  renderPerformanceTable = (data, index, total) => {
+    console.log('dataTable')
+    console.log(data)
     if (data.length == 0)
       return
-    let summary = this.CalculateSumary(data)
+    let summary = this.CalculateSumary(data, total)
     return (
       <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
         {this.renderRow(data[0], null, true)}
@@ -304,6 +313,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     );
   };
   renderArea = (data, index) => {
+
     return (
       <View key={"a:" + data[0][0]["Region"]} style={styles.areaContainer}>
         <View style={styles.bolgeTextContainer}>
@@ -314,7 +324,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
 
         <View>
           {data.map((data, index) => {
-            return this.renderPerformanceTable(data, index);
+            return this.renderPerformanceTable(data, index, false);
           })}
         </View>
         <View>
@@ -324,42 +334,60 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     );
   };
   renderTotalArea = (data) => {
-    let summary = this.CalculateTotalSumaries(data)
-    return (
-      <View style={styles.areaContainer}>
-        <View style={styles.bolgeTextContainer}>
-          <Text style={styles.bolgeText}>
-            {"BÖLGE TOPLAMLARI"}
-          </Text>
+    console.log(data)
+    if (this.state.isEnd) {
+      // let summary = this.CalculateTotal(this.state.totalTable.filter(item => item), false)
+      let data = this.state.totalTable.filter(item => item)
+      return (
+        <View key={"a:"} style={styles.areaContainer}>
+          <View style={styles.bolgeTextContainer}>
+            <Text style={styles.bolgeText}>
+              {"TÜM TOPLAMLAR"}
+            </Text>
+          </View>
+
+          <View>
+            {this.renderPerformanceTable(data, 0, true)}
+
+          </View>
+
         </View>
-        <View style={{ backgroundColor: 'blue' }}>
-          {this.renderPerformanceTable(summary, 0)}
-        </View>
-      </View>
-    );
-  };
+      );
+    } else {
+      return null
+    }
+
+  }
   renderFlatList = () => {
+    console.log('data')
+    console.log(this.state.totalTable.filter(item => item))
     return <FlatList data={this.state.smallData}
       onEndReached={() => {
         if (this.props.performanceData.length > this.state.page) {
           this.setState({
             page: this.state.page + 1,
-            smallData: this.props.performanceData.slice(0, this.state.page + 1)
+            smallData: this.props.performanceData.slice(0, this.state.page + 1),
+            isEnd: false
           })
+        } else {
+          this.setState({ isEnd: true })
         }
       }}
       onEndReachedThreshold={.7}
-      keyExtractor={(item, index) => index.toString()}
+      keyExtractor={(item, index) => index.toString()
+      }
+      ListFooterComponent={this.renderTotalArea}
       renderItem={({ item, index }) => {
         return this.renderArea(item, index)
       }}
-    ></FlatList>
+    ></FlatList >
   }
 
   render() {
     return this.renderFlatList()
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
