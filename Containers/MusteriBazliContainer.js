@@ -26,6 +26,7 @@ export default class MusteriBazliContainer extends React.Component {
   }
 
   selectCustomer = (customer) => {
+
     if (this.state.inProgress === true) return;
     this.setState({ inProgress: true });
     getCustomer(customer.Id)
@@ -35,25 +36,29 @@ export default class MusteriBazliContainer extends React.Component {
           selectedCustomer: d,
           customerId: customer.Id,
         });
+        getCustomerNotes(customer.Id)
+          .then((d) => {
+            this.setState({
+              customerNote: d,
+            });
+          }
+          )
+          .catch((e) => console.log(e));
       })
       .catch((e) => {
         this.setState({ inProgress: false });
       });
 
-    getCustomerNotes(customer.Id)
-      .then((d) => {
-        this.setState({
-          customerNote: d,
-        });
-      }
-      )
-      .catch((e) => console.log(e));
+
     getWarehouse(customer.Id)
       .then((d) => console.log("ware", d))
       .catch((e) => console.log(e));
     getAnalizeCode(customer.Id)
   };
-
+  setNote(value) {
+    console.log(value)
+    this.setState({ customerNote: value })
+  }
   render() {
     return (
       <MusteriBazliComponent
@@ -61,6 +66,7 @@ export default class MusteriBazliContainer extends React.Component {
         selectedCustomer={this.state.selectedCustomer}
         selectCustomer={this.selectCustomer}
         customerNote={this.state.customerNote}
+        onChangeNote={this.setNote.bind(this)}
         data={this.props.data}
       />
     );

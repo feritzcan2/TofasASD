@@ -35,9 +35,6 @@ export default class App extends React.Component {
         require("./assets/third.png"),
         require("./assets/username.png"),
         require("./assets/wallpaper.png"),
-
-
-
       ]);
       resolve();
       return;

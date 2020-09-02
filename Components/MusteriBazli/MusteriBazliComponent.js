@@ -104,7 +104,6 @@ export default class MusteriBazliComponent extends React.Component {
 
   }
   onTextEdit = (text, isUsername) => {
-
     this.props.setCustomerNull()
     if (isUsername === true) {
       this.setState({ searchingName: text, data: null, tableData: null });
@@ -353,7 +352,7 @@ export default class MusteriBazliComponent extends React.Component {
 
     let peopleContact = this.props.selectedCustomer && this.props.selectedCustomer.MemberList
       && this.props.selectedCustomer.MemberList.length > 0 ? this.props.selectedCustomer.MemberList[0] : null
-    console.log(this.props.selectedCustomer)
+    console.log(this.props.customerNote)
     return (
       <View>
         <Text style={styles.headerText}> Müşteri Bilgileri </Text>
@@ -430,15 +429,14 @@ export default class MusteriBazliComponent extends React.Component {
         <Text style={styles.headerText}> Müşteri Notu </Text>
         <TextInput
           style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={text => this.setState({ note: text })}
-          value={this.state.note}
+          onChangeText={this.props.onChangeNote}
+          value={this.props.customerNote}
           placeholder='Müşteri Notu'
-          multiline
         />
         <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", width: "80%", height: screenHeight * 0.07, backgroundColor: "#74b566", marginVertical: 5 }}
           onPress={
             () => {
-              setCustomerNotes(this.props.selectedCustomer.Id, this.state.note).then(data => {
+              setCustomerNotes(this.props.selectedCustomer.CustomerId, this.props.customerNote).then(data => {
                 console.log("dd:", data)
               })
             }
@@ -447,7 +445,7 @@ export default class MusteriBazliComponent extends React.Component {
         <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", width: "80%", height: screenHeight * 0.07, backgroundColor: "#74b566", marginVertical: 5 }}
           onPress={
             () => {
-              sendCustomerNotes(this.props.selectedCustomer.Email, this.state.note).then(data => {
+              sendCustomerNotes(this.props.selectedCustomer.Email, this.props.customerNote).then(data => {
                 console.log("dd:", data)
               })
             }

@@ -87,20 +87,32 @@ export function getCustomerNotes(id) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-
-        Authorization: "",
       },
       body: JSON.stringify({
         Token: global.userData.Token,
-
         Data: {
           Parameters: {
             CustomerId: id,
           },
-          Name: "GetInfo_CustomerNotes",
+          Name: "GetInfo_CustomerNotesASD",
         },
       }),
     });
+    console.log({
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Token: global.userData.Token,
+        Data: {
+          Parameters: {
+            CustomerId: id,
+          },
+          Name: "GetInfo_CustomerNotesASD",
+        },
+      }),
+    })
 
     result = await result.json().catch((error) => {
       resolve(null);
@@ -110,7 +122,7 @@ export function getCustomerNotes(id) {
       resolve(null);
       return;
     }
-
+    console.log(result.Data)
     resolve(result.Data);
   });
 }
@@ -157,12 +169,10 @@ export function sendCustomerNotes(mail, message) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-
         Authorization: "",
       },
       body: JSON.stringify({
         Token: global.userData.Token,
-
         Data: {
           "Name": "SendAsdEmail",
           "Parameters": {
@@ -182,7 +192,16 @@ export function sendCustomerNotes(mail, message) {
       resolve(null);
       return;
     }
-
+    console.log({
+      Name: "SendAsdEmail",
+      Parameters: {
+        Header: "Müşteri Notu gönderimi",
+        EmailAddress: mail,
+        Body: message,
+      }
+    })
+    console.log(result)
+    console.log('result')
     resolve(result.Data);
   });
 }

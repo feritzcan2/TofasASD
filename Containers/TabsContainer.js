@@ -106,7 +106,6 @@ export default class TabsContainer extends Component {
   }
   componentDidMount = () => {
     this.mounted = true
-
   }
 
   prepareYildizKarneParamsData = (data) => {
@@ -238,6 +237,9 @@ export default class TabsContainer extends Component {
           }}
           selectedStyle={{ color: "red" }}
           onSelect={(el) => {
+            if (this.state.menuOpen) {
+              this.toggleMenu()
+            }
             this.setState({ page: el.props.name, menuOpen: false })
           }}
         >
