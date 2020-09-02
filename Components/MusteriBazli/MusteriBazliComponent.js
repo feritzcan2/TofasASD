@@ -428,7 +428,7 @@ export default class MusteriBazliComponent extends React.Component {
         />
         <Text style={styles.headerText}> Müşteri Notu </Text>
         <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          style={{ borderColor: '#444', borderWidth: 1, paddingHorizontal: 5, borderRadius: 5 }}
           onChangeText={this.props.onChangeNote}
           value={this.props.customerNote}
           placeholder='Müşteri Notu'
