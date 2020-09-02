@@ -229,7 +229,7 @@ export default class TabsContainer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={[this.state.page === "duyurular" ? '#5dffa0' : '#F5FCFF', this.state.page === "duyurular" ? '#1f16b5' : '#F5FCFF']} style={[styles.container, { paddingTop: this.state.page === "duyurular" ? 20 : 0 }]}>
+        {this.state.page === "duyurular" ? <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#5dffa0','#1f16b5' ]} style={styles.Gradient}/>:null}
           <Tabs
             selected={this.state.page}
             style={{
@@ -301,7 +301,6 @@ export default class TabsContainer extends Component {
             <YildizKarneContainer yildizData={this.state.yildizData} />
           )}
           {this.state.page === "musteri" && <MusteriBazliContainer />}
-        </LinearGradient>
       </View>
     );
   }
@@ -323,4 +322,8 @@ const styles = StyleSheet.create({
     color: "#333333",
     marginBottom: 5,
   },
+  Gradient:{
+    height:30,
+    width:'100%', 
+  }
 });

@@ -209,7 +209,7 @@ export default class DuyuruComponent extends React.Component {
         <Text style={styles.duyuruHeaderText}>DUYURULAR</Text>
 
         {this.state.detailShown !== true && (
-          <ScrollView style={styles.scrollContainer}>
+          <ScrollView style={styles.scrollContainer} contentContainerStyle={{paddingBottom:40}}>
             {this.props.data.map((data, index) => {
               return this.renderAnnouncement(data, index);
             })}
@@ -253,6 +253,7 @@ const styles = StyleSheet.create({
     top: "20%",
     left: "10%",
     height: "69%",
+    paddingBottom:300
   },
   announcementContainer: {
     borderRadius: 10,
