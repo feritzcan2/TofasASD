@@ -23,6 +23,7 @@ export default class GeneralDetayComponent extends React.Component {
     }
 
     renderRow = (rowData, index, isHeader) => {
+        console.log(this.props.detailAreaData)
         return (
             <View
                 key={"r " + index}
@@ -135,7 +136,7 @@ export default class GeneralDetayComponent extends React.Component {
     };
 
     render() {
-
+        console.log(this.props.detailAreaData)
         return (
             <Modal
                 transparent
@@ -263,7 +264,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>{this.props.detailAreaData ? this.props.detailAreaData.PriceTargetStr : ""}
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.PriceTargetStr.split(',')[0] + ' ₺' : ""}
                                     </Text>
                                 </View>
                             </View>
@@ -291,7 +292,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>{this.props.detailAreaData ? this.props.detailAreaData.PriceLinkedTargetStr : ""}
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.PriceLinkedTargetStr + ' ₺' : ""}
                                     </Text>
                                 </View>
                             </View>
@@ -319,12 +320,152 @@ export default class GeneralDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>{this.props.detailAreaData ? this.props.detailAreaData.TargetPercentStr : ""}
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.TargetPercentStr.split(',')[0] + ' %' : ""}
                                     </Text>
                                 </View>
                             </View>
 
+                            <View style={{ flexDirection: "row", marginBottom: 3 }}>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 1, backgroundColor: "#473e54",
+                                }}>
+                                    <Text style={{
+                                        fontSize: normalize(11),
+                                        marginTop: 5,
+                                        marginBottom: 5,
+                                        color: "white",
+                                        fontWeight: "bold"
+                                    }}>SATIŞ HEDEFLERİ
+                                </Text>
+                                </View>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 3, backgroundColor: "#473e54",
+                                }}>
+                                    <Text style={{
+                                        fontSize: normalize(11),
+                                        marginTop: 5,
+                                        marginBottom: 5,
+                                        color: "white",
+                                        fontWeight: "bold"
+                                    }}>HEDEFE KALAN CİRO
+                                </Text>
+                                </View>
+                            </View>
 
+                            <View style={{ flexDirection: "row", marginBottom: 3 }}>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 1, backgroundColor: "#473e54",
+                                }}>
+                                    <Text style={{
+                                        fontSize: normalize(11),
+                                        marginTop: 5,
+                                        marginBottom: 5,
+                                        color: "white",
+                                        fontWeight: "bold"
+                                    }}>95 %
+                                </Text>
+                                </View>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
+
+                                }}><Text style={{
+                                    fontSize: normalize(11),
+                                    marginTop: 5,
+                                    marginBottom: 5,
+                                    color: "#667077",
+                                    fontWeight: "bold"
+                                }}>{(this.props.detailAreaData.PriceTarget * 95 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? ((this.props.detailAreaData.PriceTarget * 95 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{ flexDirection: "row", marginBottom: 3 }}>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 1, backgroundColor: "#473e54",
+                                }}>
+                                    <Text style={{
+                                        fontSize: normalize(11),
+                                        marginTop: 5,
+                                        marginBottom: 5,
+                                        color: "white",
+                                        fontWeight: "bold"
+                                    }}>105 %
+                                </Text>
+                                </View>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
+
+                                }}><Text style={{
+                                    fontSize: normalize(11),
+                                    marginTop: 5,
+                                    marginBottom: 5,
+                                    color: "#667077",
+                                    fontWeight: "bold"
+                                }}>{(this.props.detailAreaData.PriceTarget * 105 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? ((this.props.detailAreaData.PriceTarget * 105 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{ flexDirection: "row", marginBottom: 3 }}>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 1, backgroundColor: "#473e54",
+                                }}>
+                                    <Text style={{
+                                        fontSize: normalize(11),
+                                        marginTop: 5,
+                                        marginBottom: 5,
+                                        color: "white",
+                                        fontWeight: "bold"
+                                    }}>115 %
+                                </Text>
+                                </View>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
+
+                                }}><Text style={{
+                                    fontSize: normalize(11),
+                                    marginTop: 5,
+                                    marginBottom: 5,
+                                    color: "#667077",
+                                    fontWeight: "bold"
+                                }}>{(this.props.detailAreaData.PriceTarget * 115 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? ((this.props.detailAreaData.PriceTarget * 115 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{ flexDirection: "row", marginBottom: 3 }}>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 1, backgroundColor: "#473e54",
+                                }}>
+                                    <Text style={{
+                                        fontSize: normalize(11),
+                                        marginTop: 5,
+                                        marginBottom: 5,
+                                        color: "white",
+                                        fontWeight: "bold"
+                                    }}>125 %
+                                </Text>
+                                </View>
+                                <View style={{
+                                    justifyContent: "center", alignItems: "center",
+                                    flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
+
+                                }}><Text style={{
+                                    fontSize: normalize(11),
+                                    marginTop: 5,
+                                    marginBottom: 5,
+                                    color: "#667077",
+                                    fontWeight: "bold"
+                                }}>{(this.props.detailAreaData.PriceTarget * 125 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? ((this.props.detailAreaData.PriceTarget * 125 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
+                                    </Text>
+                                </View>
+                            </View>
                         </View>
 
                         <TouchableOpacity

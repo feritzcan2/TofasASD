@@ -432,25 +432,29 @@ export default class MusteriBazliComponent extends React.Component {
           onChangeText={this.props.onChangeNote}
           value={this.props.customerNote}
           placeholder='Müşteri Notu'
+          multiline
         />
-        <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", width: "80%", height: screenHeight * 0.07, backgroundColor: "#74b566", marginVertical: 5 }}
-          onPress={
-            () => {
-              setCustomerNotes(this.props.selectedCustomer.CustomerId, this.props.customerNote).then(data => {
-                console.log("dd:", data)
-              })
-            }
-          }><Text style={{ fontSize: normalize(18), color: "white" }}>Notu Kaydet</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", width: "80%", height: screenHeight * 0.07, backgroundColor: "#74b566", marginVertical: 5 }}
-          onPress={
-            () => {
-              sendCustomerNotes(this.props.selectedCustomer.Email, this.props.customerNote).then(data => {
-                console.log("dd:", data)
-              })
-            }
-          }><Text style={{ fontSize: normalize(18), color: "white" }}>Notu Mail At</Text>
-        </TouchableOpacity>
+        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
+          <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", width: "45%", height: screenHeight * 0.05, backgroundColor: "#74b566", marginVertical: 5 }}
+            onPress={
+              () => {
+                setCustomerNotes(this.props.selectedCustomer.CustomerId, this.props.customerNote).then(data => {
+                  console.log("dd:", data)
+                })
+              }
+            }><Text style={{ fontSize: normalize(18), color: "white" }}>Notu Kaydet</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", width: "45%", height: screenHeight * 0.05, backgroundColor: "#74b566", marginVertical: 5 }}
+            onPress={
+              () => {
+                sendCustomerNotes(this.props.selectedCustomer.Email, this.props.customerNote).then(data => {
+                  console.log("dd:", data)
+                })
+              }
+            }><Text style={{ fontSize: normalize(18), color: "white" }}>Notu Mail At</Text>
+          </TouchableOpacity>
+        </View>
+
         <Text style={styles.headerText}> Müşteriye Satışlar </Text>
         {this.renderSatislar()}
 

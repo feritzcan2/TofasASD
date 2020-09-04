@@ -44,7 +44,7 @@ export default class FilterComponent extends React.Component {
     ];
     if (global.bayiler) {
       for (let a = 0; a < global.bayiler.length; a++) {
-        if (global.bayiler[a].ShortName != '') {
+        if (global.bayiler[a].ShortName != '' && !global.bayiler[a].Deleted) {
           bayiler.push({
             value: global.bayiler[a],
           });
@@ -164,6 +164,7 @@ export default class FilterComponent extends React.Component {
   };
   render() {
     if (this.state.notReady === true) return <View></View>
+    console.log(this.state.bayiData)
     return (
       <Modal
         transparent

@@ -61,11 +61,11 @@ export default class DuyuruComponent extends React.Component {
         >
           <View>
             <Text style={styles.dateHeaderText}>Başlangıç Tarihi</Text>
-            <Text style={styles.dateText}>{data.StartDate.split("T")[0]}</Text>
+            <Text style={styles.dateText}>{data.StartDate.split("T")[0].split('-')[2] + '.' + data.StartDate.split("T")[0].split('-')[1] + '.' + data.StartDate.split("T")[0].split('-')[0]}</Text>
           </View>
-          <View>
+          <View style={{ alignItems: 'center' }}>
             <Text style={styles.dateHeaderText}>Bitiş Tarihi</Text>
-            <Text style={styles.dateText}>{data.EndDate.split("T")[0]}</Text>
+            <Text style={styles.dateText}>{data.EndDate.split("T")[0].split('-')[2] + '.' + data.EndDate.split("T")[0].split('-')[1] + '.' + data.EndDate.split("T")[0].split('-')[0]}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -184,7 +184,7 @@ export default class DuyuruComponent extends React.Component {
       <View style={styles.container}>
 
         <View style={{
-          width: screenWidth, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '7%', paddingTop: '7%', paddingBottom: '3%',
+          width: screenWidth, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '7%', paddingTop: '7%', paddingBottom: '3%', alignItems: 'center'
         }} >
           <Image source={require('../../assets/logoDuyuru.png')} style={{ resizeMode: 'contain', width: screenWidth * 0.5, height: screenHeight * 0.1, }} />
           <Animated.View style={{
@@ -196,7 +196,7 @@ export default class DuyuruComponent extends React.Component {
           }}>
             <Avatar
               source={require("../../assets/notificationIcon.png")}
-              size="large"
+              size="medium"
               onPress={this.props.toggleBildirim}
             />
             <Badge
@@ -209,7 +209,7 @@ export default class DuyuruComponent extends React.Component {
         <Text style={styles.duyuruHeaderText}>DUYURULAR</Text>
 
         {this.state.detailShown !== true && (
-          <ScrollView style={styles.scrollContainer} contentContainerStyle={{paddingBottom:40}}>
+          <ScrollView style={styles.scrollContainer} contentContainerStyle={{ paddingBottom: 40 }}>
             {this.props.data.map((data, index) => {
               return this.renderAnnouncement(data, index);
             })}
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     top: "20%",
     left: "10%",
     height: "69%",
-    paddingBottom:300
+    paddingBottom: 300
   },
   announcementContainer: {
     borderRadius: 10,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
   duyuruHeaderText: {
     color: "#46BAA7",
     alignSelf: "center",
-    fontSize: normalize(30),
+    fontSize: normalize(26),
     marginTop: "0%",
     textAlign: "center",
     fontWeight: "bold",

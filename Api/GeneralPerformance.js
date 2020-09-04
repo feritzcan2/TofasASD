@@ -73,7 +73,7 @@ export function getBayiList() {
 
 export function getGenelPerformance(filters) {
   return new Promise(async function (resolve, reject) {
-
+    console.log(filters)
     if (global.genelPerformance[JSON.stringify(filters)]) {
       resolve(global.genelPerformance[JSON.stringify(filters)])
       return
@@ -97,7 +97,7 @@ export function getGenelPerformance(filters) {
             Region: filters.region,
             DealerCode: filters.dealerCode,
             Year: filters.year,
-            PreviewType: filters.donemTuru,
+            PreviewType: 1,
             Quarter: filters.quarter,
             MonthNo: filters.month + 1,
           },

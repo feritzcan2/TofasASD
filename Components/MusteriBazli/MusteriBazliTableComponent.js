@@ -33,6 +33,7 @@ export default class MusteriBazliTableComponent extends React.Component {
     }
 
     renderRow = (rowData, index, isHeader, isSummary, region) => {
+        console.log(rowData)
         return (
             <View
                 key={"r " + index}
@@ -160,7 +161,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                         ]}
                     >
                         {console.log(rowData)}
-                        {isHeader ? "ASD" : rowData.PERAKENDECI_ADI+' '+rowData.PERAKENDECI_SOYADI}
+                        {isHeader ? "ASD" : rowData.SALESMAN_NAME}
                     </Text>
                 </View>
                 <View
