@@ -90,8 +90,7 @@ export default class PerformanceContainer extends React.Component {
   };
 
   applyPerformanceFilter = (filters) => {
-    console.log('filters')
-    console.log(filters)
+
     this.setState({ selectedPerformanceFilters: filters });
     if (filters.donemTuru == 1) {
       this.setState({ isDetail: true })
@@ -100,7 +99,6 @@ export default class PerformanceContainer extends React.Component {
     }
     getGenelPerformance(filters).then((data) => {
       this.preparePerformanceData(data);
-      console.log(data)
     });
   };
 

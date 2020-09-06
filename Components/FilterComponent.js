@@ -59,14 +59,12 @@ export default class FilterComponent extends React.Component {
       return { notReady: true };
     }
     if (global.regions) {
-      console.log("has regions")
       for (let a = 0; a < global.regions.length; a++) {
         bolgeler.push({
           value: global.regions[a].Text,
         });
       }
     } else {
-      console.log("has no regions")
 
       getRegions().then((e) => {
         this.setState(this.createData())
@@ -164,7 +162,6 @@ export default class FilterComponent extends React.Component {
   };
   render() {
     if (this.state.notReady === true) return <View></View>
-    console.log(this.state.bayiData)
     return (
       <Modal
         transparent

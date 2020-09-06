@@ -193,7 +193,6 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
               detail.dealerName = rowData.DealerName
               detail.name = rowData.name
               detail.region = region
-              console.log(detail)
               this.props.showDetail(detail)
             }}
             style={{
@@ -280,7 +279,6 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
     return <FlatList data={this.state.smallData}
       onEndReached={() => {
         if (this.props.performanceData.length > this.state.page) {
-          console.log("load ")
           this.setState({
             page: this.state.page + 1,
             smallData: this.props.performanceData ?

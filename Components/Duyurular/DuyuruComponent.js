@@ -23,10 +23,21 @@ const screenWidth = Dimensions.get("window").width;
 export default class DuyuruComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.shakeAnimation = new Animated.Value(0);
+
     this.state = {
       detailShown: false,
-      startValue: this.props.notifCount > 0 ? new Animated.Value(0.3) : new Animated.Value(1),
+      startValue: new Animated.Value(0.3)
     };
+  }
+
+  startShake = () => {
+    Animated.sequence([
+      Animated.timing(this.shakeAnimation, { toValue: 10, duration: 100, useNativeDriver: true }),
+      Animated.timing(this.shakeAnimation, { toValue: -10, duration: 100, useNativeDriver: true }),
+      Animated.timing(this.shakeAnimation, { toValue: 10, duration: 100, useNativeDriver: true }),
+      Animated.timing(this.shakeAnimation, { toValue: 0, duration: 100, useNativeDriver: true })
+    ]).start();
   }
 
   renderAnnouncementDetail = (data, index) => {
@@ -36,12 +47,17 @@ export default class DuyuruComponent extends React.Component {
     });
   };
   componentDidMount() {
+
     if (this.props.notifCount > 0) {
-      Animated.spring(this.state.startValue, {
-        toValue: 1,
-        friction: 1
-      }).start();
+      this.startShake()
     }
+
+  }
+  shouldComponentUpdate(nextProps) {
+
+    if ((!this.props.notifCount || this.props.notifCount === 0) && nextProps.notifCount > 0)
+      this.startShake()
+    return true
   }
   renderAnnouncement = (data, index) => {
     return (
@@ -80,7 +96,6 @@ export default class DuyuruComponent extends React.Component {
         visible={this.state.detailShown}
         onRequestClose={() =>
           function () {
-            console.log("loader modal closed");
           }
         }
       >
@@ -188,11 +203,7 @@ export default class DuyuruComponent extends React.Component {
         }} >
           <Image source={require('../../assets/logoDuyuru.png')} style={{ resizeMode: 'contain', width: screenWidth * 0.5, height: screenHeight * 0.1, }} />
           <Animated.View style={{
-            flex: 1, alignItems: 'flex-end', transform: [
-              {
-                scale: this.state.startValue,
-              },
-            ],
+            flex: 1, alignItems: 'flex-end', transform: [{ translateX: this.shakeAnimation }],
           }}>
             <Avatar
               source={require("../../assets/notificationIcon.png")}

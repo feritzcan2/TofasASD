@@ -73,7 +73,6 @@ export function getBayiList() {
 
 export function getGenelPerformance(filters) {
   return new Promise(async function (resolve, reject) {
-    console.log(filters)
     if (global.genelPerformance[JSON.stringify(filters)]) {
       resolve(global.genelPerformance[JSON.stringify(filters)])
       return
@@ -106,20 +105,6 @@ export function getGenelPerformance(filters) {
       }),
     });
 
-    console.log("Perf params: ", JSON.stringify({
-      Token: global.userData.Token,
-      Data: {
-        Parameters: {
-          Region: filters.region,
-          DealerCode: filters.dealerCode,
-          Year: filters.year,
-          PreviewType: filters.donemTuru,
-          Quarter: filters.quarter,
-          MonthNo: filters.month,
-        },
-        Name: "GetList_SalePerformanceSalesmanASD",
-      },
-    }))
 
 
     result = await result.json().catch((error) => {
@@ -163,7 +148,6 @@ export function getCampaigns() {
       resolve(null);
       return;
     });
-    // console.log("kampanya:", result);
     if (result.Data === null || result.Data === undefined) {
       resolve(null);
       return;
@@ -207,23 +191,6 @@ export function getCampaignDetail(data, id) {
       })
     })
 
-    console.log(JSON.stringify({
-      Token: global.userData.Token,
-      Data: {
-        Name: "GetList_CampaignTargetActualASDDetail",
-        Parameters: {
-          CampaignId: 6,
-          PriceLinkedTargetStr: data.PriceLinkedTargetStr,
-          TargetPercentStr: data.TargetPercentStr,
-          PriceTarget: data.PriceTarget,
-          TargetPercent: data.TargetPercent,
-          CampaignType: data.CampaignType,
-          PriceLinkedTarget: data.PriceLinkedTarget,
-          MinSalePercent: data.MinSalePercent,
-          MinSaleType: data.MinSaleType
-        },
-      }
-    }))
     result = await result.json().catch((error) => {
       resolve(null);
       return;

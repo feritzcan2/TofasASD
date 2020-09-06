@@ -33,7 +33,6 @@ export function searchCustomer(name, code) {
       resolve(null);
       return;
     });
-    // console.log(result);
     if (result.Data === null || result.Data === undefined) {
       resolve(null);
       return;
@@ -82,7 +81,6 @@ export function getCustomer(id) {
 export function getCustomerNotes(id) {
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
-    console.log(global.userData.Token)
     let result = await fetch(url, {
       method: "POST",
       headers: {
@@ -98,21 +96,7 @@ export function getCustomerNotes(id) {
         },
       }),
     });
-    console.log({
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        Token: global.userData.Token,
-        Data: {
-          Parameters: {
-            CustomerId: id,
-          },
-          Name: "GetInfo_CustomerNotesASD",
-        },
-      }),
-    })
+
 
     result = await result.json().catch((error) => {
       resolve(null);
@@ -122,7 +106,6 @@ export function getCustomerNotes(id) {
       resolve(null);
       return;
     }
-    console.log(result.Data)
     resolve(result.Data);
   });
 }
@@ -192,16 +175,7 @@ export function sendCustomerNotes(mail, message) {
       resolve(null);
       return;
     }
-    console.log({
-      Name: "SendAsdEmail",
-      Parameters: {
-        Header: "Müşteri Notu gönderimi",
-        EmailAddress: mail,
-        Body: message,
-      }
-    })
-    console.log(result)
-    console.log('result')
+
     resolve(result.Data);
   });
 }
@@ -264,7 +238,6 @@ export function getAnalizeCode() {
       return;
     });
 
-    console.log("analizy: ", result.Data.length)
     if (result.Data === null || result.Data === undefined) {
       resolve(null);
       return;
@@ -298,7 +271,6 @@ export function getDefinition() {
       return;
     });
 
-    console.log("analizy: ", result.Data.length)
     if (result.Data === null || result.Data === undefined) {
       resolve(null);
       return;
@@ -330,7 +302,6 @@ export function getTypeCode() {
       return;
     });
 
-    console.log("analizy: ", result.Data.length)
     if (result.Data === null || result.Data === undefined) {
       resolve(null);
       return;
@@ -380,13 +351,7 @@ export function getListInvoice(params) {
       return;
     });
 
-    console.log("analizy: ", JSON.stringify({
-      Token: global.userData.Token,
-      Data: {
-        Name: "GetList_InvoiceASD",
-        Parameters: params
-      },
-    }))
+
     if (!result || result.Data === null || result.Data === undefined) {
       resolve(null);
       return;

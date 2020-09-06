@@ -51,12 +51,11 @@ export default class MusteriBazliContainer extends React.Component {
 
 
     getWarehouse(customer.Id)
-      .then((d) => console.log("ware", d))
+      .then((d) => { })
       .catch((e) => console.log(e));
     getAnalizeCode(customer.Id)
   };
   setNote(value) {
-    console.log(value)
     this.setState({ customerNote: value })
   }
   render() {

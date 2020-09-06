@@ -47,11 +47,10 @@ export default class ButtonSubmit extends Component {
       easing: Easing.linear,
     }).start();
 
-    // "TEST", "E2018RYZ"
+    // "test2", "2"
     //    login(this.props.username, this.props.pw).then((status) => {
 
     login("TEST", "E2018RYZ").then((status) => {
-      console.log(status);
       this._onGrow();
       this.setState({ isLoading: false });
       this.buttonAnimated.setValue(0);

@@ -339,7 +339,6 @@ export default class MusteriBazliComponent extends React.Component {
                 RowTo: "10"
               }
               getListInvoice(filters).then(datta => {
-                console.log("dd:", datta)
                 this.setState({ tableData: datta })
               })
             }
@@ -352,7 +351,6 @@ export default class MusteriBazliComponent extends React.Component {
 
     let peopleContact = this.props.selectedCustomer && this.props.selectedCustomer.MemberList
       && this.props.selectedCustomer.MemberList.length > 0 ? this.props.selectedCustomer.MemberList[0] : null
-    console.log(this.props.customerNote)
     return (
       <View>
         <Text style={styles.headerText}> Müşteri Bilgileri </Text>
@@ -439,7 +437,6 @@ export default class MusteriBazliComponent extends React.Component {
             onPress={
               () => {
                 setCustomerNotes(this.props.selectedCustomer.CustomerId, this.props.customerNote).then(data => {
-                  console.log("dd:", data)
                 })
               }
             }><Text style={{ fontSize: normalize(18), color: "white" }}>Notu Kaydet</Text>
@@ -448,7 +445,6 @@ export default class MusteriBazliComponent extends React.Component {
             onPress={
               () => {
                 sendCustomerNotes(this.props.selectedCustomer.Email, this.props.customerNote).then(data => {
-                  console.log("dd:", data)
                 })
               }
             }><Text style={{ fontSize: normalize(18), color: "white" }}>Notu Mail At</Text>

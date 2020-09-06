@@ -372,7 +372,6 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
     return <FlatList data={this.state.smallData}
       onEndReached={() => {
         if (this.props.performanceData.length > this.state.page) {
-          console.log("load ")
           this.setState({
             page: this.state.page + 1,
             smallData: this.props.performanceData.slice(0, this.state.page + 1)

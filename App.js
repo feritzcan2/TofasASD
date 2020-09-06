@@ -43,15 +43,12 @@ export default class App extends React.Component {
   setLoggedIn = () => {
     getAnalizeCode().then(data => {
       global.analyzeCode = data
-      console.log("analyze set")
     })
     getTypeCode().then(data => {
       global.typeCode = data
-      console.log("analyze set")
     })
     getDefinition().then(data => {
       global.definition = data
-      console.log("analyze set")
     })
     this.setState({ loggedIn: true });
   };

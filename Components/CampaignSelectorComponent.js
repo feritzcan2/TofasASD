@@ -31,9 +31,7 @@ export default class CampaignSelectorComponent extends React.Component {
   }
 
   render() {
-    console.log("camp:"
 
-      , this.state.selectedCampaign)
     return (
       <Modal
         transparent

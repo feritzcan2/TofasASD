@@ -25,7 +25,6 @@ export function getNotifications(hidden) {
 
 
         result = await result.json().catch((error) => {
-            console.log("null res")
             resolve(null);
             return;
         });

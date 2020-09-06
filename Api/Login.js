@@ -40,7 +40,6 @@ export function login(UserName, Password) {
       return;
     });
 
-    console.log("login res", result);
     if (result.Data === null || result.Message !== "Success") {
       resolve(false);
       return;

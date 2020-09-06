@@ -23,7 +23,6 @@ export default class GeneralDetayComponent extends React.Component {
     }
 
     renderRow = (rowData, index, isHeader) => {
-        console.log(this.props.detailAreaData)
         return (
             <View
                 key={"r " + index}
@@ -136,7 +135,6 @@ export default class GeneralDetayComponent extends React.Component {
     };
 
     render() {
-        console.log(this.props.detailAreaData)
         return (
             <Modal
                 transparent

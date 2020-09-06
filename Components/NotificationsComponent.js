@@ -36,7 +36,6 @@ export default class NotificationsComponent extends React.Component {
                 visible={this.state.detailShown}
                 onRequestClose={() =>
                     function () {
-                        console.log("loader modal closed");
                     }
                 }
             >
