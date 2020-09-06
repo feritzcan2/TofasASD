@@ -370,14 +370,15 @@ export default class GeneralDetayComponent extends React.Component {
                                     justifyContent: "center", alignItems: "center",
                                     flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
-                                }}><Text style={{
+                                }}
+                                >{this.props.detailAreaData ? <Text style={{
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>{(this.props.detailAreaData.PriceTarget * 95 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? ((this.props.detailAreaData.PriceTarget * 95 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
-                                    </Text>
+                                }}>{(this.props.detailAreaData.PriceTarget * 95 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 && this.props.detailAreaData ? ((this.props.detailAreaData.PriceTarget * 95 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
+                                </Text> : null}
                                 </View>
                             </View>
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
@@ -398,14 +399,14 @@ export default class GeneralDetayComponent extends React.Component {
                                     justifyContent: "center", alignItems: "center",
                                     flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
-                                }}><Text style={{
+                                }}>{this.props.detailAreaData ? <Text style={{
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
                                 }}>{(this.props.detailAreaData.PriceTarget * 105 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? ((this.props.detailAreaData.PriceTarget * 105 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
-                                    </Text>
+                                </Text> : null}
                                 </View>
                             </View>
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
@@ -426,14 +427,14 @@ export default class GeneralDetayComponent extends React.Component {
                                     justifyContent: "center", alignItems: "center",
                                     flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
-                                }}><Text style={{
+                                }}>{this.props.detailAreaData ? <Text style={{
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
                                 }}>{(this.props.detailAreaData.PriceTarget * 115 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? ((this.props.detailAreaData.PriceTarget * 115 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
-                                    </Text>
+                                </Text> : null}
                                 </View>
                             </View>
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
@@ -454,14 +455,14 @@ export default class GeneralDetayComponent extends React.Component {
                                     justifyContent: "center", alignItems: "center",
                                     flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
-                                }}><Text style={{
+                                }}>{this.props.detailAreaData ? <Text style={{
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
                                 }}>{(this.props.detailAreaData.PriceTarget * 125 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? ((this.props.detailAreaData.PriceTarget * 125 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
-                                    </Text>
+                                </Text> : null}
                                 </View>
                             </View>
                         </View>
