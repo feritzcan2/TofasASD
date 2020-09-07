@@ -74,6 +74,7 @@ export function getBayiList() {
 export function getGenelPerformance(filters) {
   return new Promise(async function (resolve, reject) {
     if (global.genelPerformance[JSON.stringify(filters)]) {
+
       resolve(global.genelPerformance[JSON.stringify(filters)])
       return
     }
@@ -96,7 +97,7 @@ export function getGenelPerformance(filters) {
             Region: filters.region,
             DealerCode: filters.dealerCode,
             Year: filters.year,
-            PreviewType: 1,
+            PreviewType: filters.donemTuru,
             Quarter: filters.quarter,
             MonthNo: filters.month + 1,
           },
@@ -104,7 +105,20 @@ export function getGenelPerformance(filters) {
         },
       }),
     });
-
+    console.log("perf filters ", JSON.stringify({
+      Token: global.userData.Token,
+      Data: {
+        Parameters: {
+          Region: filters.region,
+          DealerCode: filters.dealerCode,
+          Year: filters.year,
+          PreviewType: filters.donemTuru,
+          Quarter: filters.quarter,
+          MonthNo: filters.month + 1,
+        },
+        Name: "GetList_SalePerformanceSalesmanASD",
+      },
+    }))
 
 
     result = await result.json().catch((error) => {

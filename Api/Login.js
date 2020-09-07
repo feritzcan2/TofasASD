@@ -55,14 +55,13 @@ export function login(UserName, Password) {
     getCampaigns();
     getAnnouncements()
     getGenelPerformance({
-
       hedefTuru: 0,
       region: 0,
       dealerCode: "",
-      quarter: 3,
+      quarter: 1,
       year: new Date().getFullYear(),
-      month: new Date().getMonth() + 1,
-      donemTuru: 0,
+      month: new Date().getMonth(),
+      donemTuru: 1,
 
     })
     resolve(true);

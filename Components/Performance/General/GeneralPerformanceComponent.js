@@ -33,7 +33,7 @@ export default class GeneralPerformanceComponent extends React.Component {
       filterVisible: false,
       performanceData: [],
       page: "tablo",
-      detailVisible:false
+      detailVisible: false
     };
   }
 
@@ -41,7 +41,7 @@ export default class GeneralPerformanceComponent extends React.Component {
     this.setState({ selectedTab: tab });
   };
   showDetail = (data) => {
-      this.setState({ detailVisible: true, detailAreaData: data })
+    this.setState({ detailVisible: true, detailAreaData: data })
   }
   render() {
     const { selectedTab, performanceData } = this.state;

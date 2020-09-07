@@ -37,7 +37,7 @@ export default class PerformanceContainer extends React.Component {
         quarter: 1,
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
-        donemTuru: 0,
+        donemTuru: 1,
       },
       isDetail: false
     };

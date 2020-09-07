@@ -79,6 +79,7 @@ export default class FilterComponent extends React.Component {
       bayiData: bayiler,
       yilData: yilData,
       donemData: [
+        ,
         {
           value: "AYLIK",
         },
@@ -87,10 +88,9 @@ export default class FilterComponent extends React.Component {
         },
         {
           value: "YILLIK",
-        },
-        {
+        }, {
           value: "AY YTD",
-        },
+        }
       ],
       quarterData: [
         {
@@ -235,12 +235,13 @@ export default class FilterComponent extends React.Component {
               value={this.state.donemData[this.state.filters.donemTuru].value}
               data={this.state.donemData}
               onChangeText={(value, index, data) => {
+                console.log("donem turu ", index, index + 1)
                 let flters = this.state.filters;
                 flters.donemTuru = index;
                 this.setState({ filters: flters });
               }}
             />
-            {this.state.filters.donemTuru == 1 ? <Dropdown
+            {this.state.filters.donemTuru == 2 ? <Dropdown
               containerStyle={{ width: "90%", alignSelf: "center" }}
               label="ÇEYREK"
               value={this.state.quarterData[this.state.filters.quarter - 1].value}
@@ -251,7 +252,7 @@ export default class FilterComponent extends React.Component {
                 this.setState({ filters: flters });
               }}
             /> : null}
-            <Dropdown
+            {(this.state.filters.donemTuru !== 3 && this.state.filters.donemTuru !== 2) ? <Dropdown
               containerStyle={{ width: "90%", alignSelf: "center" }}
               label="AY"
               value={this.state.ayData[this.state.filters.month].value}
@@ -261,7 +262,7 @@ export default class FilterComponent extends React.Component {
                 this.setState({ filters: flters });
               }}
               data={this.state.ayData}
-            />
+            /> : null}
             <Dropdown
               containerStyle={{ width: "90%", alignSelf: "center" }}
               label="HEDEFE TABİ SATIŞ"
