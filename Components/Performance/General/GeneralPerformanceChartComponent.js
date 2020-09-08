@@ -352,6 +352,12 @@ export default class GeneralPerformanceChartComponent extends React.Component {
             <View style={{ flex: 1, }}>
 
             </View>
+            <View style={{ flex: 1, }}>
+
+            </View>
+            <View style={{ flex: 1, }}>
+
+            </View>
           </View>
         </ScrollView>
       </View>

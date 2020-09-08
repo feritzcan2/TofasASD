@@ -244,6 +244,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     return summary
   }
   CalculateTotal = (data) => {
+
     let summary = {
       DealerName: "BÖLGELER",
       Region: "TEST2",
@@ -271,6 +272,11 @@ export default class GeneralPerformanceTableComponent extends React.Component {
         summary.tumSatis += item.tumSatis
         summary.target += item.target
       }
+    }
+    console.log(summary)
+    console.log(this.state.totalTable)
+    if (data[0][0].Region == 1 && this.state.totalTable[1] && summary.hedefGerceklestirme != this.state.totalTable[1].hedefGerceklestirme) {
+      this.setState({ totalTable: [] })
     }
     if (!this.state.totalTable[data[0][0].Region]) {
       const totalTable = this.state.totalTable;
