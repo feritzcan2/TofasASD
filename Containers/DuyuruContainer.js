@@ -104,7 +104,7 @@ export default class DuyuruContainer extends React.Component {
 
   render() {
 
-    return <View>
+    return <View style={{ marginTop: 10 }}>
       <SwipeGesture gestureStyle={{
         height: '100%',
         width: '100%'

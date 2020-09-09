@@ -324,6 +324,7 @@ const styles = StyleSheet.create({
   },
   Gradient: {
     height: 30,
+    zIndex: 10000,
     width: '100%',
     position: 'absolute',
     top: 0
