@@ -1,3 +1,5 @@
+import { relogin } from "./Login";
+
 let url = "https://b2b.opar.com/api/adminmobile/GetList_CustomerSearchASD";
 
 export function getYildizPuanDetail() {
@@ -21,11 +23,16 @@ export function getYildizPuanDetail() {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      console.log("null data: ", result)
+      await relogin(); debugger
+      result = await getYildizPuanDetail()
+      resolve(result);
       return;
     }
 
@@ -54,11 +61,16 @@ export function getYildizKarneDetails() {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      console.log("null data: ", result)
+      await relogin(); debugger
+      result = await getYildizKarneDetails()
+      resolve(result);
       return;
     }
 
@@ -87,11 +99,16 @@ export function getYildizKarneBayiParams() {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      console.log("null data: ", result)
+      await relogin(); debugger
+      result = await getYildizKarneBayiParams()
+      resolve(result);
       return;
     }
 
@@ -119,11 +136,16 @@ export function getYildizKarneTympParams() {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      console.log("null data: ", result)
+      await relogin(); debugger
+      result = await getYildizKarneTympParams()
+      resolve(result);
       return;
     }
 
@@ -154,11 +176,16 @@ export function getHedef(type) {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      console.log("null data: ", result)
+      await relogin(); debugger
+      result = await getHedef(type)
+      resolve(result);
       return;
     }
 
@@ -189,11 +216,16 @@ export function getHedefDetail(id) {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      console.log("null data: ", result)
+      await relogin(); debugger
+      result = await getHedefDetail(id)
+      resolve(result);
       return;
     }
 

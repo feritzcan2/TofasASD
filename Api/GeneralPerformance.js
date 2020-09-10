@@ -1,7 +1,11 @@
+import { relogin } from "./Login";
+
 let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
 
 
 export function getRegions() {
+  console.log("getRegions")
+
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
 
@@ -24,11 +28,17 @@ export function getRegions() {
 
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getRegions()
+      console.log("null data: genel perf ", result)
+
+      resolve(result);
       return;
     }
     global.regions = result.Data;
@@ -38,6 +48,8 @@ export function getRegions() {
 }
 
 export function getBayiList() {
+  console.log("get bayi")
+
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
 
@@ -59,11 +71,17 @@ export function getBayiList() {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getBayiList()
+      console.log("null data: genel get bayi ", result)
+
+      resolve(result);
       return;
     }
     global.bayiler = result.Data;
@@ -72,6 +90,8 @@ export function getBayiList() {
 }
 
 export function getGenelPerformance(filters) {
+  console.log("getGenelPerformance")
+
   return new Promise(async function (resolve, reject) {
     if (global.genelPerformance[JSON.stringify(filters)]) {
 
@@ -105,28 +125,21 @@ export function getGenelPerformance(filters) {
         },
       }),
     });
-    console.log("perf filters ", JSON.stringify({
-      Token: global.userData.Token,
-      Data: {
-        Parameters: {
-          Region: filters.region,
-          DealerCode: filters.dealerCode,
-          Year: filters.year,
-          PreviewType: filters.donemTuru,
-          Quarter: filters.quarter,
-          MonthNo: filters.month + 1,
-        },
-        Name: "GetList_SalePerformanceSalesmanASD",
-      },
-    }))
+
 
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getGenelPerformance(filters)
+      console.log("null data: genel perf genelperf ", result)
+
+      resolve(result);
       return;
     }
     global.genelPerformance[JSON.stringify(filters)] = result.Data
@@ -135,6 +148,8 @@ export function getGenelPerformance(filters) {
 }
 
 export function getCampaigns() {
+  console.log("getCampaigns")
+
   return new Promise(async function (resolve, reject) {
 
     if (!global.userData || !global.userData.Token) resolve(null);
@@ -159,11 +174,17 @@ export function getCampaigns() {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getCampaigns()
+      console.log("null data: genel get camp ", result)
+
+      resolve(result);
       return;
     }
     global.campaigns = result.Data;
@@ -173,6 +194,9 @@ export function getCampaigns() {
 }
 
 export function getCampaignDetail(data, id) {
+
+  console.log("getCampaignDetail")
+
   return new Promise(async function (resolve, reject) {
 
     if (!global.userData || !global.userData.Token) resolve(null);
@@ -206,12 +230,17 @@ export function getCampaignDetail(data, id) {
     })
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
-    console.log("kampanya:", result);
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getCampaignDetail(data, id)
+      console.log("null data: ", result)
+
+      resolve(result);
       return;
     }
     global.campaigns = result.Data;
@@ -221,6 +250,8 @@ export function getCampaignDetail(data, id) {
 }
 
 export function getCampaignPerformance(id) {
+  console.log("getCampaignPerformance")
+
   return new Promise(async function (resolve, reject) {
 
     if (global.campaignPerformance[id]) {
@@ -249,6 +280,8 @@ export function getCampaignPerformance(id) {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
@@ -257,7 +290,14 @@ export function getCampaignPerformance(id) {
       result.Data === undefined ||
       result.Data.saleListSalesman === undefined
     ) {
-      resolve(null);
+      if (result.Data && result.Data.saleListSalesman === undefined) {
+        console.log("null data: ", result)
+        await relogin(); debugger
+        result = await getCampaignPerformance(id)
+        console.log("null data: genel camp perf ", result)
+
+        resolve(result);
+      }
       return;
     }
     global.campaignPerformance[id] = result.Data.saleListSalesman

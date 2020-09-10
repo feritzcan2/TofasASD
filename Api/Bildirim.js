@@ -1,6 +1,9 @@
+import { relogin } from "./Login";
+
 let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
 
 export function getNotifications(hidden) {
+    console.log("notif")
     return new Promise(async function (resolve, reject) {
         if (!global.userData || !global.userData.Token) resolve(null);
 
@@ -25,11 +28,15 @@ export function getNotifications(hidden) {
 
 
         result = await result.json().catch((error) => {
+            console.log(error)
             resolve(null);
             return;
         });
         if (result.Data === null || result.Data === undefined) {
-            resolve(null);
+            await relogin(); debugger
+            result = await getNotifications(hidden)
+            console.log("null data validation  ", result)
+            resolve(result);
             return;
         }
         global.duyurular = result.Data;

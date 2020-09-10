@@ -1,6 +1,10 @@
+import { relogin } from "./Login";
+
 let url = "https://b2b.opar.com/api/adminmobile/GetList_CustomerSearchASD";
 
 export function searchCustomer(name, code) {
+  console.log("searchCustomer")
+
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
 
@@ -30,11 +34,17 @@ export function searchCustomer(name, code) {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await searchCustomer(name, code)
+      console.log("null data:  search cust", result)
+
+      resolve(result);
       return;
     }
 
@@ -66,11 +76,17 @@ export function getCustomer(id) {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getCustomer(id)
+      console.log("null data: get cust", result)
+
+      resolve(result);
       return;
     }
 
@@ -99,11 +115,17 @@ export function getCustomerNotes(id) {
 
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getCustomerNotes(id)
+      console.log("get cust note: ", result)
+
+      resolve(result);
       return;
     }
     resolve(result.Data);
@@ -133,11 +155,17 @@ export function setCustomerNotes(id, message) {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await setCustomerNotes(id, message)
+      console.log("null set cust notes: ", result)
+
+      resolve(result.Data);
       return;
     }
 
@@ -168,11 +196,17 @@ export function sendCustomerNotes(mail, message) {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await sendCustomerNotes(mail, message)
+      console.log("null send note: ", result)
+
+      resolve(result);
       return;
     }
 
@@ -201,12 +235,18 @@ export function getWarehouse(id) {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
 
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getWarehouse(id)
+      console.log("null get ware: ", result)
+
+      resolve(result.Data);
       return;
     }
 
@@ -234,12 +274,18 @@ export function getAnalizeCode() {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
 
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getAnalizeCode()
+      console.log("null get analiz: ", result)
+
+      resolve(result);
       return;
     }
 
@@ -267,12 +313,18 @@ export function getDefinition() {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
 
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getDefinition()
+      console.log("null get def: ", result)
+
+      resolve(result);
       return;
     }
 
@@ -298,12 +350,18 @@ export function getTypeCode() {
     });
 
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
 
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getTypeCode()
+      console.log("null get type: ", result)
+
+      resolve(result);
       return;
     }
 
@@ -353,7 +411,12 @@ export function getListInvoice(params) {
 
 
     if (!result || result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getListInvoice(params)
+
+      console.log("null get list: ", result)
+
+      resolve(result);
       return;
     }
 

@@ -1,6 +1,11 @@
+import { relogin } from "./Login";
+import { AsyncStorage } from "react-native";
+
 let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
 
 export function getAnnouncements() {
+  console.log("announcement")
+
   return new Promise(async function (resolve, reject) {
     if (!global.userData || !global.userData.Token) resolve(null);
 
@@ -21,12 +26,19 @@ export function getAnnouncements() {
       }),
     });
 
+
     result = await result.json().catch((error) => {
+      console.log(error)
+
       resolve(null);
       return;
     });
+
     if (result.Data === null || result.Data === undefined) {
-      resolve(null);
+      await relogin(); debugger
+      result = await getAnnouncements()
+      console.log("null data: ", result.Data, result)
+      resolve(result.reverse());
       return;
     }
     global.duyurular = result.Data;
