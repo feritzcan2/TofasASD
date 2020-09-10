@@ -317,6 +317,9 @@ export default class GeneralPerformanceChartComponent extends React.Component {
           </View>
           <View style={{ width: 60, height: 300 }}>
             <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 8).toFixed(0)} %</Text>
+            </View>
+            <View style={{ flex: 1, }}>
               <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 7).toFixed(0)} %</Text>
             </View>
             <View style={{ flex: 1, }}>
@@ -336,6 +339,9 @@ export default class GeneralPerformanceChartComponent extends React.Component {
             </View>
             <View style={{ flex: 1, }}>
               <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef).toFixed(0)} %</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+
             </View>
             <View style={{ flex: 1, }}>
 

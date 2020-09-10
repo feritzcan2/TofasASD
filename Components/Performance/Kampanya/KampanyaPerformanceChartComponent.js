@@ -310,6 +310,9 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
           </View>
           <View style={{ width: 60, height: 300 }}>
             <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 8).toFixed(0)} %</Text>
+            </View>
+            <View style={{ flex: 1, }}>
               <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 7).toFixed(0)} %</Text>
             </View>
             <View style={{ flex: 1, }}>
@@ -328,7 +331,16 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
               <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 2).toFixed(0)} %</Text>
             </View>
             <View style={{ flex: 1, }}>
-              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef).toFixed(0)}</Text>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef).toFixed(0)} %</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+
+            </View>
+            <View style={{ flex: 1, }}>
+
+            </View>
+            <View style={{ flex: 1, }}>
+
             </View>
             <View style={{ flex: 1, }}>
 

@@ -92,7 +92,7 @@ export default class PerformanceContainer extends React.Component {
   applyPerformanceFilter = (filters) => {
 
     this.setState({ selectedPerformanceFilters: filters });
-    if (filters.donemTuru == 1) {
+    if (filters.donemTuru == 2) {
       this.setState({ isDetail: true })
     } else {
       this.setState({ isDetail: false })

@@ -170,7 +170,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : { marginTop: "15%" },
+              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : { marginTop: "15%" }, !isHeader && isSummary ? { fontWeight: 'bold' } : {}
             ]}
           >
             {isHeader
@@ -293,7 +293,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     }
     return summary
   }
-  renderPerformanceTable = (data, index, total) => {
+  renderPerformanceTable = (data, index, total, isSummary) => {
 
     if (data.length == 0)
       return
@@ -302,7 +302,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
       <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
         {this.renderRow(data[0], null, true)}
         {data.map((rowData, index) => {
-          return this.renderRow(rowData, index);
+          return this.renderRow(rowData, index, undefined, isSummary);
         })}
         {this.renderRow(summary, 100, false, true)}
       </View>
@@ -338,11 +338,12 @@ export default class GeneralPerformanceTableComponent extends React.Component {
       </View>
     );
   };
-  renderTotalArea = (data) => {
+  renderTotalArea = () => {
 
     if (this.state.isEnd) {
       // let summary = this.CalculateTotal(this.state.totalTable.filter(item => item), false)
       let data = this.state.totalTable.filter(item => item)
+      console.log(data)
       return (
         <View key={"a:"} style={styles.areaContainer}>
           <View style={styles.bolgeTextContainer}>
@@ -352,7 +353,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           </View>
 
           <View>
-            {this.renderPerformanceTable(data, 0, true)}
+            {this.renderPerformanceTable(data, 0, true, true)}
 
           </View>
 
