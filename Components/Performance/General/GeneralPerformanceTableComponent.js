@@ -62,7 +62,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader || isSummary ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader || isSummary ? { fontWeight: "800", color: "#5a5a5a" } : { flex: 1, textAlign: 'center', textAlignVertical: 'center' },
             ]}
           >
             {isHeader ? rowData.DealerName : rowData.name}

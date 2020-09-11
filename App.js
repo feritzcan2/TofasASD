@@ -22,7 +22,7 @@ export default class App extends React.Component {
         require("./assets/eye_black.png"),
         require("./assets/first.png"),
         require("./assets/headerbg.jpg"),
-        require("./assets/headerbg.png"),
+        require("./assets/headerback.png"),
         require("./assets/icon.png"),
         require("./assets/left-arrow.png"),
         require("./assets/loading.gif"),

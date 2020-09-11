@@ -133,7 +133,9 @@ export default class GeneralDetayComponent extends React.Component {
             </View>
         );
     };
-
+    convertText(text) {
+        return text.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+    }
     render() {
         return (
             <Modal
@@ -262,7 +264,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>{this.props.detailAreaData ? this.props.detailAreaData.PriceTargetStr.split(',')[0] + ' ₺' : ""}
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.PriceTargetStr.split(',')[0] + '' : ""}
                                     </Text>
                                 </View>
                             </View>
@@ -377,7 +379,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>{(this.props.detailAreaData.PriceTarget * 95 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 && this.props.detailAreaData ? ((this.props.detailAreaData.PriceTarget * 95 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
+                                }}>{(this.props.detailAreaData.PriceTarget * 95 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 && this.props.detailAreaData ? this.convertText(((this.props.detailAreaData.PriceTarget * 95 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0)) + ' ₺ Kaldı.' : 'Tamamlandı.'}
                                 </Text> : null}
                                 </View>
                             </View>
@@ -405,7 +407,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>{(this.props.detailAreaData.PriceTarget * 105 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? ((this.props.detailAreaData.PriceTarget * 105 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
+                                }}>{(this.props.detailAreaData.PriceTarget * 105 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? this.convertText(((this.props.detailAreaData.PriceTarget * 105 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0)) + ' ₺ Kaldı.' : 'Tamamlandı.'}
                                 </Text> : null}
                                 </View>
                             </View>
@@ -433,7 +435,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>{(this.props.detailAreaData.PriceTarget * 115 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? ((this.props.detailAreaData.PriceTarget * 115 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
+                                }}>{(this.props.detailAreaData.PriceTarget * 115 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? this.convertText(((this.props.detailAreaData.PriceTarget * 115 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0)) + ' ₺ Kaldı.' : 'Tamamlandı.'}
                                 </Text> : null}
                                 </View>
                             </View>
@@ -461,7 +463,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>{(this.props.detailAreaData.PriceTarget * 125 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? ((this.props.detailAreaData.PriceTarget * 125 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0) + ' ₺ Kaldı.' : 'Tamamlandı.'}
+                                }}>{(this.props.detailAreaData.PriceTarget * 125 / 100) - this.props.detailAreaData.PriceLinkedTarget > 0 ? this.convertText(((this.props.detailAreaData.PriceTarget * 125 / 100) - this.props.detailAreaData.PriceLinkedTarget).toFixed(0)) + ' ₺ Kaldı.' : 'Tamamlandı.'}
                                 </Text> : null}
                                 </View>
                             </View>
