@@ -33,7 +33,9 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     }
     return true
   }
-
+  convertText(text) {
+    return text.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+  }
   renderRow = (rowData, index, isHeader, isSummary) => {
     return (
       <View
@@ -85,7 +87,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
               isSummary ? { fontWeight: "800", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
             ]}
           >
-            {isHeader ? "HEDEF" : rowData.target.toLocaleString('tr') + " ₺"}
+            {isHeader ? "HEDEF" : this.convertText(rowData.target.toLocaleString('tr')) + " ₺"}
           </Text>
         </View>
         <View
@@ -104,7 +106,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
               isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
             ]}
           >
-            {isHeader ? "TÜM SATIŞ" : rowData.tumSatis.toLocaleString('tr') + " ₺"}
+            {isHeader ? "TÜM SATIŞ" : this.convertText(rowData.tumSatis.toLocaleString('tr')) + " ₺"}
           </Text>
         </View>
         <View
@@ -128,13 +130,13 @@ export default class GeneralPerformanceTableComponent extends React.Component {
             {isHeader
               ? "HEDEFE TABİ SATIŞ"
               : this.props.hedefTuru === 0
-                ? rowData.hepsi.toLocaleString('tr') + " ₺"
+                ? this.convertText(rowData.hepsi.toLocaleString('tr')) + " ₺"
                 : this.props.hedefTuru === 1
-                  ? rowData.perakende.toLocaleString('tr') + " ₺"
+                  ? this.convertText(rowData.perakende.toLocaleString('tr')) + " ₺"
                   : this.props.hedefTuru === 2
-                    ? rowData.sigorta.toLocaleString('tr') + " ₺"
+                    ? this.convertText(rowData.sigorta.toLocaleString('tr')) + " ₺"
                     : this.props.hedefTuru === 3
-                      ? rowData.yetkili.toLocaleString('tr') + " ₺"
+                      ? this.convertText(rowData.yetkili.toLocaleString('tr')) + " ₺"
                       : "s" + " ₺"}
           </Text>
         </View>
@@ -154,7 +156,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
               isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
             ]}
           >
-            {isHeader ? "PRİME TABİ SATIŞ" : rowData.primeTabiSatis.toLocaleString('tr') + " ₺"}
+            {isHeader ? "PRİME TABİ SATIŞ" : this.convertText(rowData.primeTabiSatis.toLocaleString('tr')) + " ₺"}
           </Text>
         </View>
         <View
@@ -170,7 +172,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : { marginTop: "15%" }, !isHeader && isSummary ? { fontWeight: 'bold' } : {}
+              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : { flex: 1, textAlign: 'center', textAlignVertical: 'center' }, !isHeader && isSummary ? { fontWeight: 'bold' } : {}
             ]}
           >
             {isHeader
