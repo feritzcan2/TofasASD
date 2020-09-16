@@ -5,6 +5,7 @@ import Form from "./Form";
 import Wallpaper from "./Wallpaper";
 import ButtonSubmit from "./ButtonSubmit";
 import SignupSection from "./SignupSection";
+import { AsyncStorage } from "react-native";
 
 export default class LoginScreen extends Component {
   constructor(props) {
@@ -13,12 +14,27 @@ export default class LoginScreen extends Component {
       username: "",
       pw: "",
     };
+
+
+  }
+  componentDidMount() {
+    AsyncStorage.getItem("loginUsername").then(data => {
+      console.log("us", data)
+      if (data)
+        this.setState({ username: data })
+    })
+    AsyncStorage.getItem("loginPw").then(data => {
+      if (data)
+        this.setState({ pw: data })
+    })
   }
   render() {
     return (
       <Wallpaper>
         <Logo />
         <Form
+          username={this.state.username}
+          pw={this.state.pw}
           setUsername={(username) => this.setState({ username })}
           setPassword={(pw) => this.setState({ pw: pw })}
         />

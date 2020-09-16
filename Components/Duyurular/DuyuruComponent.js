@@ -199,7 +199,7 @@ export default class DuyuruComponent extends React.Component {
       <View style={styles.container}>
 
         <View style={{
-          width: screenWidth, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '7%', paddingTop: '7%', paddingBottom: '3%', alignItems: 'center'
+          width: screenWidth, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '7%', paddingTop: '3%', paddingBottom: '3%', alignItems: 'center'
         }} >
           <Image source={require('../../assets/logoDuyuru.png')} style={{ resizeMode: 'contain', width: screenWidth * 0.5, height: screenHeight * 0.1, }} />
           <Animated.View style={{
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
   duyuruHeaderText: {
     color: "#46BAA7",
     alignSelf: "center",
-    fontSize: normalize(26),
+    fontSize: normalize(23),
     marginTop: "0%",
     textAlign: "center",
     fontWeight: "bold",

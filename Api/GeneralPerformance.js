@@ -1,12 +1,20 @@
 import { relogin } from "./Login";
+import { AsyncStorage } from "react-native";
 
 let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
 
 
 export function getRegions() {
+
   console.log("getRegions")
 
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getRegions()
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -34,9 +42,8 @@ export function getRegions() {
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getRegions()
-      console.log("null data: genel perf ", result)
 
       resolve(result);
       return;
@@ -51,6 +58,12 @@ export function getBayiList() {
   console.log("get bayi")
 
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getBayiList()
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -77,9 +90,8 @@ export function getBayiList() {
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getBayiList()
-      console.log("null data: genel get bayi ", result)
 
       resolve(result);
       return;
@@ -93,6 +105,12 @@ export function getGenelPerformance(filters) {
   console.log("getGenelPerformance")
 
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getGenelPerformance(filters)
+      resolve(result)
+      return
+    }
     if (global.genelPerformance[JSON.stringify(filters)]) {
 
       resolve(global.genelPerformance[JSON.stringify(filters)])
@@ -135,9 +153,8 @@ export function getGenelPerformance(filters) {
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getGenelPerformance(filters)
-      console.log("null data: genel perf genelperf ", result)
 
       resolve(result);
       return;
@@ -151,7 +168,12 @@ export function getCampaigns() {
   console.log("getCampaigns")
 
   return new Promise(async function (resolve, reject) {
-
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getCampaigns()
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -180,9 +202,8 @@ export function getCampaigns() {
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getCampaigns()
-      console.log("null data: genel get camp ", result)
 
       resolve(result);
       return;
@@ -198,7 +219,12 @@ export function getCampaignDetail(data, id) {
   console.log("getCampaignDetail")
 
   return new Promise(async function (resolve, reject) {
-
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getCampaignDetail(data, id)
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -236,7 +262,7 @@ export function getCampaignDetail(data, id) {
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getCampaignDetail(data, id)
       console.log("null data: ", result)
 
@@ -253,7 +279,12 @@ export function getCampaignPerformance(id) {
   console.log("getCampaignPerformance")
 
   return new Promise(async function (resolve, reject) {
-
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getCampaignPerformance(id)
+      resolve(result)
+      return
+    }
     if (global.campaignPerformance[id]) {
       console.log("return from cache")
       resolve(global.campaignPerformance[id])
@@ -292,7 +323,7 @@ export function getCampaignPerformance(id) {
     ) {
       if (result.Data && result.Data.saleListSalesman === undefined) {
         console.log("null data: ", result)
-        await relogin(); debugger
+        await relogin();
         result = await getCampaignPerformance(id)
         console.log("null data: genel camp perf ", result)
 

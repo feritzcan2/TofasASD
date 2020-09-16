@@ -8,6 +8,7 @@ export default class UserInput extends Component {
       <View style={styles.inputWrapper}>
         <Image source={this.props.source} style={styles.inlineImg} />
         <TextInput
+          value={this.props.value}
           onChangeText={(text) => this.props.setText(text)}
           style={styles.input}
           placeholder={this.props.placeholder}

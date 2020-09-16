@@ -1,9 +1,16 @@
 import { relogin } from "./Login";
+import { AsyncStorage } from "react-native";
 
 let url = "https://b2b.opar.com/api/adminmobile/GetList_CustomerSearchASD";
 
 export function getYildizPuanDetail() {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getYildizPuanDetail()
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -30,7 +37,7 @@ export function getYildizPuanDetail() {
     });
     if (result.Data === null || result.Data === undefined) {
       console.log("null data: ", result)
-      await relogin(); debugger
+      await relogin();
       result = await getYildizPuanDetail()
       resolve(result);
       return;
@@ -42,6 +49,12 @@ export function getYildizPuanDetail() {
 
 export function getYildizKarneDetails() {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getYildizKarneDetails()
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -68,7 +81,7 @@ export function getYildizKarneDetails() {
     });
     if (result.Data === null || result.Data === undefined) {
       console.log("null data: ", result)
-      await relogin(); debugger
+      await relogin();
       result = await getYildizKarneDetails()
       resolve(result);
       return;
@@ -80,6 +93,12 @@ export function getYildizKarneDetails() {
 
 export function getYildizKarneBayiParams() {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getYildizKarneBayiParams()
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -106,7 +125,7 @@ export function getYildizKarneBayiParams() {
     });
     if (result.Data === null || result.Data === undefined) {
       console.log("null data: ", result)
-      await relogin(); debugger
+      await relogin();
       result = await getYildizKarneBayiParams()
       resolve(result);
       return;
@@ -117,6 +136,12 @@ export function getYildizKarneBayiParams() {
 }
 export function getYildizKarneTympParams() {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getYildizKarneTympParams()
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -143,7 +168,7 @@ export function getYildizKarneTympParams() {
     });
     if (result.Data === null || result.Data === undefined) {
       console.log("null data: ", result)
-      await relogin(); debugger
+      await relogin();
       result = await getYildizKarneTympParams()
       resolve(result);
       return;
@@ -155,6 +180,12 @@ export function getYildizKarneTympParams() {
 
 export function getHedef(type) {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getHedef(type)
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -183,7 +214,7 @@ export function getHedef(type) {
     });
     if (result.Data === null || result.Data === undefined) {
       console.log("null data: ", result)
-      await relogin(); debugger
+      await relogin();
       result = await getHedef(type)
       resolve(result);
       return;
@@ -195,6 +226,12 @@ export function getHedef(type) {
 
 export function getHedefDetail(id) {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getHedefDetail(id)
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -223,7 +260,7 @@ export function getHedefDetail(id) {
     });
     if (result.Data === null || result.Data === undefined) {
       console.log("null data: ", result)
-      await relogin(); debugger
+      await relogin();
       result = await getHedefDetail(id)
       resolve(result);
       return;

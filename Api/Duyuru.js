@@ -7,6 +7,12 @@ export function getAnnouncements() {
   console.log("announcement")
 
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getAnnouncements()
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -35,10 +41,9 @@ export function getAnnouncements() {
     });
 
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getAnnouncements()
-      console.log("null data: ", result.Data, result)
-      resolve(result.reverse());
+      resolve(result);
       return;
     }
     global.duyurular = result.Data;

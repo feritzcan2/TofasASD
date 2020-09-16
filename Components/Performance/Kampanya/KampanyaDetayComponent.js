@@ -101,7 +101,10 @@ export default class KampanyaDetayComponent extends React.Component {
                                 textAlign: 'center',
                                 fontWeight: "800", color: "#5a5a5a",
                                 fontSize: normalize(8)
-                            } : { flex: 1, fontWeight: "500", marginLeft: "5%", color: (rowData && rowData.Goal) === "Hedef Tamamlandı" ? "green" : "red" },
+                            } : {
+                                    alignItems: "center", textAlign: "center",
+                                    justifyContent: "center", flex: 1, fontWeight: "500", marginLeft: "5%", color: (rowData && rowData.Goal) === "Hedef Tamamlandı" ? "green" : "red"
+                                },
                         ]}
                     >
                         {isHeader ? "HEDEFE KALAN CİRO" : rowData.Goal.split(',')[0]}

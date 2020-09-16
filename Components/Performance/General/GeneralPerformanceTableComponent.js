@@ -64,7 +64,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader || isSummary ? { fontWeight: "800", color: "#5a5a5a" } : { flex: 1, textAlign: 'center', textAlignVertical: 'center' },
+              isHeader || isSummary ? { fontWeight: "800", color: "#5a5a5a" } : { textAlign: 'center', textAlignVertical: 'center' },
             ]}
           >
             {isHeader ? rowData.DealerName : rowData.name}
@@ -172,7 +172,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : { flex: 1, textAlign: 'center', textAlignVertical: 'center' }, !isHeader && isSummary ? { fontWeight: 'bold' } : {}
+              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : !isSummary ? { marginTop: "15%" } : {}, !isHeader && isSummary ? { fontWeight: "800", color: "#5a5a5a", fontSize: normalize(8) } : {}
             ]}
           >
             {isHeader
@@ -188,14 +188,14 @@ export default class GeneralPerformanceTableComponent extends React.Component {
                       : "s" + " ₺"
                 : rowData.hedefGerceklestirme.toFixed(2).toLocaleString('tr') + " %"}
           </Text>
-          {!isHeader && this.props.isDetail && <TouchableOpacity
+          {!isHeader && !isSummary && this.props.isDetail && <TouchableOpacity
             onPress={() => {
 
               let detail = rowData.campaignDetail
               detail.dealerName = rowData.DealerName
               detail.name = rowData.name
               detail.region = rowData.Region
-              detail.PriceTargetStr = rowData.campaignDetail.PriceTarget.toLocaleString('tr') + " ₺"
+              detail.PriceTargetStr = rowData.target.toLocaleString('tr') + " ₺"
               this.props.showDetail(detail)
             }}
             style={{

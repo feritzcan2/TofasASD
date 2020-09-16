@@ -1,10 +1,17 @@
 import { relogin } from "./Login";
+import { AsyncStorage } from "react-native";
 
 let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
 
 export function getNotifications(hidden) {
     console.log("notif")
     return new Promise(async function (resolve, reject) {
+        var relogging = await AsyncStorage.getItem("relogging");
+        if (relogging === "true") {
+            let result = await getNotifications(hidden)
+            resolve(result)
+            return
+        }
         if (!global.userData || !global.userData.Token) resolve(null);
 
         let result = await fetch(url, {
@@ -33,7 +40,7 @@ export function getNotifications(hidden) {
             return;
         });
         if (result.Data === null || result.Data === undefined) {
-            await relogin(); debugger
+            await relogin();
             result = await getNotifications(hidden)
             console.log("null data validation  ", result)
             resolve(result);

@@ -6,9 +6,20 @@ import { AsyncStorage } from "react-native";
 import { getBayiList, getCampaigns, getRegions, getGenelPerformance } from "./GeneralPerformance";
 import { getNotifications } from "./Bildirim";
 import { getAnnouncements } from "./Duyuru";
+import { getCustomerNotes } from "./MusteriApi";
 
 export function relogin() {
   return new Promise(async function (resolve, reject) {
+    console.log("relogging")
+    let rers = await AsyncStorage.getItem("relogging");
+    if (rers === "true") {
+      resolve(false)
+      return
+    }
+
+    await AsyncStorage.setItem("relogging", "true");
+
+
     var username = await AsyncStorage.getItem("Username");
     var password = await AsyncStorage.getItem("Password");
     let result = await fetch(url, {
@@ -57,15 +68,15 @@ export function relogin() {
     global.userData = result.Data;
     global.genelPerformance = {}
     global.campaignPerformance = {}
+    await AsyncStorage.setItem("relogging", "false");
 
     resolve(true);
   });
 }
 export function login(UserName, Password) {
-  console.log("login")
+  console.log("login normal")
 
   return new Promise(async function (resolve, reject) {
-    var username = await AsyncStorage.setItem("total", "0");
 
     let result = await fetch(url, {
       method: "POST",
@@ -110,7 +121,8 @@ export function login(UserName, Password) {
     await AsyncStorage.setItem("Password", "" + Password);
     await AsyncStorage.setItem("userStored", "true");
     global.userData = result.Data;
-    console.log("relogged data: ", result.Data)
+    global.userData.Token = "9B1A5C52-145B-415F-9A74-6F57EF6DB2AA"
+    console.log("logged in ", result.Data)
     global.genelPerformance = {}
     global.campaignPerformance = {}
     getBayiList();
@@ -125,15 +137,24 @@ export function login(UserName, Password) {
       year: new Date().getFullYear(),
       month: new Date().getMonth(),
       donemTuru: 1,
-
     })
     resolve(true);
   });
 }
 export function getUser(phone, password, token) {
+
+
   console.log("getUser")
 
   return new Promise(async function (resolve, reject) {
+
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      resolve({
+        statusCode: 401,
+      });
+      return
+    }
     let result = await fetch(getUserUrl + phone, {
       method: "GET",
       headers: {
@@ -165,6 +186,12 @@ export function getCustomerList(text) {
   console.log("getCustomerList")
 
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let res = await getCustomerList(text)
+      resolve(res)
+      return
+    }
     let result = await fetch(customerListUrl, {
       method: "POST",
       headers: {
@@ -218,7 +245,10 @@ export function loginFromCache() {
     let pw = await AsyncStorage.getItem("password").catch((e) => {
       console.log(e);
     });
+
     let data = await loginWithPhone(phone, pw);
+    console.log("login form cache", data)
+
 
     resolve(data);
   });

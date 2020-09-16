@@ -1,19 +1,19 @@
 {
   "expo": {
-    "name": "TofasB2B",
-    "slug": "TofasB2B",
+    "name": "Opar Takip",
+    "slug": "OparTakip",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "2.0.8",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f8f8f8"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,7 +22,7 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.eryaz.tofasadmin",
+      "bundleIdentifier": "com.eryaz.oparasd",
       "supportsTablet": true
     },
     "android": {

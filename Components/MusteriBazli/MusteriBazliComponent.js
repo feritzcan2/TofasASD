@@ -466,12 +466,12 @@ export default class MusteriBazliComponent extends React.Component {
     const { } = this.props;
 
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <KeyboardAvoidingView behavior="height" style={styles.container}>
         <ScrollView
           style={{
             width: "90%",
             alignSelf: "center",
-            height: "90%",
+            height: screenHeight * 0.9,
           }}
         >
           <View style={{ height: screenHeight * 0.1 }}></View>

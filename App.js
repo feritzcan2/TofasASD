@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, AsyncStorage } from "react-native";
 import LoginContainer from "./Containers/LoginContainer";
 import TabsContainer from "./Containers/TabsContainer";
 import { Asset } from "expo-asset";
@@ -12,10 +12,16 @@ export default class App extends React.Component {
       loggedIn: false,
       userData: null,
     };
+
     this.loadAssets()
+  }
+  async componentWillMount() {
+
   }
   loadAssets = async () => {
     return new Promise(async function (resolve, reject) {
+      var relogging = await AsyncStorage.setItem("relogging", "false");
+
       await Asset.loadAsync([
         //BUTTON
         require("./assets/cancel.png"),

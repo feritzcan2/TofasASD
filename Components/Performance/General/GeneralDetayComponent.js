@@ -137,6 +137,7 @@ export default class GeneralDetayComponent extends React.Component {
         return text.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
     render() {
+        console.log("trgerr", this.props.detailAreaData)
         return (
             <Modal
                 transparent
@@ -158,7 +159,7 @@ export default class GeneralDetayComponent extends React.Component {
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
-                                    flex: 1, backgroundColor: "#473e54",
+                                    flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
                                         fontSize: normalize(11),
@@ -186,7 +187,8 @@ export default class GeneralDetayComponent extends React.Component {
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
-                                    flex: 1, backgroundColor: "#473e54",
+                                    flex: 1.5
+                                    , backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
                                         fontSize: normalize(11),
@@ -215,7 +217,7 @@ export default class GeneralDetayComponent extends React.Component {
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
-                                    flex: 1, backgroundColor: "#473e54",
+                                    flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
                                         fontSize: normalize(11),
@@ -243,7 +245,7 @@ export default class GeneralDetayComponent extends React.Component {
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
-                                    flex: 1, backgroundColor: "#473e54",
+                                    flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
                                         fontSize: normalize(11),
@@ -264,14 +266,14 @@ export default class GeneralDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>{this.props.detailAreaData ? this.props.detailAreaData.PriceTargetStr.split(',')[0] + '' : ""}
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.PriceTargetStr + '' : ""}
                                     </Text>
                                 </View>
                             </View>
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
-                                    flex: 1, backgroundColor: "#473e54",
+                                    flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
                                         fontSize: normalize(11),
@@ -299,7 +301,7 @@ export default class GeneralDetayComponent extends React.Component {
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
-                                    flex: 1, backgroundColor: "#473e54",
+                                    flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
                                         fontSize: normalize(11),
@@ -320,7 +322,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     marginBottom: 5,
                                     color: "#667077",
                                     fontWeight: "bold"
-                                }}>{this.props.detailAreaData ? this.props.detailAreaData.TargetPercentStr.split(',')[0] + ' %' : ""}
+                                }}>{this.props.detailAreaData ? this.props.detailAreaData.TargetPercentStr + ' %' : ""}
                                     </Text>
                                 </View>
                             </View>
@@ -357,7 +359,7 @@ export default class GeneralDetayComponent extends React.Component {
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
-                                    flex: 1, backgroundColor: "#473e54",
+                                    flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
                                         fontSize: normalize(11),
@@ -386,7 +388,7 @@ export default class GeneralDetayComponent extends React.Component {
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
-                                    flex: 1, backgroundColor: "#473e54",
+                                    flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
                                         fontSize: normalize(11),
@@ -414,7 +416,7 @@ export default class GeneralDetayComponent extends React.Component {
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
-                                    flex: 1, backgroundColor: "#473e54",
+                                    flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
                                         fontSize: normalize(11),
@@ -442,7 +444,7 @@ export default class GeneralDetayComponent extends React.Component {
                             <View style={{ flexDirection: "row", marginBottom: 3 }}>
                                 <View style={{
                                     justifyContent: "center", alignItems: "center",
-                                    flex: 1, backgroundColor: "#473e54",
+                                    flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
                                         fontSize: normalize(11),

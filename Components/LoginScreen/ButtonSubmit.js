@@ -10,6 +10,7 @@ import {
   Image,
   Alert,
   View,
+  AsyncStorage,
 } from "react-native";
 import { Actions, ActionConst } from "react-native-router-flux";
 
@@ -34,28 +35,23 @@ export default class ButtonSubmit extends Component {
   }
 
   componentDidMount() {
-    this._onPress();
   }
 
   _onPress() {
-    if (this.state.isLoading) return;
+    console.log(this.props.username, this.props.pw)
 
-    this.setState({ isLoading: true });
-    Animated.timing(this.buttonAnimated, {
-      toValue: 1,
-      duration: 200,
-      easing: Easing.linear,
-    }).start();
 
     // "test2", "2"
     //    login(this.props.username, this.props.pw).then((status) => {
 
-    login("TEST", "E2018RYZ").then((status) => {
+    login(this.props.username, this.props.pw).then((status) => {
       this._onGrow();
       this.setState({ isLoading: false });
       this.buttonAnimated.setValue(0);
       this.growAnimated.setValue(0);
       if (status === true) {
+        AsyncStorage.setItem("loginUsername", this.props.username)
+        AsyncStorage.setItem("loginPw", this.props.pw)
         this.props.setLoggedIn();
       } else {
         alert("Giriş bilgileri yanlış!");

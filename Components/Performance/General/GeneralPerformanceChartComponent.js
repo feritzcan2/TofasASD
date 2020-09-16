@@ -64,7 +64,7 @@ export default class GeneralPerformanceChartComponent extends React.Component {
   };
   getMaxHedefValue = (data) => {
     let max = 1;
-    debugger;
+    ;
 
     for (let a = 0; a < data.length; a++) {
       let value = data[a].hedefGerceklestirme;

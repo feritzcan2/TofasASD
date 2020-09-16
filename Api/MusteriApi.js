@@ -1,4 +1,5 @@
 import { relogin } from "./Login";
+import { AsyncStorage } from "react-native";
 
 let url = "https://b2b.opar.com/api/adminmobile/GetList_CustomerSearchASD";
 
@@ -6,6 +7,12 @@ export function searchCustomer(name, code) {
   console.log("searchCustomer")
 
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await searchCustomer(name, code)
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -40,7 +47,7 @@ export function searchCustomer(name, code) {
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await searchCustomer(name, code)
       console.log("null data:  search cust", result)
 
@@ -54,6 +61,12 @@ export function searchCustomer(name, code) {
 
 export function getCustomer(id) {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getCustomer(id)
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -82,7 +95,7 @@ export function getCustomer(id) {
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getCustomer(id)
       console.log("null data: get cust", result)
 
@@ -96,6 +109,12 @@ export function getCustomer(id) {
 
 export function getCustomerNotes(id) {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getCustomerNotes(id)
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
     let result = await fetch(url, {
       method: "POST",
@@ -121,7 +140,7 @@ export function getCustomerNotes(id) {
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getCustomerNotes(id)
       console.log("get cust note: ", result)
 
@@ -134,6 +153,12 @@ export function getCustomerNotes(id) {
 
 export function setCustomerNotes(id, message) {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await setCustomerNotes(id, message)
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -161,7 +186,7 @@ export function setCustomerNotes(id, message) {
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await setCustomerNotes(id, message)
       console.log("null set cust notes: ", result)
 
@@ -174,6 +199,12 @@ export function setCustomerNotes(id, message) {
 }
 export function sendCustomerNotes(mail, message) {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await sendCustomerNotes(mail, message)
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -202,7 +233,7 @@ export function sendCustomerNotes(mail, message) {
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await sendCustomerNotes(mail, message)
       console.log("null send note: ", result)
 
@@ -215,6 +246,12 @@ export function sendCustomerNotes(mail, message) {
 }
 export function getWarehouse(id) {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getWarehouse(id)
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -242,7 +279,7 @@ export function getWarehouse(id) {
     });
 
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getWarehouse(id)
       console.log("null get ware: ", result)
 
@@ -256,6 +293,12 @@ export function getWarehouse(id) {
 
 export function getAnalizeCode() {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getAnalizeCode()
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -281,9 +324,8 @@ export function getAnalizeCode() {
     });
 
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getAnalizeCode()
-      console.log("null get analiz: ", result)
 
       resolve(result);
       return;
@@ -295,6 +337,12 @@ export function getAnalizeCode() {
 
 export function getDefinition() {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getDefinition()
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -320,10 +368,8 @@ export function getDefinition() {
     });
 
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getDefinition()
-      console.log("null get def: ", result)
-
       resolve(result);
       return;
     }
@@ -333,6 +379,12 @@ export function getDefinition() {
 }
 export function getTypeCode() {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getTypeCode()
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -357,9 +409,8 @@ export function getTypeCode() {
     });
 
     if (result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getTypeCode()
-      console.log("null get type: ", result)
 
       resolve(result);
       return;
@@ -371,6 +422,12 @@ export function getTypeCode() {
 
 export function getListInvoice(params) {
   return new Promise(async function (resolve, reject) {
+    var relogging = await AsyncStorage.getItem("relogging");
+    if (relogging === "true") {
+      let result = await getListInvoice(params)
+      resolve(result)
+      return
+    }
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -411,7 +468,7 @@ export function getListInvoice(params) {
 
 
     if (!result || result.Data === null || result.Data === undefined) {
-      await relogin(); debugger
+      await relogin();
       result = await getListInvoice(params)
 
       console.log("null get list: ", result)

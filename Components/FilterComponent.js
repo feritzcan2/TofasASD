@@ -149,7 +149,7 @@ export default class FilterComponent extends React.Component {
           value: "HEPSİ",
         },
         {
-          value: "Parakende",
+          value: "Perakende",
         },
         {
           value: "Sigorta",
@@ -235,7 +235,6 @@ export default class FilterComponent extends React.Component {
               value={this.state.donemData[this.state.filters.donemTuru].value}
               data={this.state.donemData}
               onChangeText={(value, index, data) => {
-                console.log("donem turu ", index, index + 1)
                 let flters = this.state.filters;
                 flters.donemTuru = index;
                 this.setState({ filters: flters });
