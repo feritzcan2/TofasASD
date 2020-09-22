@@ -6,6 +6,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@bam.tech/react-native-make": "^3.0.0",
     "axios": "^0.19.2",
     "d3-scale": "^3.2.1",
     "expo": "~37.0.3",

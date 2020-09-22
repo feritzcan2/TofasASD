@@ -28,6 +28,7 @@ export function getNotifications(hidden) {
                     Parameters: {
                         IsHide: hidden
                     },
+                    IsHide: hidden,
                     Name: "GetList_UserNotification",
                 },
             }),

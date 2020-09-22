@@ -237,7 +237,10 @@ export default class TabsContainer extends Component {
             backgroundColor: "white",
             height: "10%",
           }}
-          selectedStyle={{ color: "red" }}
+          selectedStyle={{
+            color: "red"
+
+          }}
           onSelect={(el) => {
             if (this.state.menuOpen) {
               this.toggleMenu()
@@ -249,7 +252,9 @@ export default class TabsContainer extends Component {
             name="duyurular"
             selectedIconStyle={{
               height: "100%",
+
               borderTopWidth: 2,
+
               borderTopColor: "green",
               flex: 1,
             }}
@@ -291,6 +296,7 @@ export default class TabsContainer extends Component {
           </Text>
 
         </Tabs>
+
         {this.state.page === "duyurular" && (
           <DuyuruContainer data={this.state.duyuruData} menuOpen={this.state.menuOpen} toggleMenu={this.toggleMenu} />
         )}
@@ -301,6 +307,7 @@ export default class TabsContainer extends Component {
           <YildizKarneContainer yildizData={this.state.yildizData} />
         )}
         {this.state.page === "musteri" && <MusteriBazliContainer />}
+
       </View>
     );
   }
@@ -323,6 +330,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   Gradient: {
+    backgroundColor: "#F5FCFF",
+
     height: 30,
     zIndex: 10000,
     width: '100%',

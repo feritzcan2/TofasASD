@@ -57,7 +57,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight:"bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "BAYİ KODU" : rowData.Dealer.Code}
@@ -76,7 +76,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "BAYİ ADI" : rowData.Dealer.Name}
@@ -95,7 +95,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight:"bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "KOD" : rowData.Code}
@@ -114,7 +114,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "ÜNVAN" : rowData.Name}
@@ -133,7 +133,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "AĞIRLIK" : rowData.Weight}
@@ -152,7 +152,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader
@@ -174,7 +174,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader
@@ -196,7 +196,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader
@@ -217,7 +217,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader
@@ -239,7 +239,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "GERÇ. %" : rowData.ActualTargetPercent.toFixed(2)}
@@ -258,7 +258,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "PER. PUAN" : rowData.Point.toFixed(2)}
@@ -277,7 +277,7 @@ export default class AsdDetayComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "AĞIRLIK PUAN" : rowData.WeightPoint.toFixed(2)}
@@ -378,5 +378,10 @@ const styles = StyleSheet.create({
     fontSize: normalize(20),
     paddingTop: 10,
     paddingBottom: 10,
+  }, rowText: {
+    width: "100%",
+    textAlign: "center",
+    fontSize: normalize(12),
+    color: "#657077",
   },
 });

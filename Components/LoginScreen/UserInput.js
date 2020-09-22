@@ -38,13 +38,14 @@ const DEVICE_HEIGHT = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: "rgba(255, 255, 255, 0.4)",
+    backgroundColor: "#7bd9a7",
     width: DEVICE_WIDTH - 40,
     height: 40,
     marginHorizontal: 20,
     paddingLeft: 45,
     borderRadius: 20,
-    color: "#ffffff",
+    color: "#304baa",
+    fontWeight: "bold"
   },
   inputWrapper: {
     flex: 1,

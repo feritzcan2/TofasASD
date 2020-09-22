@@ -62,7 +62,6 @@ export default class Form extends Component {
           style={styles.btnEye}
           onPress={this.showPass}
         >
-          <Image source={eyeImg} style={styles.iconEye} />
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
@@ -74,7 +73,7 @@ const DEVICE_HEIGHT = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1.8,
     alignItems: "center",
   },
   btnEye: {

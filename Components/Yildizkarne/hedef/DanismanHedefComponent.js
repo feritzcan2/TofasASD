@@ -81,7 +81,7 @@ export default class DanismanHedefComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "KOD" : rowData.Code}
@@ -100,7 +100,7 @@ export default class DanismanHedefComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "ÜNVAN" : rowData.Name}
@@ -119,7 +119,7 @@ export default class DanismanHedefComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader
@@ -140,7 +140,7 @@ export default class DanismanHedefComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader
@@ -252,12 +252,17 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: "8%",
     display: "flex",
+  }, rowText: {
+    width: "100%",
+    textAlign: "center",
+    fontSize: normalize(12),
+    color: "#657077",
   },
   text: {
     fontSize: normalize(16),
     color: "#473e54",
     padding: 5,
-    fontWeight: "600",
+    fontWeight: 'bold',
   },
   headerText: {
     color: "#457ab2",

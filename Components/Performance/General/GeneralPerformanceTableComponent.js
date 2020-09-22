@@ -64,7 +64,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader || isSummary ? { fontWeight: "800", color: "#5a5a5a" } : { textAlign: 'center', textAlignVertical: 'center' },
+              isHeader || isSummary ? { fontWeight: 'bold', color: "#5a5a5a" } : { textAlign: 'center', textAlignVertical: 'center' },
             ]}
           >
             {isHeader ? rowData.DealerName : rowData.name}
@@ -83,8 +83,8 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
-              isSummary ? { fontWeight: "800", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
+              isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
+              isSummary ? { fontWeight: 'bold', color: "#5a5a5a", fontSize: normalize(7.5) } : {},
             ]}
           >
             {isHeader ? "HEDEF" : this.convertText(rowData.target.toLocaleString('tr')) + " ₺"}
@@ -103,7 +103,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "TÜM SATIŞ" : this.convertText(rowData.tumSatis.toLocaleString('tr')) + " ₺"}
@@ -122,8 +122,8 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
-              isSummary ? { fontWeight: "800", color: "#5a5a5a", fontSize: normalize(8) } : {},
+              isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
+              isSummary ? { fontWeight: 'bold', color: "#5a5a5a", fontSize: normalize(8) } : {},
 
             ]}
           >
@@ -153,7 +153,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "PRİME TABİ SATIŞ" : this.convertText(rowData.primeTabiSatis.toLocaleString('tr')) + " ₺"}
@@ -172,7 +172,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : !isSummary ? { marginTop: "15%" } : {}, !isHeader && isSummary ? { fontWeight: "800", color: "#5a5a5a", fontSize: normalize(8) } : {}
+              isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : !isSummary ? {} : {}, !isHeader && isSummary ? { fontWeight: 'bold', color: "#5a5a5a", fontSize: normalize(8) } : {}
             ]}
           >
             {isHeader
@@ -195,7 +195,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
               detail.dealerName = rowData.DealerName
               detail.name = rowData.name
               detail.region = rowData.Region
-              detail.PriceTargetStr = rowData.target.toLocaleString('tr') + " ₺"
+              detail.PriceTargetStr = rowData.target.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " ₺"
               this.props.showDetail(detail)
             }}
             style={{
@@ -205,7 +205,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
             <Text
               style={[
                 styles.rowText,
-                isHeader ? { fontWeight: "800", color: "#5a5a5a" } : { color: "white" },
+                isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : { color: "white" },
               ]}
             >
               İNCELE
@@ -275,8 +275,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
         summary.target += item.target
       }
     }
-    console.log(summary)
-    console.log(this.state.totalTable)
+
     if (data[0][0].Region == 1 && this.state.totalTable[1] && summary.hedefGerceklestirme != this.state.totalTable[1].hedefGerceklestirme) {
       this.setState({ totalTable: [] })
     }
@@ -345,7 +344,6 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     if (this.state.isEnd) {
       // let summary = this.CalculateTotal(this.state.totalTable.filter(item => item), false)
       let data = this.state.totalTable.filter(item => item)
-      console.log(data)
       return (
         <View key={"a:"} style={styles.areaContainer}>
           <View style={styles.bolgeTextContainer}>
@@ -417,6 +415,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   rowText: {
+    width: "100%",
+    textAlign: "center",
     fontSize: normalize(8),
     color: "#657077",
   },

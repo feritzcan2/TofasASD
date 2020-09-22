@@ -34,34 +34,34 @@ export default class BayiHedefComponent extends React.Component {
       type === 0
         ? "B_YPH_T"
         : type === 1
-        ? "B_YMK_T"
-        : type === 2
-        ? "B_OW_T"
-        : type === 3
-        ? "B_AIH_T"
-        : type === 4
-        ? "B_FPS_T"
-        : type === 5
-        ? "B_SDH_T"
-        : type === 6
-        ? "B_BKK_T"
-        : [];
+          ? "B_YMK_T"
+          : type === 2
+            ? "B_OW_T"
+            : type === 3
+              ? "B_AIH_T"
+              : type === 4
+                ? "B_FPS_T"
+                : type === 5
+                  ? "B_SDH_T"
+                  : type === 6
+                    ? "B_BKK_T"
+                    : [];
     let colName2 =
       type === 0
         ? "B_YPH_E"
         : type === 1
-        ? "B_YMK_E"
-        : type === 2
-        ? "B_OW_E"
-        : type === 3
-        ? "B_AIH_E"
-        : type === 4
-        ? "B_FPS_E"
-        : type === 5
-        ? "B_SDH_E"
-        : type === 6
-        ? "B_BKK_E"
-        : [];
+          ? "B_YMK_E"
+          : type === 2
+            ? "B_OW_E"
+            : type === 3
+              ? "B_AIH_E"
+              : type === 4
+                ? "B_FPS_E"
+                : type === 5
+                  ? "B_SDH_E"
+                  : type === 6
+                    ? "B_BKK_E"
+                    : [];
     return (
       <View
         key={"r " + index}
@@ -89,7 +89,7 @@ export default class BayiHedefComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "KOD" : rowData.Code}
@@ -108,7 +108,7 @@ export default class BayiHedefComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "ÜNVAN" : rowData.Name}
@@ -127,7 +127,7 @@ export default class BayiHedefComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader
@@ -148,7 +148,7 @@ export default class BayiHedefComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader
@@ -277,12 +277,17 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: "8%",
     display: "flex",
+  }, rowText: {
+    width: "100%",
+    textAlign: "center",
+    fontSize: normalize(12),
+    color: "#657077",
   },
   text: {
     fontSize: normalize(16),
     color: "#473e54",
     padding: 5,
-    fontWeight: "600",
+    fontWeight: 'bold',
   },
   headerText: {
     color: "#457ab2",

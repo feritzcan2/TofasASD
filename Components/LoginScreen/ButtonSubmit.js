@@ -35,11 +35,27 @@ export default class ButtonSubmit extends Component {
   }
 
   componentDidMount() {
+    // this._onPress()
   }
 
   _onPress() {
     console.log(this.props.username, this.props.pw)
 
+    // login("test2", "2").then((status) => {
+
+    // login("TEST", "E2018RYZ").then((status) => {
+    //   console.log(status);
+    //   this._onGrow();
+    //   this.setState({ isLoading: false });
+    //   this.buttonAnimated.setValue(0);
+    //   this.growAnimated.setValue(0);
+    //   if (status === true) {
+    //     this.props.setLoggedIn();
+    //   } else {
+    //     alert("Giriş bilgileri yanlış!");
+    //   }
+    // });
+    // return
 
     // "test2", "2"
     //    login(this.props.username, this.props.pw).then((status) => {
@@ -58,18 +74,7 @@ export default class ButtonSubmit extends Component {
       }
     });
 
-    // login("TEST", "E2018RYZ").then((status) => {
-    //   console.log(status);
-    //   this._onGrow();
-    //   this.setState({ isLoading: false });
-    //   this.buttonAnimated.setValue(0);
-    //   this.growAnimated.setValue(0);
-    //   if (status === true) {
-    //     this.props.setLoggedIn();
-    //   } else {
-    //     alert("Giriş bilgileri yanlış!");
-    //   }
-    // });
+
 
     // setTimeout(() => {
     //   this._onGrow();
@@ -134,7 +139,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#F035E0",
+    backgroundColor: "#304baa",
     height: MARGIN,
     borderRadius: 20,
     zIndex: 100,

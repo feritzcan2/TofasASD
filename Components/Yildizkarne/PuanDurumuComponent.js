@@ -55,7 +55,7 @@ export default class PuanDurumuComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "SIRA" : rowData.Index}
@@ -74,7 +74,7 @@ export default class PuanDurumuComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "GRUP" : rowData.Group}
@@ -94,7 +94,7 @@ export default class PuanDurumuComponent extends React.Component {
             <Text
               style={[
                 styles.rowText,
-                isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
               ]}
             >
               {isHeader ? "BAYİ KOD" : rowData.Dealer.Code}
@@ -115,7 +115,7 @@ export default class PuanDurumuComponent extends React.Component {
             <Text
               style={[
                 styles.rowText,
-                isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
               ]}
             >
               {isHeader ? "BAYİ ÜNVAN" : rowData.Dealer.Name}
@@ -135,7 +135,7 @@ export default class PuanDurumuComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight:"bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "KOD" : rowData.Code}
@@ -154,7 +154,7 @@ export default class PuanDurumuComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? (isDanisman === true ? "İSİM" : "ÜNVAN") : rowData.Name}
@@ -173,7 +173,7 @@ export default class PuanDurumuComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "PUAN" : rowData.WeightPoint.toFixed(2)}
@@ -260,7 +260,12 @@ const styles = StyleSheet.create({
     marginTop: "8%",
     display: "flex",
   },
-  rowText: { fontSize: normalize(12) },
+  rowText: {
+    width: "100%",
+    textAlign: "center",
+    fontSize: normalize(12),
+    color: "#657077",
+  },
   headerText: {
     color: "#457ab2",
     fontWeight: "bold",

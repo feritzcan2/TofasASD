@@ -51,7 +51,7 @@ export default class KampanyaSComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? rowData.DealerName : rowData.name}
@@ -70,7 +70,7 @@ export default class KampanyaSComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? "HEDEF" : rowData.target + " ₺"}
@@ -89,7 +89,7 @@ export default class KampanyaSComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? "Tüm Satış" : rowData.tumSatis + " ₺"}
@@ -108,7 +108,7 @@ export default class KampanyaSComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader
@@ -137,7 +137,7 @@ export default class KampanyaSComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? "Prime Tabi Satış" : rowData.primeTabiSatis + " ₺"}
@@ -156,7 +156,7 @@ export default class KampanyaSComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader

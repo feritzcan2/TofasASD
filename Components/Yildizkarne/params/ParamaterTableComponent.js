@@ -47,7 +47,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "BAYİ KODU" : rowData.Code}
@@ -66,7 +66,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "BAYİ ADI" : rowData.Name}
@@ -86,7 +86,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "BÖLGE" : rowData.Area}
@@ -105,7 +105,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "YILDIZ KARNE GRUBU" : rowData.TympGroup}
@@ -124,7 +124,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "GRUP" : rowData.Group}
@@ -143,7 +143,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "HEDEF %" : rowData.Target}
@@ -162,7 +162,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "ALT LİMİT %" : rowData.Limit}
@@ -181,7 +181,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "ÜST LİMİT %" : rowData.TopLimit}
@@ -200,7 +200,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "ASD ADET" : rowData.AsdQuantity}
@@ -219,7 +219,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "PROMOSYON ADET" : rowData.PromotionQuantity}
@@ -238,7 +238,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "OWV" : rowData.StoreQuantity}
@@ -257,7 +257,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "YEMEK ADET" : rowData.FoodQuantity}
@@ -294,7 +294,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "ADI" : rowData.Name}
@@ -313,7 +313,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "HEDEF" : rowData.Target}
@@ -333,7 +333,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "ALT LİMİT" : rowData.Limit}
@@ -352,7 +352,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "ÜST LİMİT" : rowData.TopLimit}
@@ -371,7 +371,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "AĞIRLIK" : rowData.Weight}
@@ -390,7 +390,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "TİP" : rowData.Type}
@@ -409,7 +409,7 @@ export default class ParamaterTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "KOD" : rowData.Code}
@@ -447,6 +447,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     backgroundColor: "#473e54",
+  }, rowText: {
+    width: "100%",
+    textAlign: "center",
+    fontSize: normalize(12),
+    color: "#657077",
   },
   headerText: {
     fontSize: normalize(20),

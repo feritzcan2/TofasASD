@@ -66,8 +66,6 @@ export function relogin() {
     console.log("relogin succeed")
 
     global.userData = result.Data;
-    global.genelPerformance = {}
-    global.campaignPerformance = {}
     await AsyncStorage.setItem("relogging", "false");
 
     resolve(true);

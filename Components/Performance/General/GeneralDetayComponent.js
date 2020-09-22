@@ -22,122 +22,11 @@ export default class GeneralDetayComponent extends React.Component {
 
     }
 
-    renderRow = (rowData, index, isHeader) => {
-        return (
-            <View
-                key={"r " + index}
-                style={[
-                    {
-                        flex: 1,
-                        borderBottomColor: "white",
-                        borderBottomWidth: 2,
-                        height: screenHeight * 0.08,
-                        flexDirection: "row",
-                    },
-                    isHeader ? { backgroundColor: "#f6f6f6" } : {},
-                ]}
-            >
-                <View
-                    style={{
-                        height: "100%",
-                        flex: 1,
-                        borderColor: "#dbe0e2",
-                        borderWidth: 0.5,
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                >
-                    <Text
-                        style={[
-                            styles.rowText,
-                            isHeader ? {
-                                fontWeight: "800", color: "#5a5a5a",
-                                fontSize: normalize(8)
-                            } : {},
-                        ]}
-                    >
-                        {isHeader ? "HEDEF" : rowData.TargetValue}
-                    </Text>
-                </View>
-                <View
-                    style={{
-                        height: "100%",
-                        flex: 1,
-                        borderColor: "#dbe0e2",
-                        borderWidth: 0.5,
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                >
-                    <Text
-                        style={[
-                            styles.rowText,
-                            isHeader ? {
-                                fontWeight: "800", color: "#5a5a5a",
-                                fontSize: normalize(8)
-                            } : {},
-                        ]}
-                    >
-                        {isHeader ? "PERFORMANS" : rowData.Performance}
-                    </Text>
-                </View>
-                <View
-                    style={{
-                        height: "100%",
-                        flex: 1.5,
-                        flexDirection: "row",
-                        borderColor: "#dbe0e2",
-                        borderWidth: 0.5,
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                >
 
-                    <Text
-                        style={[
-
-                            styles.rowText,
-                            isHeader ? {
-
-                                fontWeight: "800", color: "#5a5a5a",
-                                fontSize: normalize(8)
-                            } : { flex: 1, fontWeight: "500", marginLeft: "5%", color: (rowData && rowData.Goal) === "Hedef Tamamlandı" ? "green" : "red" },
-                        ]}
-                    >
-                        {isHeader ? "HEDEFE KALAN CİRO" : rowData.Goal.split(',')[0]}
-
-                    </Text>
-                </View>
-                <View
-                    style={{
-                        height: "100%",
-                        flex: 1,
-                        borderColor: "#dbe0e2",
-                        borderWidth: 0.5,
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                >
-                    <Text
-                        style={[
-                            styles.rowText,
-                            isHeader ? {
-                                fontWeight: "800", color: "#5a5a5a",
-                                fontSize: normalize(8)
-                            } : {},
-                        ]}
-                    >
-                        {isHeader ? "HAKEDİŞ" : rowData.Progress}
-                    </Text>
-                </View>
-            </View>
-        );
-    };
     convertText(text) {
         return text.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
     render() {
-        console.log("trgerr", this.props.detailAreaData)
         return (
             <Modal
                 transparent
@@ -162,6 +51,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -175,6 +65,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 3,
                                     borderBottomWidth: 0.5, borderBottomColor: "#667077"
                                 }}><Text style={{
+                                    textAlign: "center",
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
@@ -191,6 +82,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     , backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -205,6 +97,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
                                 }}><Text style={{
+                                    textAlign: "center",
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
@@ -220,6 +113,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -233,6 +127,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
                                 }}><Text style={{
+                                    textAlign: "center",
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
@@ -248,6 +143,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -261,6 +157,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
                                 }}><Text style={{
+                                    textAlign: "center",
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
@@ -276,6 +173,8 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -289,6 +188,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
                                 }}><Text style={{
+                                    textAlign: "center",
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
@@ -304,6 +204,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -317,6 +218,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
                                 }}><Text style={{
+                                    textAlign: "center",
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
@@ -333,6 +235,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 1, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -346,6 +249,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 3, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -362,6 +266,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -376,6 +281,7 @@ export default class GeneralDetayComponent extends React.Component {
 
                                 }}
                                 >{this.props.detailAreaData ? <Text style={{
+                                    textAlign: "center",
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
@@ -391,6 +297,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -404,6 +311,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
                                 }}>{this.props.detailAreaData ? <Text style={{
+                                    textAlign: "center",
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
@@ -419,6 +327,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -432,6 +341,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
                                 }}>{this.props.detailAreaData ? <Text style={{
+                                    textAlign: "center",
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
@@ -447,6 +357,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 1.5, backgroundColor: "#473e54",
                                 }}>
                                     <Text style={{
+                                        textAlign: "center",
                                         fontSize: normalize(11),
                                         marginTop: 5,
                                         marginBottom: 5,
@@ -460,6 +371,7 @@ export default class GeneralDetayComponent extends React.Component {
                                     flex: 3, borderBottomWidth: 0.5, borderBottomColor: "#667077"
 
                                 }}>{this.props.detailAreaData ? <Text style={{
+                                    textAlign: "center",
                                     fontSize: normalize(11),
                                     marginTop: 5,
                                     marginBottom: 5,
@@ -474,7 +386,7 @@ export default class GeneralDetayComponent extends React.Component {
                         <TouchableOpacity
                             onPress={this.props.close}
                             style={{ justifyContent: "center", alignItems: "center", height: "10%", backgroundColor: "#473e54" }}>
-                            <Text style={{ fontSize: normalize(20), color: "white", fontWeight: "bold" }}>KAPAT</Text>
+                            <Text style={{ textAlign: "center", fontSize: normalize(20), color: "white", fontWeight: "bold" }}>KAPAT</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

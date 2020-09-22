@@ -54,7 +54,6 @@ export default class PerformanceContainer extends React.Component {
       });
     } else if (this.state.selectedCampaign) {
       getCampaignPerformance(this.state.selectedCampaign.Id).then((data) => {
-        //   console.log(data)
         this.preparePerformanceData(data, true);
       });
     }

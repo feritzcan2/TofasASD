@@ -63,7 +63,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader || isSummary ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader || isSummary ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? rowData.DealerName : rowData.name}
@@ -82,8 +82,8 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
-              isSummary ? { fontWeight: "800", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
+              isSummary ? { fontWeight: "bold", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
             ]}
           >
             {isHeader ? "HEDEF" : this.convertText(rowData.target.toLocaleString('tr')) + " ₺"}
@@ -102,7 +102,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "TÜM SATIŞ" : this.convertText(rowData.tumSatis.toLocaleString('tr')) + " ₺"}
@@ -121,8 +121,8 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
-              isSummary ? { fontWeight: "800", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
+              isSummary ? { fontWeight: "bold", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
 
             ]}
           >
@@ -152,7 +152,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
             {isHeader ? "PRİME TABİ SATIŞ" : this.convertText(rowData.primeTabiSatis.toLocaleString('tr')) + " ₺"}
@@ -172,7 +172,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: "800", color: "#5a5a5a" } : { marginTop: "15%" },
+              isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : { marginTop: "15%" },
             ]}
           >
             {isHeader
@@ -204,7 +204,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
             <Text
               style={[
                 styles.rowText,
-                isHeader ? { fontWeight: "800", color: "#5a5a5a" } : { color: "white" },
+                isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : { color: "white" },
               ]}
             >
               İNCELE
@@ -325,6 +325,8 @@ const styles = StyleSheet.create({
   rowText: {
     fontSize: normalize(8),
     color: "#657077",
+    width: "100%",
+    textAlign: "center"
   },
   bolgeText: {
     color: "white",

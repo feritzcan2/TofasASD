@@ -99,5 +99,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: "40%",
     aspectRatio: 1,
+  }, rowText: {
+    width: "100%",
+    textAlign: "center",
+    fontSize: normalize(12),
+    color: "#657077",
   },
 });

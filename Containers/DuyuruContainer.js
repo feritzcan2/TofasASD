@@ -56,7 +56,6 @@ export default class DuyuruContainer extends React.Component {
 
       let notifications = this.state.notifications
       notifications.nonRead = data
-      notifications.read = data
       if (this.mounted === true)
         this.setState({ notifications })
     }).catch(e => {
@@ -103,11 +102,12 @@ export default class DuyuruContainer extends React.Component {
   }
 
   render() {
-
-    return <View style={{ marginTop: 10 }}>
+    return <View style={{
+      paddingTop: 30, backgroundColor: "#F5FCFF"
+    }}>
       <SwipeGesture gestureStyle={{
         height: '100%',
-        width: '100%'
+        width: '100%',
       }}
         onSwipePerformed={this.onSwipePerformed}>
         <MenuDrawer

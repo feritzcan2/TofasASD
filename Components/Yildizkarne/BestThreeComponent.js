@@ -40,7 +40,7 @@ export default class BestThreeComponent extends React.Component {
                             /></View>
                         </View>
                         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                            <Text style={{ color: "#616c72", fontWeight: "500", fontSize: normalize(14) }}>
+                            <Text style={{ color: "#616c72", fontWeight: 'bold', fontSize: normalize(14) }}>
                                 {second.WeightPoint.toFixed(2)} Puan</Text></View>
 
                     </View>
@@ -54,7 +54,7 @@ export default class BestThreeComponent extends React.Component {
                         }}><Text
                             style={{ color: "#bdbdbd", fontSize: normalize(30), fontWeight: "bold" }}>2</Text></View>
                         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}><Text
-                            style={{ color: "#353535", fontSize: normalize(12), fontWeight: "600" }}>{second.Name}</Text></View>
+                            style={{ color: "#353535", fontSize: normalize(12), fontWeight: 'bold' }}>{second.Name}</Text></View>
                     </View>
                 </View>
                 <View style={{
@@ -73,7 +73,7 @@ export default class BestThreeComponent extends React.Component {
                             /></View>
                         </View>
                         <View style={{ alignItems: "center", justifyContent: "center" }}>
-                            <Text style={{ color: "#616c72", fontWeight: "500", fontSize: normalize(14) }}>
+                            <Text style={{ color: "#616c72", fontWeight: 'bold', fontSize: normalize(14) }}>
                                 {first.WeightPoint.toFixed(2)} Puan</Text>
                         </View>
 
@@ -90,7 +90,7 @@ export default class BestThreeComponent extends React.Component {
                         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
 
                             <Text
-                                style={{ color: "#353535", fontSize: normalize(12), fontWeight: "600" }}>{first.Name}</Text>
+                                style={{ color: "#353535", fontSize: normalize(12), fontWeight: 'bold' }}>{first.Name}</Text>
 
                         </View>
                     </View>
@@ -106,7 +106,7 @@ export default class BestThreeComponent extends React.Component {
                             /></View>
                         </View>
                         <View style={{ alignItems: "center", justifyContent: "center" }}>
-                            <Text style={{ color: "#616c72", fontWeight: "500", fontSize: normalize(14) }}>
+                            <Text style={{ color: "#616c72", fontWeight: 'bold', fontSize: normalize(14) }}>
                                 {third.WeightPoint.toFixed(2)} Puan</Text>
                         </View>
 
@@ -123,7 +123,7 @@ export default class BestThreeComponent extends React.Component {
                                 style={{ color: "#7f4627", fontSize: normalize(30), fontWeight: "bold" }}>3</Text>
                         </View>
                         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}><Text
-                            style={{ color: "#353535", fontSize: normalize(12), fontWeight: "600" }}>{third.Name}</Text></View>
+                            style={{ color: "#353535", fontSize: normalize(12), fontWeight: 'bold' }}>{third.Name}</Text></View>
                     </View>
                 </View>
             </View>

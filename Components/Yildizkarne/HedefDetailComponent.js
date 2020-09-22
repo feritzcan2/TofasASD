@@ -119,6 +119,6 @@ const styles = StyleSheet.create({
     fontSize: normalize(16),
     color: "#473e54",
     padding: 5,
-    fontWeight: "600",
+    fontWeight: 'bold',
   },
 });

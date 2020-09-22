@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ImageBackground,
-  Animated
+  Animated, Platform
 } from "react-native";
 import { normalize } from "../../HelperFunctions";
 import { WebView } from "react-native-webview";
@@ -67,7 +67,7 @@ export default class DuyuruComponent extends React.Component {
         style={styles.announcementContainer}
       >
         <Text style={styles.headerText}>{data.Header}</Text>
-        <View
+        {data && <View
           style={{
             flexDirection: "row",
             justifyContent: "space-evenly",
@@ -75,6 +75,7 @@ export default class DuyuruComponent extends React.Component {
             marginTop: 30,
           }}
         >
+
           <View>
             <Text style={styles.dateHeaderText}>Başlangıç Tarihi</Text>
             <Text style={styles.dateText}>{data.StartDate.split("T")[0].split('-')[2] + '.' + data.StartDate.split("T")[0].split('-')[1] + '.' + data.StartDate.split("T")[0].split('-')[0]}</Text>
@@ -83,12 +84,15 @@ export default class DuyuruComponent extends React.Component {
             <Text style={styles.dateHeaderText}>Bitiş Tarihi</Text>
             <Text style={styles.dateText}>{data.EndDate.split("T")[0].split('-')[2] + '.' + data.EndDate.split("T")[0].split('-')[1] + '.' + data.EndDate.split("T")[0].split('-')[0]}</Text>
           </View>
-        </View>
+        </View>}
       </TouchableOpacity>
     );
   };
   renderDetail = () => {
+    console.log("file ", this.state.detail.FilePath)
     let self = this;
+    const fontSize = Platform.OS === 'android' ? "100%" : "200%";
+
     return (
       <Modal
         transparent
@@ -137,13 +141,15 @@ export default class DuyuruComponent extends React.Component {
                 height: screenHeight * 0.5,
                 width: screenWidth * 0.8,
                 resizeMode: "cover",
-              }}
+              }} bounces={false}
               scrollEnabled={false}
               injectedJavaScript={`const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=0.5, maximum-scale=0.5, user-scalable=2.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); `}
-              scalesPageToFit={true}
+              scalesPageToFit={false}
               source={{
                 html: `<style>
-    body { font-size: 200%; word-wrap: break-word; overflow-wrap: break-word; }
+    body { max-width: 100%;
+
+overflow-x: hidden;font-size: ${fontSize}; word-wrap: break-word; overflow-wrap: break-word; }
 </style>`+ this.state.detail.Content
               }}
             />
@@ -172,7 +178,7 @@ export default class DuyuruComponent extends React.Component {
               onPress={async function () {
                 try {
                   Linking.openURL(
-                    "https://b2b.opar.com" + self.state.detail.FilePath
+                    "http://b2b.opar.com" + self.state.detail.FilePath
                   );
                 } catch (e) {
                   console.error(e);
@@ -263,8 +269,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: "20%",
     left: "10%",
-    height: "69%",
-    paddingBottom: 300
+    height: screenHeight * 0.63,
   },
   announcementContainer: {
     borderRadius: 10,

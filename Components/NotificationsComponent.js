@@ -9,7 +9,7 @@ import {
 
     Text,
     TouchableHighlight,
-    TouchableOpacity,
+    TouchableOpacity, Platform
 } from "react-native";
 import { WebView } from "react-native-webview";
 const screenHeight = Dimensions.get("window").height;
@@ -28,6 +28,8 @@ export default class NotificationsComponent extends React.Component {
     }
 
     renderDetail = () => {
+        const fontSize = Platform.OS === 'android' ? "100%" : "200%";
+
         let self = this;
         return (
             <Modal
@@ -79,10 +81,10 @@ export default class NotificationsComponent extends React.Component {
                             }}
                             scrollEnabled={false}
                             injectedJavaScript={`const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=0.5, maximum-scale=0.5, user-scalable=2.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); `}
-                            scalesPageToFit={true}
+                            scalesPageToFit={false}
                             source={{
                                 html: `<style>
-    body { font-size: 200%; word-wrap: break-word; overflow-wrap: break-word; }
+    body { font-size: ${fontSize}; word-wrap: break-word; overflow-wrap: break-word; }
 </style>`+
                                     this.state.detail.Content
                             }}
@@ -100,11 +102,11 @@ export default class NotificationsComponent extends React.Component {
             onPress={() => this.setState({ detail: notification, detailShown: true })}
             key={index}
             onStartShouldSetResponder={() => true} style={{
-                width: "100%", minHeight: "10%",
+                width: "100%", minHeight: screenHeight * 0.1,
                 borderWidth: 1,
                 borderColor: "#DDDDDD",
-                justifyContent: "center", marginTop: "5%",
-                marginBottom: "5%",
+                justifyContent: "center", marginTop: screenHeight * 0.01,
+                marginBottom: screenHeight * 0.01,
                 backgroundColor: "#5c636b"
                 , alignItems: "center"
             }}>
@@ -121,13 +123,16 @@ export default class NotificationsComponent extends React.Component {
     }
 
     renderNotifications = (data, isRead) => {
+
         return <ScrollView
             style={{
-                marginTop: "20%",
-                marginBottom: "15%",
+                zIndex: 500000,
+                marginTop: screenHeight * 0.15,
+                marginBottom: screenHeight * 0.1,
+
                 width: "90%",
                 alignSelf: "center",
-                height: "90%",
+                height: screenHeight * 0.6,
             }}
         >
             {data.map((notification, index) => {
@@ -144,7 +149,7 @@ export default class NotificationsComponent extends React.Component {
                         selected={this.state.page}
                         style={{
                             top: "0%",
-                            zIndex: 500000,
+                            zIndex: 5000,
                             backgroundColor: "#1f2832",
                             height: "10%",
                             flex: 1,

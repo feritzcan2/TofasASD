@@ -51,7 +51,7 @@ export default class KampanyaDetayComponent extends React.Component {
                         style={[
                             styles.rowText,
                             isHeader ? {
-                                fontWeight: "800", color: "#5a5a5a",
+                                fontWeight: 'bold', color: "#5a5a5a",
                                 fontSize: normalize(8)
                             } : {},
                         ]}
@@ -73,7 +73,7 @@ export default class KampanyaDetayComponent extends React.Component {
                         style={[
                             styles.rowText,
                             isHeader ? {
-                                fontWeight: "800", color: "#5a5a5a",
+                                fontWeight: 'bold', color: "#5a5a5a",
                                 fontSize: normalize(8)
                             } : {},
                         ]}
@@ -99,11 +99,11 @@ export default class KampanyaDetayComponent extends React.Component {
                             styles.rowText,
                             isHeader ? {
                                 textAlign: 'center',
-                                fontWeight: "800", color: "#5a5a5a",
+                                fontWeight: 'bold', color: "#5a5a5a",
                                 fontSize: normalize(8)
                             } : {
                                     alignItems: "center", textAlign: "center",
-                                    justifyContent: "center", flex: 1, fontWeight: "500", marginLeft: "5%", color: (rowData && rowData.Goal) === "Hedef Tamamlandı" ? "green" : "red"
+                                    justifyContent: "center", flex: 1, fontWeight: 'bold', marginLeft: "5%", color: (rowData && rowData.Goal) === "Hedef Tamamlandı" ? "green" : "red"
                                 },
                         ]}
                     >
@@ -125,7 +125,7 @@ export default class KampanyaDetayComponent extends React.Component {
                         style={[
                             styles.rowText,
                             isHeader ? {
-                                fontWeight: "800", color: "#5a5a5a",
+                                fontWeight: 'bold', color: "#5a5a5a",
                                 fontSize: normalize(8)
                             } : {},
                         ]}

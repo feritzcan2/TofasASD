@@ -5,9 +5,7 @@ let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
 
 
 export function getRegions() {
-
   console.log("getRegions")
-
   return new Promise(async function (resolve, reject) {
     var relogging = await AsyncStorage.getItem("relogging");
     if (relogging === "true") {
@@ -76,9 +74,11 @@ export function getBayiList() {
       body: JSON.stringify({
         Token: global.userData.Token,
         Name: "GetList_DealerASD",
+        OparDealers: true,
 
         Data: {
           Name: "GetList_DealerASD",
+          OparDealers: true
         },
       }),
     });
@@ -117,15 +117,14 @@ export function getGenelPerformance(filters) {
       return
     }
     if (!global.userData || !global.userData.Token) {
+      console.log("perf no token")
       resolve(null)
-
     }
 
     let result = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-
         Authorization: "",
       },
       body: JSON.stringify({
@@ -144,8 +143,6 @@ export function getGenelPerformance(filters) {
       }),
     });
 
-
-
     result = await result.json().catch((error) => {
       console.log(error)
 
@@ -155,11 +152,12 @@ export function getGenelPerformance(filters) {
     if (result.Data === null || result.Data === undefined) {
       await relogin();
       result = await getGenelPerformance(filters)
-
       resolve(result);
       return;
     }
     global.genelPerformance[JSON.stringify(filters)] = result.Data
+    console.log("perf data token", result.Data, JSON.stringify(filters))
+
     resolve(result.Data);
   });
 }

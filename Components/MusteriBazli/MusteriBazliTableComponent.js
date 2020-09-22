@@ -60,7 +60,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader || isSummary ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader || isSummary ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? "BAYİ\nKODU" : rowData.BAYI_KODU}
@@ -79,8 +79,8 @@ export default class MusteriBazliTableComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
-                            isSummary ? { fontWeight: "800", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
+                            isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
+                            isSummary ? { fontWeight: 'bold', color: "#5a5a5a", fontSize: normalize(7.5) } : {},
                         ]}
                     >
                         {isHeader ? "BAYİ\nADI" : rowData.BAYI}
@@ -99,7 +99,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? "FATURA\nNO" : rowData.FATURA_NO}
@@ -118,7 +118,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? "FATURA\nTARİHİ" : rowData.FATURA_TARIHI.split("T")[0]}
@@ -137,7 +137,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? "PARÇA\nKODU" : rowData.PARCA_KODU}
@@ -156,7 +156,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? "ASD" : rowData.SALESMAN_NAME}
@@ -175,7 +175,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? "MİKTAR" : rowData.FAT_MIKTAR}
@@ -194,7 +194,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? "BİRİM\nFİYAT" : rowData.BIRIM_FIYAT}
@@ -213,7 +213,7 @@ export default class MusteriBazliTableComponent extends React.Component {
                     <Text
                         style={[
                             styles.rowText,
-                            isHeader ? { fontWeight: "800", color: "#5a5a5a" } : {},
+                            isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
                         ]}
                     >
                         {isHeader ? "TUTAR" : rowData.TUTAR}
