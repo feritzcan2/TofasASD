@@ -74,6 +74,7 @@ export default class FilterComponent extends React.Component {
     }
 
     return {
+      notReady: false,
       filters: { ...this.props.selectedFilters },
       bolgeData: bolgeler,
       bayiData: bayiler,

@@ -126,15 +126,17 @@ export default class GeneralPerformanceComponent extends React.Component {
               FİLTRE SEÇ
             </Text>
           </TouchableOpacity>
-          {this.state.page === "tablo" && (
+          {this.props.performanceData && this.props.performanceData.length > 0 && this.state.page === "tablo" && (
             <GeneralPerformanceTableComponent
               performanceData={this.props.performanceData}
+              allData={this.props.allData}
+              regionData={this.props.regionData}
               hedefTuru={this.props.filters.hedefTuru}
               isDetail={this.props.isDetail}
               showDetail={this.showDetail}
             />
           )}
-          {this.state.page === "grafik" && (
+          {this.props.performanceData && this.props.performanceData.length > 0 && this.state.page === "grafik" && (
             <PerformanceChartComponent
               hedefTuru={this.props.filters.hedefTuru}
               performanceData={this.props.performanceData}

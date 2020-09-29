@@ -49,6 +49,7 @@ export default class KampanyaPerformanceComponent extends React.Component {
 
   render() {
     const { selectedTab, performanceData } = this.state;
+    console.log("kampanya ", this.props.selectedCampaignPerformance)
     return (
       <View style={{ flex: 1, marginTop: "3%" }}>
         <KampanyaDetayComponent

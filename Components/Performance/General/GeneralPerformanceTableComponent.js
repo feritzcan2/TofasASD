@@ -36,7 +36,8 @@ export default class GeneralPerformanceTableComponent extends React.Component {
   convertText(text) {
     return text.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
   }
-  renderRow = (rowData, index, isHeader, isSummary) => {
+  renderRow = (rowData, index, isHeader, isSummary, isRegion) => {
+    if (!rowData) return null
     return (
       <View
         key={"r " + index}
@@ -64,10 +65,10 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader || isSummary ? { fontWeight: 'bold', color: "#5a5a5a" } : { textAlign: 'center', textAlignVertical: 'center' },
+              isHeader || isSummary ? { textAlign: 'center', textAlignVertical: 'center', fontWeight: 'bold', color: "#5a5a5a" } : { textAlign: 'center', textAlignVertical: 'center' },
             ]}
           >
-            {isHeader ? rowData.DealerName : rowData.name}
+            {isHeader && isSummary && isRegion ? "BÖLGE TOPLAMI	" : isHeader && isSummary ? "BÖLGELER" : isHeader ? rowData.DealerName : rowData.name}
           </Text>
         </View>
         <View
@@ -301,25 +302,28 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     let summary = this.CalculateSumary(data, total)
     return (
       <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
-        {this.renderRow(data[0], null, true)}
+        {this.renderRow(data[0], null, true, isSummary)}
         {data.map((rowData, index) => {
           return this.renderRow(rowData, index, undefined, isSummary);
         })}
-        {this.renderRow(summary, 100, false, true)}
+        {this.renderRow(isSummary && total ? this.props.allData : summary, 100, false, true)}
       </View>
     );
   };
-  renderPerformanceTotalTable = (data, index) => {
-    let summary = this.CalculateTotal(data, false)
+  renderPerformanceTotalTable = (data, index, bolge) => {
+    console.log("reg", data, this.props.regionData.length)
+    data.name = bolge + " .Bölge"
     return (
       <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
-        {this.renderRow(data[0], null, true)}
-        {this.renderRow(summary, 100, false, true)}
+        {this.renderRow(data, null, true, true, true)}
+        {this.renderRow(data, 100, false, true)}
       </View>
     );
   };
   renderArea = (data, index) => {
+    console.log("region ", data[0][0]["Region"])
 
+    let regionIndex = this.props.regionData.length === 1 ? 0 : data[0][0]["Region"] - 1
     return (
       <View key={"a:" + data[0][0]["Region"]} style={styles.areaContainer}>
         <View style={styles.bolgeTextContainer}>
@@ -333,8 +337,8 @@ export default class GeneralPerformanceTableComponent extends React.Component {
             return this.renderPerformanceTable(data, index, false);
           })}
         </View>
-        <View>
-          {this.renderPerformanceTotalTable(data, index)}
+        <View >
+          {this.renderPerformanceTotalTable(this.props.regionData[regionIndex], index, data[0][0]["Region"])}
         </View>
       </View>
     );
@@ -352,8 +356,8 @@ export default class GeneralPerformanceTableComponent extends React.Component {
             </Text>
           </View>
 
-          <View>
-            {this.renderPerformanceTable(data, 0, true, true)}
+          <View >
+            {this.renderPerformanceTable(this.props.regionData, 0, true, true)}
 
           </View>
 
@@ -415,9 +419,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   rowText: {
+    justifyContent: "center",
+
     width: "100%",
     textAlign: "center",
-    fontSize: normalize(8),
+    fontSize: normalize(9),
     color: "#657077",
   },
   bolgeText: {

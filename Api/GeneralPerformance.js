@@ -5,7 +5,8 @@ let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
 
 
 export function getRegions() {
-  console.log("getRegions")
+  if (global.regions && global.regions.length > 0)
+    return global.regions
   return new Promise(async function (resolve, reject) {
     var relogging = await AsyncStorage.getItem("relogging");
     if (relogging === "true") {
@@ -54,6 +55,9 @@ export function getRegions() {
 
 export function getBayiList() {
   console.log("get bayi")
+
+  if (global.bayiler && global.bayiler.length > 0)
+    return global.bayiler
 
   return new Promise(async function (resolve, reject) {
     var relogging = await AsyncStorage.getItem("relogging");
@@ -156,7 +160,8 @@ export function getGenelPerformance(filters) {
       return;
     }
     global.genelPerformance[JSON.stringify(filters)] = result.Data
-    console.log("perf data token", result.Data, JSON.stringify(filters))
+    console.log(JSON.stringify(filters), global.userData.Token)
+    //console.log("perf data item3", result.Data.Item3)
 
     resolve(result.Data);
   });

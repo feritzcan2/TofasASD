@@ -39,7 +39,6 @@ export default class ButtonSubmit extends Component {
   }
 
   _onPress() {
-    console.log(this.props.username, this.props.pw)
 
     // login("test2", "2").then((status) => {
 
@@ -49,7 +48,7 @@ export default class ButtonSubmit extends Component {
     //   this.setState({ isLoading: false });
     //   this.buttonAnimated.setValue(0);
     //   this.growAnimated.setValue(0);
-    //   if (status === true) {
+    //   if (status === true) { 
     //     this.props.setLoggedIn();
     //   } else {
     //     alert("Giriş bilgileri yanlış!");
@@ -69,6 +68,7 @@ export default class ButtonSubmit extends Component {
         AsyncStorage.setItem("loginUsername", this.props.username)
         AsyncStorage.setItem("loginPw", this.props.pw)
         this.props.setLoggedIn();
+
       } else {
         alert("Giriş bilgileri yanlış!");
       }

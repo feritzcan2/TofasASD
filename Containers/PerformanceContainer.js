@@ -54,7 +54,8 @@ export default class PerformanceContainer extends React.Component {
       });
     } else if (this.state.selectedCampaign) {
       getCampaignPerformance(this.state.selectedCampaign.Id).then((data) => {
-        this.preparePerformanceData(data, true);
+        this.preperaKampanyaData(data, true);
+
       });
     }
   }
@@ -102,6 +103,145 @@ export default class PerformanceContainer extends React.Component {
   };
 
   preparePerformanceData = (serverData, isKampanya) => {
+
+    let listData = serverData && serverData.Item1 ? serverData.Item1 : []
+    let datas = {};
+    for (let a = 0; a < listData.length; a++) {
+      let data = listData[a];
+      let campaignTarget = {
+        PriceLinkedTarget: data.PriceLinkedTargetStr,
+        TargetPercentStr: data.TargetPercentStr,
+        PriceTarget: data.PriceTarget,
+        TargetPercent: data.TargetPercent,
+        CampaignType: 1,
+        PriceLinkedTarget: data.PriceLinkedTarget,
+        PriceLinkedTargetStr: data.PriceLinkedTargetStr,
+        MinSalePercent: 100,
+        MinSaleType: 2
+      }
+      let rowData = {
+        DealerName: data.DealerName,
+        Region: data.Region,
+        name: data.SalesmanName,
+        target: parseInt(data.PriceTarget, 10),
+        tumSatis: parseInt(data.PriceTotal, 10),
+        tabiSatis: parseInt(data.PriceLinkedTarget, 10),
+        primeTabiSatis: parseInt(data.PricePrim, 10),
+        hepsi: parseInt(data.PriceLinkedTarget, 10),
+        perakende: parseInt(data.PriceLinkedTarget_Perakende, 10),
+        sigorta: parseInt(data.PriceLinkedTarget_Sigorta, 10),
+        yetkili: parseInt(data.PriceLinkedTarget_Servis, 10),
+        hedefGerceklestirme: data.TargetPercent,
+        campaignDetail: campaignTarget
+      };
+
+      if (datas[data.DealerCode]) {
+        datas[data.DealerCode].push(rowData);
+      } else {
+        datas[data.DealerCode] = [rowData];
+      }
+    }
+
+    let dataArray = [];
+
+    for (var key in datas) {
+      // check if the property/key is defined in the object itself, not in parent
+      if (datas.hasOwnProperty(key)) {
+        dataArray.push(datas[key]);
+      }
+    }
+
+    datas = {};
+    for (let a = 0; a < dataArray.length; a++) {
+      if (datas[dataArray[a][0].Region]) {
+        datas[dataArray[a][0].Region].push(dataArray[a]);
+      } else {
+        datas[dataArray[a][0].Region] = [dataArray[a]];
+      }
+    }
+    let regionArray = [];
+
+    for (var key in datas) {
+      // check if the property/key is defined in the object itself, not in parent
+      if (datas.hasOwnProperty(key)) {
+        regionArray.push(datas[key]);
+      }
+    }
+
+    let regionData = []
+    let regionListData = serverData && serverData.Item2 ? serverData.Item2 : []
+    let allData = null
+
+    for (let a = 0; a < regionListData.length; a++) {
+      let data = regionListData[a];
+      let campaignTarget = {
+        PriceLinkedTarget: data.PriceLinkedTargetStr,
+        TargetPercentStr: data.TargetPercentStr,
+        PriceTarget: data.PriceTarget,
+        TargetPercent: data.TargetPercent,
+        CampaignType: 1,
+        PriceLinkedTarget: data.PriceLinkedTarget,
+        PriceLinkedTargetStr: data.PriceLinkedTargetStr,
+        MinSalePercent: 100,
+        MinSaleType: 2
+      }
+      let rowData = {
+
+        DealerName: data.DealerName,
+        Region: data.Region,
+        name: (a + 1) + " .Bölge",
+        target: parseInt(data.PriceTarget, 10),
+        tumSatis: parseInt(data.PriceTotal, 10),
+        tabiSatis: parseInt(data.PriceLinkedTarget, 10),
+        primeTabiSatis: parseInt(data.PricePrim, 10),
+        hepsi: parseInt(data.PriceLinkedTarget, 10),
+        perakende: parseInt(data.PriceLinkedTarget_Perakende, 10),
+        sigorta: parseInt(data.PriceLinkedTarget_Sigorta, 10),
+        yetkili: parseInt(data.PriceLinkedTarget_Servis, 10),
+        hedefGerceklestirme: data.TargetPercent,
+        campaignDetail: campaignTarget
+      };
+
+      regionData.push(rowData)
+    }
+
+    if (serverData.Item3 && serverData.Item3.length > 0) {
+      let data = serverData.Item3[0];
+      let campaignTarget = {
+        PriceLinkedTarget: data.PriceLinkedTargetStr,
+        TargetPercentStr: data.TargetPercentStr,
+        PriceTarget: data.PriceTarget,
+        TargetPercent: data.TargetPercent,
+        CampaignType: 1,
+        PriceLinkedTarget: data.PriceLinkedTarget,
+        PriceLinkedTargetStr: data.PriceLinkedTargetStr,
+        MinSalePercent: 100,
+        MinSaleType: 2
+      }
+      allData = {
+        DealerName: data.DealerName,
+        Region: data.Region,
+        name: "TÜRKİYE",
+        target: parseInt(data.PriceTarget, 10),
+        tumSatis: parseInt(data.PriceTotal, 10),
+        tabiSatis: parseInt(data.PriceLinkedTarget, 10),
+        primeTabiSatis: parseInt(data.PricePrim, 10),
+        hepsi: parseInt(data.PriceLinkedTarget, 10),
+        perakende: parseInt(data.PriceLinkedTarget_Perakende, 10),
+        sigorta: parseInt(data.PriceLinkedTarget_Sigorta, 10),
+        yetkili: parseInt(data.PriceLinkedTarget_Servis, 10),
+        hedefGerceklestirme: data.TargetPercent,
+        campaignDetail: campaignTarget
+      };
+
+    }
+    if (isKampanya === true) {
+      this.setState({ selectedCampaignPerformance: regionArray });
+    } else this.setState({ performanceData: regionArray, regionData: regionData, allData: allData });
+  };
+
+
+  preperaKampanyaData = (serverData, isKampanya) => {
     let datas = {};
     for (let a = 0; a < serverData.length; a++) {
       let data = serverData[a];
@@ -164,9 +304,8 @@ export default class PerformanceContainer extends React.Component {
         regionArray.push(datas[key]);
       }
     }
-    if (isKampanya === true) {
-      this.setState({ selectedCampaignPerformance: regionArray });
-    } else this.setState({ performanceData: regionArray });
+    this.setState({ selectedCampaignPerformance: regionArray });
+
   };
 
   render() {
@@ -226,6 +365,8 @@ export default class PerformanceContainer extends React.Component {
               applyFilters={this.applyPerformanceFilter}
               filters={this.state.selectedPerformanceFilters}
               performanceData={this.state.performanceData}
+              regionData={this.state.regionData}
+              allData={this.state.allData}
               isDetail={this.state.isDetail}
             />
           )}
