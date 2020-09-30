@@ -117,7 +117,7 @@ export default class MusteriBazliComponent extends React.Component {
         this.setState({ data: data });
       })
       .catch((e) => {
-        console.log(e);
+
       });
     return text;
   };
@@ -336,7 +336,7 @@ export default class MusteriBazliComponent extends React.Component {
                 SelectedType: this.state.filters.typeCode,
                 CustomerCode: this.props.selectedCustomer.CustomerCode,
                 RowFrom: "0",
-                RowTo: "10"
+                RowTo: "1000"
               }
               getListInvoice(filters).then(datta => {
                 this.setState({ tableData: datta })

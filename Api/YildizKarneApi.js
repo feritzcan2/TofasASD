@@ -30,13 +30,13 @@ export function getYildizPuanDetail() {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      console.log("null data: ", result)
+
       await relogin();
       result = await getYildizPuanDetail()
       resolve(result);
@@ -74,13 +74,13 @@ export function getYildizKarneDetails() {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      console.log("null data: ", result)
+
       await relogin();
       result = await getYildizKarneDetails()
       resolve(result);
@@ -118,13 +118,13 @@ export function getYildizKarneBayiParams() {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      console.log("null data: ", result)
+
       await relogin();
       result = await getYildizKarneBayiParams()
       resolve(result);
@@ -161,13 +161,13 @@ export function getYildizKarneTympParams() {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      console.log("null data: ", result)
+
       await relogin();
       result = await getYildizKarneTympParams()
       resolve(result);
@@ -207,13 +207,13 @@ export function getHedef(type) {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      console.log("null data: ", result)
+
       await relogin();
       result = await getHedef(type)
       resolve(result);
@@ -253,13 +253,13 @@ export function getHedefDetail(id) {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
     });
     if (result.Data === null || result.Data === undefined) {
-      console.log("null data: ", result)
+
       await relogin();
       result = await getHedefDetail(id)
       resolve(result);

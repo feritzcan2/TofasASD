@@ -43,7 +43,7 @@ export default class ButtonSubmit extends Component {
     // login("test2", "2").then((status) => {
 
     // login("TEST", "E2018RYZ").then((status) => {
-    //   console.log(status);
+    //   
     //   this._onGrow();
     //   this.setState({ isLoading: false });
     //   this.buttonAnimated.setValue(0);

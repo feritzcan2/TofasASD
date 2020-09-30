@@ -4,7 +4,7 @@ import { AsyncStorage } from "react-native";
 let url = "https://b2b.opar.com/api/adminmobile/GetList_CustomerSearchASD";
 
 export function searchCustomer(name, code) {
-  console.log("searchCustomer")
+
 
   return new Promise(async function (resolve, reject) {
     var relogging = await AsyncStorage.getItem("relogging");
@@ -41,7 +41,7 @@ export function searchCustomer(name, code) {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -49,7 +49,7 @@ export function searchCustomer(name, code) {
     if (result.Data === null || result.Data === undefined) {
       await relogin();
       result = await searchCustomer(name, code)
-      console.log("null data:  search cust", result)
+
 
       resolve(result);
       return;
@@ -89,7 +89,7 @@ export function getCustomer(id) {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -97,7 +97,7 @@ export function getCustomer(id) {
     if (result.Data === null || result.Data === undefined) {
       await relogin();
       result = await getCustomer(id)
-      console.log("null data: get cust", result)
+
 
       resolve(result);
       return;
@@ -134,7 +134,7 @@ export function getCustomerNotes(id) {
 
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -142,7 +142,7 @@ export function getCustomerNotes(id) {
     if (result.Data === null || result.Data === undefined) {
       await relogin();
       result = await getCustomerNotes(id)
-      console.log("get cust note: ", result)
+
 
       resolve(result);
       return;
@@ -180,7 +180,7 @@ export function setCustomerNotes(id, message) {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -188,7 +188,7 @@ export function setCustomerNotes(id, message) {
     if (result.Data === null || result.Data === undefined) {
       await relogin();
       result = await setCustomerNotes(id, message)
-      console.log("null set cust notes: ", result)
+
 
       resolve(result.Data);
       return;
@@ -227,7 +227,7 @@ export function sendCustomerNotes(mail, message) {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -235,7 +235,7 @@ export function sendCustomerNotes(mail, message) {
     if (result.Data === null || result.Data === undefined) {
       await relogin();
       result = await sendCustomerNotes(mail, message)
-      console.log("null send note: ", result)
+
 
       resolve(result);
       return;
@@ -272,7 +272,7 @@ export function getWarehouse(id) {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -281,7 +281,7 @@ export function getWarehouse(id) {
     if (result.Data === null || result.Data === undefined) {
       await relogin();
       result = await getWarehouse(id)
-      console.log("null get ware: ", result)
+
 
       resolve(result.Data);
       return;
@@ -317,7 +317,7 @@ export function getAnalizeCode() {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -361,7 +361,7 @@ export function getDefinition() {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -402,7 +402,7 @@ export function getTypeCode() {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -428,6 +428,7 @@ export function getListInvoice(params) {
       resolve(result)
       return
     }
+    console.log(params)
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -440,28 +441,13 @@ export function getListInvoice(params) {
         Token: global.userData.Token,
         Data: {
           "Name": "GetList_InvoiceASD",
-          "Parameters": {
-            "DateStart": "01/01/2020",
-            "CustomerCode": "0050521062",
-            "DateEnd": "07/07/2020",
-            "DealerName": "",
-            "SelectedDefinition": "",
-            "SelectedAnalize": "",
-            "SelectedType": "",
-            "DealerCode": "",
-            "FactorNOSearch": "",
-            "AmountSearch": "",
-            "ASDSearch": "",
-            "ProductCodeSearch": "",
-            "RowFrom": "0",
-            "RowTo": "10"
-          }
+          "Parameters": params
         }
       }),
     });
 
     result = await result.json().catch((error) => {
-      console.log("error:", error)
+
       resolve(null);
       return;
     });
@@ -474,6 +460,7 @@ export function getListInvoice(params) {
       resolve(result);
       return;
     }
+    console.log("invoice: ", result.Data)
 
     resolve(result.Data);
   });

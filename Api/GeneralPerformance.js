@@ -34,7 +34,7 @@ export function getRegions() {
 
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -48,7 +48,7 @@ export function getRegions() {
     }
     global.regions = result.Data;
 
-    console.log("bolge geldiiiii", result.Data)
+
 
 
     resolve(result.Data);
@@ -56,7 +56,7 @@ export function getRegions() {
 }
 
 export function getBayiList() {
-  console.log("get bayi")
+
 
   if (global.bayiler && global.bayiler.length > 0)
     return global.bayiler
@@ -90,7 +90,7 @@ export function getBayiList() {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -108,7 +108,7 @@ export function getBayiList() {
 }
 
 export function getGenelPerformance(filters) {
-  console.log("getGenelPerformance")
+
 
   return new Promise(async function (resolve, reject) {
     var relogging = await AsyncStorage.getItem("relogging");
@@ -123,7 +123,7 @@ export function getGenelPerformance(filters) {
       return
     }
     if (!global.userData || !global.userData.Token) {
-      console.log("perf no token")
+
       resolve(null)
     }
 
@@ -150,7 +150,7 @@ export function getGenelPerformance(filters) {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -162,14 +162,14 @@ export function getGenelPerformance(filters) {
       return;
     }
     global.genelPerformance[JSON.stringify(filters)] = result.Data
-    //console.log("perf data item3", result.Data.Item3)
+    //
 
     resolve(result.Data);
   });
 }
 
 export function getCampaigns() {
-  console.log("getCampaigns")
+
 
   return new Promise(async function (resolve, reject) {
     var relogging = await AsyncStorage.getItem("relogging");
@@ -200,7 +200,7 @@ export function getCampaigns() {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -220,7 +220,7 @@ export function getCampaigns() {
 
 export function getCampaignDetail(data, id) {
 
-  console.log("getCampaignDetail")
+
 
   return new Promise(async function (resolve, reject) {
     var relogging = await AsyncStorage.getItem("relogging");
@@ -260,7 +260,7 @@ export function getCampaignDetail(data, id) {
     })
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -268,7 +268,7 @@ export function getCampaignDetail(data, id) {
     if (result.Data === null || result.Data === undefined) {
       await relogin();
       result = await getCampaignDetail(data, id)
-      console.log("null data: ", result)
+
 
       resolve(result);
       return;
@@ -280,7 +280,7 @@ export function getCampaignDetail(data, id) {
 }
 
 export function getCampaignPerformance(id) {
-  console.log("getCampaignPerformance")
+
 
   return new Promise(async function (resolve, reject) {
     var relogging = await AsyncStorage.getItem("relogging");
@@ -290,7 +290,7 @@ export function getCampaignPerformance(id) {
       return
     }
     if (global.campaignPerformance[id]) {
-      console.log("return from cache")
+
       resolve(global.campaignPerformance[id])
       return
     }
@@ -315,7 +315,7 @@ export function getCampaignPerformance(id) {
     });
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;
@@ -326,10 +326,10 @@ export function getCampaignPerformance(id) {
       result.Data.saleListSalesman === undefined
     ) {
       if (result.Data && result.Data.saleListSalesman === undefined) {
-        console.log("null data: ", result)
+
         await relogin();
         result = await getCampaignPerformance(id)
-        console.log("null data: genel camp perf ", result)
+
 
         resolve(result);
       }

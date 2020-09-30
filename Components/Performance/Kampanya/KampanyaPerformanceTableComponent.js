@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
-  Dimensions,
+  Dimensions, Platform
 } from "react-native";
 
 import { normalize } from "../../../HelperFunctions";
@@ -83,7 +83,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
             style={[
               styles.rowText,
               isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
-              isSummary ? { fontWeight: "bold", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
+              isSummary ? { fontWeight: "bold", color: "#5a5a5a", fontSize: Platform.OS == "ios" ? normalize(7) : normalize(10) } : {},
             ]}
           >
             {isHeader ? "HEDEF" : this.convertText(rowData.target.toLocaleString('tr')) + " ₺"}
@@ -122,7 +122,7 @@ export default class KampanyaPerformanceTableComponent extends React.Component {
             style={[
               styles.rowText,
               isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
-              isSummary ? { fontWeight: "bold", color: "#5a5a5a", fontSize: normalize(7.5) } : {},
+              isSummary ? { fontWeight: "bold", color: "#5a5a5a", fontSize: Platform.OS == "ios" ? normalize(7) : normalize(10) } : {},
 
             ]}
           >
@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   rowText: {
-    fontSize: normalize(8),
+    fontSize: Platform.OS == "ios" ? normalize(7) : normalize(10),
     color: "#657077",
     width: "100%",
     textAlign: "center"

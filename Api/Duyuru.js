@@ -4,7 +4,7 @@ import { AsyncStorage } from "react-native";
 let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
 
 export function getAnnouncements() {
-  console.log("announcement")
+
 
   return new Promise(async function (resolve, reject) {
     var relogging = await AsyncStorage.getItem("relogging");
@@ -34,7 +34,7 @@ export function getAnnouncements() {
 
 
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve(null);
       return;

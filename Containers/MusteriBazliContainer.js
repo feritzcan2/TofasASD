@@ -43,7 +43,7 @@ export default class MusteriBazliContainer extends React.Component {
             });
           }
           )
-          .catch((e) => console.log(e));
+          .catch((e) => { })
       })
       .catch((e) => {
         this.setState({ inProgress: false });
@@ -52,7 +52,7 @@ export default class MusteriBazliContainer extends React.Component {
 
     getWarehouse(customer.Id)
       .then((d) => { })
-      .catch((e) => console.log(e));
+      .catch((e) => { })
     getAnalizeCode(customer.Id)
   };
   setNote(value) {

@@ -50,7 +50,7 @@ export default class DuyuruContainer extends React.Component {
       if (this.mounted === true)
         this.setState({ notifications })
     }).catch(e => {
-      console.log("notif err: ", e)
+
     })
     getNotifications(false).then(data => {
 
@@ -59,7 +59,7 @@ export default class DuyuruContainer extends React.Component {
       if (this.mounted === true)
         this.setState({ notifications })
     }).catch(e => {
-      console.log("notif err: ", e)
+
     })
   }
   onSwipePerformed = (action) => {
@@ -77,19 +77,19 @@ export default class DuyuruContainer extends React.Component {
         break;
       }
       case 'right': {
-        console.log('right Swipe performed');
+
         break;
       }
       case 'up': {
-        console.log('up Swipe performed');
+
         break;
       }
       case 'down': {
-        console.log('down Swipe performed');
+
         break;
       }
       default: {
-        console.log('Undeteceted action');
+
       }
     }
   }

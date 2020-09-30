@@ -89,7 +89,7 @@ export default class DuyuruComponent extends React.Component {
     );
   };
   renderDetail = () => {
-    console.log("file ", this.state.detail.FilePath)
+
     let self = this;
     const fontSize = Platform.OS === 'android' ? "100%" : "200%";
 

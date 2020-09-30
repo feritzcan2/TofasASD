@@ -10,7 +10,7 @@ import { getCustomerNotes } from "./MusteriApi";
 
 export function relogin() {
   return new Promise(async function (resolve, reject) {
-    console.log("relogging")
+
     let rers = await AsyncStorage.getItem("relogging");
     if (rers === "true") {
       resolve(false)
@@ -43,27 +43,27 @@ export function relogin() {
         },
       }),
     }).catch(function (error) {
-      console.log(error)
 
-      console.log('There has been on relogin')
+
+
       // ADD THIS THROW error
       throw error;
     });
 
     result = await result.json().catch((error) => {
-      console.log("reloging error")
+
       resolve(false);
       return;
     });
 
     if (result.Data === null || result.Message !== "Success") {
-      console.log("null data relogin: ", result)
+
 
       resolve(false);
       return;
     }
 
-    console.log("relogin succeed")
+
 
     global.userData = result.Data;
     await AsyncStorage.setItem("relogging", "false");
@@ -72,7 +72,7 @@ export function relogin() {
   });
 }
 export function login(UserName, Password) {
-  console.log("login normal")
+
 
   return new Promise(async function (resolve, reject) {
 
@@ -97,9 +97,9 @@ export function login(UserName, Password) {
         },
       }),
     }).catch(function (error) {
-      console.log(error)
 
-      console.log('There has been a problem with your fetch operation: ' + error.message, error);
+
+
       // ADD THIS THROW error
       throw error;
     });;
@@ -110,7 +110,7 @@ export function login(UserName, Password) {
     });
 
     if (result.Data === null || result.Message !== "Success") {
-      console.log("null data login : ", result)
+
 
       resolve(false);
       return;
@@ -140,7 +140,7 @@ export function login(UserName, Password) {
 export function getUser(phone, password, token) {
 
 
-  console.log("getUser")
+
 
   return new Promise(async function (resolve, reject) {
 
@@ -159,7 +159,7 @@ export function getUser(phone, password, token) {
       },
     });
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve({
         statusCode: 401,
@@ -167,7 +167,7 @@ export function getUser(phone, password, token) {
       return;
     });
     if (result.data === null || result.data === undefined) {
-      console.log("null data: user ", result)
+
 
       resolve({
         statusCode: 401,
@@ -179,7 +179,7 @@ export function getUser(phone, password, token) {
   });
 }
 export function getCustomerList(text) {
-  console.log("getCustomerList")
+
 
   return new Promise(async function (resolve, reject) {
     var relogging = await AsyncStorage.getItem("relogging");
@@ -200,7 +200,7 @@ export function getCustomerList(text) {
       }),
     });
     result = await result.json().catch((error) => {
-      console.log(error)
+
 
       resolve({
         statusCode: 401,
@@ -208,7 +208,7 @@ export function getCustomerList(text) {
       return;
     });
     if (result.data === null || result.data === undefined) {
-      console.log("null data:  get cust list", result)
+
 
       resolve({
         statusCode: 401,
@@ -224,7 +224,7 @@ export function loginFromCache() {
   return new Promise(async function (resolve, reject) {
 
     let stored = await AsyncStorage.getItem("userStored").catch((e) => {
-      console.log(e);
+
     });
     if (stored !== "true") {
       global.loggedIn = false;
@@ -236,14 +236,14 @@ export function loginFromCache() {
     }
 
     let phone = await AsyncStorage.getItem("phone").catch((e) => {
-      console.log(e);
+
     });
     let pw = await AsyncStorage.getItem("password").catch((e) => {
-      console.log(e);
+
     });
 
     let data = await loginWithPhone(phone, pw);
-    console.log("login form cache", data)
+
 
 
     resolve(data);

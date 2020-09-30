@@ -4,7 +4,7 @@ import { AsyncStorage } from "react-native";
 let url = "https://b2b.opar.com/api/adminmobile/GetList_DealerASD";
 
 export function getNotifications(hidden) {
-    console.log("notif")
+
     return new Promise(async function (resolve, reject) {
         var relogging = await AsyncStorage.getItem("relogging");
         if (relogging === "true") {
@@ -36,14 +36,14 @@ export function getNotifications(hidden) {
 
 
         result = await result.json().catch((error) => {
-            console.log(error)
+
             resolve(null);
             return;
         });
         if (result.Data === null || result.Data === undefined) {
             await relogin();
             result = await getNotifications(hidden)
-            console.log("null data validation  ", result)
+
             resolve(result);
             return;
         }

@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
-  Dimensions
+  Dimensions, Platform
 } from "react-native";
 
 import { normalize } from "../../../HelperFunctions";
@@ -85,7 +85,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
             style={[
               styles.rowText,
               isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
-              isSummary ? { fontWeight: 'bold', color: "#5a5a5a", fontSize: normalize(7.5) } : {},
+              isSummary ? { fontWeight: 'bold', color: "#5a5a5a", fontSize: Platform.OS == "ios" ? normalize(7) : normalize(10), } : {},
             ]}
           >
             {isHeader ? "HEDEF" : this.convertText(rowData.target.toLocaleString('tr')) + " ₺"}
@@ -124,7 +124,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
             style={[
               styles.rowText,
               isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : {},
-              isSummary ? { fontWeight: 'bold', color: "#5a5a5a", fontSize: normalize(8) } : {},
+              isSummary ? { fontWeight: 'bold', color: "#5a5a5a", fontSize: Platform.OS == "ios" ? normalize(7) : normalize(10), } : {},
 
             ]}
           >
@@ -173,7 +173,7 @@ export default class GeneralPerformanceTableComponent extends React.Component {
           <Text
             style={[
               styles.rowText,
-              isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : !isSummary ? {} : {}, !isHeader && isSummary ? { fontWeight: 'bold', color: "#5a5a5a", fontSize: normalize(8) } : {}
+              isHeader ? { fontWeight: 'bold', color: "#5a5a5a" } : !isSummary ? {} : {}, !isHeader && isSummary ? { fontWeight: 'bold', color: "#5a5a5a", fontSize: Platform.OS == "ios" ? normalize(7) : normalize(10), } : {}
             ]}
           >
             {isHeader
@@ -421,7 +421,8 @@ const styles = StyleSheet.create({
 
     width: "100%",
     textAlign: "center",
-    fontSize: normalize(9),
+    textAlignVertical: "center",
+    fontSize: Platform.OS == "ios" ? normalize(7) : normalize(10),
     color: "#657077",
   },
   bolgeText: {

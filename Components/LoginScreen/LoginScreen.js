@@ -19,7 +19,7 @@ export default class LoginScreen extends Component {
   }
   componentDidMount() {
     AsyncStorage.getItem("loginUsername").then(data => {
-      console.log("us", data)
+
       if (data)
         this.setState({ username: data })
     })

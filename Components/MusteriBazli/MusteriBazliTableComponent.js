@@ -291,7 +291,7 @@ export default class MusteriBazliTableComponent extends React.Component {
             <FlatList data={this.state.smallData}
                 onEndReached={() => {
                     if (this.props.performanceData.length > this.state.page) {
-                        console.log("load ")
+
                         this.setState({
                             page: this.state.page + 1,
                             smallData: this.props.performanceData ?
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
     },
     rowText: {
-        fontSize: normalize(8),
+        fontSize: normalize(7),
         color: "#657077",
     },
     bolgeText: {
