@@ -311,7 +311,6 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     );
   };
   renderPerformanceTotalTable = (data, index, bolge) => {
-    console.log("reg", data, this.props.regionData.length)
     data.name = bolge + " .Bölge"
     return (
       <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
@@ -321,7 +320,6 @@ export default class GeneralPerformanceTableComponent extends React.Component {
     );
   };
   renderArea = (data, index) => {
-    console.log("region ", data[0][0]["Region"])
 
     let regionIndex = this.props.regionData.length === 1 ? 0 : data[0][0]["Region"] - 1
     return (

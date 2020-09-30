@@ -62,16 +62,19 @@ export default class FilterComponent extends React.Component {
       for (let a = 0; a < global.regions.length; a++) {
         bolgeler.push({
           value: global.regions[a].Text,
+          index: global.regions[a].Value,
         });
       }
     } else {
-
       getRegions().then((e) => {
+        console.log("bolge geldi", e)
         this.setState(this.createData())
         return;
       });
       return { notReady: true };
     }
+
+    console.log("bolgele ", bolgeler)
 
     return {
       notReady: false,
@@ -161,8 +164,17 @@ export default class FilterComponent extends React.Component {
       ],
     };
   };
+
+  getBolgeWithRegion = (region) => {
+    for (let a = 0; a < this.state.bolgeData.length; a++) {
+      if (this.state.bolgeData[a].index === region) return this.state.bolgeData[a]
+    }
+    console.log("cant find bolge with region ", region)
+    return null
+  }
   render() {
-    if (this.state.notReady === true) return <View></View>
+    if (this.state.notReady === true || !this.props.selectedFilters) return <View></View>
+    console.log("bosss:", this.state.bolgeData, this.state.filters.region)
     return (
       <Modal
         transparent
@@ -183,11 +195,14 @@ export default class FilterComponent extends React.Component {
             <Dropdown
               containerStyle={{ width: "90%", alignSelf: "center" }}
               label="BÖLGELER"
-              value={this.state.bolgeData[this.state.filters.region].value}
+              value={this.getBolgeWithRegion(this.state.filters.region).value}
               data={this.state.bolgeData}
               onChangeText={(value, index, data) => {
+                console.log("value", value)
+                console.log("data", data)
+                console.log("index", index)
                 let flters = this.state.filters;
-                flters.region = index;
+                flters.region = data[index].index;
                 this.setState({ filters: flters });
               }}
             />

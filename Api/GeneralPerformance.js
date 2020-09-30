@@ -26,7 +26,6 @@ export function getRegions() {
       body: JSON.stringify({
         Token: global.userData.Token,
         Name: "GetList_RegionBySalesmanRole",
-
         Data: {
           Name: "GetList_RegionBySalesmanRole",
         },
@@ -48,6 +47,9 @@ export function getRegions() {
       return;
     }
     global.regions = result.Data;
+
+    console.log("bolge geldiiiii", result.Data)
+
 
     resolve(result.Data);
   });
@@ -160,7 +162,6 @@ export function getGenelPerformance(filters) {
       return;
     }
     global.genelPerformance[JSON.stringify(filters)] = result.Data
-    console.log(JSON.stringify(filters), global.userData.Token)
     //console.log("perf data item3", result.Data.Item3)
 
     resolve(result.Data);

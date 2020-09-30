@@ -471,8 +471,6 @@ export function getListInvoice(params) {
       await relogin();
       result = await getListInvoice(params)
 
-      console.log("null get list: ", result)
-
       resolve(result);
       return;
     }

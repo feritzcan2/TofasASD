@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -27,7 +27,7 @@
     },
     "android": {
       "permissions": [],
-      "versionCode": 3,
+      "versionCode": 4,
       "package": "com.eryaz.oparasd"
     },
     "entryPoint": "node_modules/expo/AppEntry.js"

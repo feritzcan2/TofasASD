@@ -6,7 +6,7 @@ import {
   getBayiList,
   getGenelPerformance,
   getCampaigns,
-  getCampaignPerformance,
+  getCampaignPerformance, getRegions
 } from "../Api/GeneralPerformance";
 import { normalize } from "../HelperFunctions";
 import FilterComponent from "../Components/FilterComponent";
@@ -30,21 +30,40 @@ export default class PerformanceContainer extends React.Component {
           ? global.campaigns[global.campaigns.length - 1]
           : null,
       page: "GENEL",
-      selectedPerformanceFilters: {
+      isDetail: false
+    };
+    if (global.regions && global.regions.length > 0) {
+      this.state.selectedPerformanceFilters = {
         hedefTuru: 0,
-        region: 0,
+        region: global.regions[0].Value,
         dealerCode: "",
         quarter: 1,
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
         donemTuru: 1,
-      },
-      isDetail: false
-    };
-    getGenelPerformance(this.state.selectedPerformanceFilters).then((data) => {
-      this.preparePerformanceData(data);
+      }
+      getGenelPerformance(this.state.selectedPerformanceFilters).then((data) => {
+        this.preparePerformanceData(data);
+      });
+    } else {
+      getRegions().then((data) => {
+        if (global.regions && global.regions.length > 0) {
+          this.state.selectedPerformanceFilters = {
+            hedefTuru: 0,
+            region: global.regions[0].Value,
+            dealerCode: "",
+            quarter: 1,
+            year: new Date().getFullYear(),
+            month: new Date().getMonth(),
+            donemTuru: 1,
+          }
+          getGenelPerformance(this.state.selectedPerformanceFilters).then((data) => {
+            this.preparePerformanceData(data);
+          });
+        }
+      });
+    }
 
-    });
     if (!global.campaigns) {
       getCampaigns().then((data) => {
         this.setState({
