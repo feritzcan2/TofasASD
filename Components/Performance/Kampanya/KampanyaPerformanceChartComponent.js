@@ -205,7 +205,7 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
 
               {barData.map((item, index) => {
                 return (
-                  <Svg height="200" width={140}>
+                  <Svg height="260" width={140}>
 
                     <SvgText
                       fill="#2c982c"
@@ -216,19 +216,19 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
                         this.setState({ modalVisible: true, modalHeader: data[index].name, modalText: 'Hedefe Gerçekleşme: ' + item.hedefGerceklestirme })
                       }}
                       x="25"
-                      y={75 + (100 - item.hedefGerceklestirme) + 25}
+                      y={120 + (100 - item.hedefGerceklestirme) + 25}
                       textAnchor="middle"
                     >
                       {item.hedefGerceklestirme}%
   </SvgText>
                     <Line
                       x1="5"
-                      y1={75 + (100 - item.hedefGerceklestirme)}
+                      y1={120 + (100 - item.hedefGerceklestirme)}
                       x2={index + 1 != barData.length ? "140" : "0"}
-                      y2={index + 1 != barData.length ? 75 + (100 - barData[(index + 1)].hedefGerceklestirme) : 75 + (100 - item.hedefGerceklestirme)}
+                      y2={index + 1 != barData.length ? 120 + (100 - barData[(index + 1)].hedefGerceklestirme) : 120 + (100 - item.hedefGerceklestirme)}
                       stroke="#ff9900"
                       strokeWidth="3" />
-                    <Circle cx="7" cy={75 + (100 - item.hedefGerceklestirme)} r="7" fill="#ff9900" />
+                    <Circle cx="7" cy={120 + (100 - item.hedefGerceklestirme)} r="7" fill="#ff9900" />
                   </Svg>
                 );
               })}
@@ -310,6 +310,15 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
           </View>
           <View style={{ width: 60, height: 300 }}>
             <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 13).toFixed(0)} %</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 12).toFixed(0)} %</Text>
+            </View>
+            <View style={{ flex: 1, }}>
+              <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 11).toFixed(0)} %</Text>
+            </View>
+            <View style={{ flex: 1, }}>
               <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef + hedefInterval * 10).toFixed(0)} %</Text>
             </View>
             <View style={{ flex: 1, }}>
@@ -338,18 +347,6 @@ export default class KampanyaPerformanceChartComponent extends React.Component {
             </View>
             <View style={{ flex: 1, }}>
               <Text style={{ textAlign: 'center', textAlignVertical: 'top' }}>{(minHedef).toFixed(0)} %</Text>
-            </View>
-            <View style={{ flex: 1, }}>
-
-            </View>
-            <View style={{ flex: 1, }}>
-
-            </View>
-            <View style={{ flex: 1, }}>
-
-            </View>
-            <View style={{ flex: 1, }}>
-
             </View>
             <View style={{ flex: 1, }}>
 
