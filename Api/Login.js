@@ -72,8 +72,6 @@ export function relogin() {
   });
 }
 export function login(UserName, Password) {
-
-
   return new Promise(async function (resolve, reject) {
 
     let result = await fetch(url, {
@@ -97,11 +95,9 @@ export function login(UserName, Password) {
         },
       }),
     }).catch(function (error) {
+      resolve(false);
 
-
-
-      // ADD THIS THROW error
-      throw error;
+      return
     });;
 
     result = await result.json().catch((error) => {
@@ -110,7 +106,6 @@ export function login(UserName, Password) {
     });
 
     if (result.Data === null || result.Message !== "Success") {
-
 
       resolve(false);
       return;
@@ -138,9 +133,6 @@ export function login(UserName, Password) {
   });
 }
 export function getUser(phone, password, token) {
-
-
-
 
   return new Promise(async function (resolve, reject) {
 

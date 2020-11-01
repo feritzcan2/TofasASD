@@ -68,7 +68,6 @@ export default class ButtonSubmit extends Component {
         AsyncStorage.setItem("loginUsername", this.props.username)
         AsyncStorage.setItem("loginPw", this.props.pw)
         this.props.setLoggedIn();
-
       } else {
         alert("Giriş bilgileri yanlış!");
       }

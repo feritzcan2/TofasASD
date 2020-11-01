@@ -98,7 +98,9 @@ export default class PerformanceContainer extends React.Component {
       this.setState({
         selectedCampaign: campaign,
         campaignFilterVisible: false,
-      });
+      }, () => getCampaignPerformance(campaign.Id).then((data) => {
+        this.preperaKampanyaData(data, true);
+      }));
     } else {
       this.setState({ campaignFilterVisible: false });
     }
