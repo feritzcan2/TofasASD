@@ -318,14 +318,14 @@ export default class TypmDetayComponent extends React.Component {
             </TouchableOpacity>
             {visible[3] === true && this.renderTable(3)}
           </View>
-          <View style={{ marginTop: screenHeight * 0.06 }}>
+          {/* <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(4)}>
               <Text style={[styles.headerText, { backgroundColor: "#D0CECE" }]}>
                 YEREL İLETİŞİM
               </Text>
             </TouchableOpacity>
             {visible[4] === true && this.renderTable(4)}
-          </View>
+          </View> */}
           <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(5)}>
               <Text style={[styles.headerText, { backgroundColor: "#F1CCB1" }]}>
@@ -334,22 +334,22 @@ export default class TypmDetayComponent extends React.Component {
             </TouchableOpacity>
             {visible[5] === true && this.renderTable(5)}
           </View>
-          <View style={{ marginTop: screenHeight * 0.06 }}>
+          {/* <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(6)}>
               <Text style={[styles.headerText, { backgroundColor: "#FFFD55" }]}>
                 STOK DEVİR HIZI
               </Text>
             </TouchableOpacity>
             {visible[6] === true && this.renderTable(6)}
-          </View>
-          <View style={{ marginTop: screenHeight * 0.06 }}>
+          </View> */}
+          {/* <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(7)}>
               <Text style={[styles.headerText, { backgroundColor: "#B7C6E4" }]}>
                 B2B KAMPANYA PANELİNDEKİ KAMPANYA ADETİ
               </Text>
             </TouchableOpacity>
             {visible[7] === true && this.renderTable(7)}
-          </View>
+          </View> */}
         </View>
       </ScrollView>
     );

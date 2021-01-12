@@ -194,6 +194,22 @@ export default class PuanDurumuComponent extends React.Component {
             : index === 3
               ? allData.aktifDanismanB
               : [];
+    
+    let first =data[0].WeightPoint
+    let second 
+    let third
+    for(let a=0;a<data.length;a++){
+      if(data[a].WeightPoint!==first){
+        second = data[a].WeightPoint
+        break
+      }
+    }
+    for(let a=0;a<data.length;a++){
+      if(data[a].WeightPoint!==first&&data[a].WeightPoint!==second){
+        third = data[a].WeightPoint
+        break
+      }
+    }
     return (
       <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
         <View >
@@ -202,7 +218,9 @@ export default class PuanDurumuComponent extends React.Component {
         <View >
           {this.renderRow(data[0], null, true, index === 2 || index === 3)}
           {data.map((rowData, indexX) => {
-            if (indexX === 0 || indexX === 1 || indexX === 2) return
+            if (rowData.WeightPoint === first || 
+              rowData.WeightPoint === second ||
+              rowData.WeightPoint === third ) return
             return this.renderRow(
               rowData,
               indexX,
