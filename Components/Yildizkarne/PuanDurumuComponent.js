@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { normalize } from "../../HelperFunctions";
 import BestThreeComponent from "./BestThreeComponent";
+import BestThreeComponent2 from "./BestThreeComponent2";
 
 const screenHeight = Dimensions.get("screen").height;
 
@@ -213,14 +214,15 @@ export default class PuanDurumuComponent extends React.Component {
     return (
       <View key={"d" + index} style={{ marginTop: screenHeight * 0.04 }}>
         <View >
-          <BestThreeComponent data={data} />
+        {(index==0||index==1)&&<BestThreeComponent data={data} />}
+        {(index!==0&&index!==1)&&<BestThreeComponent2 data={data} isA={index==2} />}
         </View>
         <View >
           {this.renderRow(data[0], null, true, index === 2 || index === 3)}
           {data.map((rowData, indexX) => {
-            if (rowData.WeightPoint === first || 
+            if ((index==0 || index==1)&&(rowData.WeightPoint === first || 
               rowData.WeightPoint === second ||
-              rowData.WeightPoint === third ) return
+              rowData.WeightPoint === third )) return
             return this.renderRow(
               rowData,
               indexX,

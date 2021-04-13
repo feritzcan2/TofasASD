@@ -204,7 +204,7 @@ export default class DanismanHedefComponent extends React.Component {
           <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(0)}>
               <Text style={[styles.headerText, { backgroundColor: "#CEEDD1" }]}>
-                YENİ MÜŞTERİ KAZANIMI
+                OPARWEB CRM HEDEFİ
               </Text>
             </TouchableOpacity>
             {visible[0] === true && this.renderTable(0)}
@@ -220,7 +220,7 @@ export default class DanismanHedefComponent extends React.Component {
           <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(2)}>
               <Text style={[styles.headerText, { backgroundColor: "#F1CCB1" }]}>
-                FIRSAT PARÇALARININ SATIŞI
+                FOKUS ÜRÜN GRUBU SATIŞI
               </Text>
             </TouchableOpacity>
             {visible[2] === true && this.renderTable(2)}

@@ -133,6 +133,30 @@ export default class DuyuruComponent extends React.Component {
             <View>
               <Text style={styles.headerText}>{this.state.detail.Header}</Text>
             </View>
+            {Platform.OS==="ios"&& 
+
+            <WebView
+              ref={"webview"}
+              style={{
+                backgroundColor: "transparent",
+                alignSelf: "center",
+                height: screenHeight ,
+                width: screenWidth * 0.8,
+                resizeMode: "cover",
+              }} bounces={false}
+              scrollEnabled={true}
+              injectedJavaScript={`const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=0.5, maximum-scale=0.5, user-scalable=2.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); `}
+              scalesPageToFit={false}
+              source={{
+                html: `<style>
+    body { max-width: 100%;
+
+overflow-x: hidden;font-size: ${fontSize}; word-wrap: break-word; overflow-wrap: break-word; }
+</style>`+ this.state.detail.Content
+              }}
+            />}
+                        {Platform.OS!=="ios"&& 
+
             <WebView
               ref={"webview"}
               style={{
@@ -152,7 +176,7 @@ export default class DuyuruComponent extends React.Component {
 overflow-x: hidden;font-size: ${fontSize}; word-wrap: break-word; overflow-wrap: break-word; }
 </style>`+ this.state.detail.Content
               }}
-            />
+            />}
             <View
               style={{
                 flexDirection: "row",

@@ -15,7 +15,7 @@ const screenHeight = Dimensions.get("screen").height;
 const screenWidth = Dimensions.get("screen").width;
 import ConfettiCannon from 'react-native-confetti-cannon';
 
-export default class BestThreeComponent extends React.Component {
+export default class BestThreeComponent2 extends React.Component {
     constructor(props) {
         super(props);
 
@@ -43,7 +43,7 @@ export default class BestThreeComponent extends React.Component {
                 </View>
                 <View style={{ alignItems: "center", justifyContent: "center" }}>
                     <Text style={{ color: "#616c72", fontWeight: 'bold', fontSize: normalize(14) }}>
-                        {first[0].WeightPoint.toFixed(2)} Puan</Text>
+                        </Text>
                 </View>
 
             </View>
@@ -79,17 +79,17 @@ export default class BestThreeComponent extends React.Component {
         <View style={{ height: "5%" }}></View>
         <View style={{ flex: 1, justifyContent: "space-evenly" }}>
             <ConfettiCannon style={{ backgroundColor: 'red' }} count={200} origin={{ x: -10, y: 100 }} fadeOut={true} autoStartDelay={0} explosionSpeed={0} />
-            <View style={{ flex: 1.7, justifyContent: "center", alignItems: "center" }}>
+            
+            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+                <Text style={{ color: "#616c72", fontWeight: 'bold', fontSize: normalize(14) }}>
+                    </Text></View>
+                    <View style={{ flex: 1.7, justifyContent: "center", alignItems: "center" }}>
                 <View style={{ flex: 1, justifyContent: "center" }}><Image
                     source={require("../../assets/second.png")}
                     style={{ flex: 1, height: "100%", aspectRatio: 1 }}
                     resizeMode="stretch"
                 /></View>
             </View>
-            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                <Text style={{ color: "#616c72", fontWeight: 'bold', fontSize: normalize(14) }}>
-                    {second[0].WeightPoint.toFixed(2)} Puan</Text></View>
-
         </View>
         <View style={{
             flex: 1, justifyContent: "space-between", backgroundColor: "#dddddd"
@@ -116,18 +116,18 @@ export default class BestThreeComponent extends React.Component {
 
         return <View style={{ flex: 1, flexDirection: "column" }}>
                     <View style={{ flex: 1, justifyContent: "space-evenly" }}>
-                        <View style={{ flex: 1.3, justifyContent: "center", alignItems: "center" }}>
-                            <View style={{ flex: 0.65, justifyContent: "center" }}><Image
+                       
+                        <View style={{ alignItems: "center", justifyContent: "center" }}>
+                            <Text style={{ color: "#616c72", fontWeight: 'bold', fontSize: normalize(14) }}>
+                               </Text>
+                        </View>
+ <View style={{ flex: 1.3, justifyContent: "center", alignItems: "center" }}>
+                            <View style={{  flex: 0.65, justifyContent: "flex-end" }}><Image
                                 source={require("../../assets/third.png")}
                                 style={{ flex: 1, height: "100%", aspectRatio: 1 }}
                                 resizeMode="stretch"
                             /></View>
                         </View>
-                        <View style={{ alignItems: "center", justifyContent: "center" }}>
-                            <Text style={{ color: "#616c72", fontWeight: 'bold', fontSize: normalize(14) }}>
-                                {third[0].WeightPoint.toFixed(2)} Puan</Text>
-                        </View>
-
                     </View>
                     <View style={{
                         flex: 0.75, backgroundColor: "#dddddd", justifyContent: "space-evenly"
@@ -148,46 +148,72 @@ export default class BestThreeComponent extends React.Component {
                 </View>
            
     }
-    getFirst=(index,data)=>{
+    getFirst=(index,data,min)=>{
+        function findLargest3(dataa,index) {
+            let first = dataa[0].WeightPoint
+            let count=0;
+            for(let a=0;a<dataa.length;a++){
+                if(dataa[a].WeightPoint !== first){
+                    first=dataa[a].WeightPoint
+                    count++;
+                }
+                if(count===index)
+                return dataa.filter((document) => document.WeightPoint >=first)
+            }
+          }
+          function findBetween(dataa,index,index2) {
+            let first = dataa[0].WeightPoint
+            let second = dataa[0].WeightPoint
+            let count=0;
+            let count2=index+1
+            for(let a=0;a<dataa.length;a++){
+                if(dataa[a].WeightPoint !== first &&dataa[a].WeightPoint !== second &&count=== index && count2!==index2){
+                    second=dataa[a].WeightPoint
+                    count2++;
+                }
+                if(dataa[a].WeightPoint !== first && count!==index){
+                    first=dataa[a].WeightPoint
+                    count++;
+                }
 
+                if(count=== index && count2===index2){
+                    console.log(index,index2,first,second)
+                    return dataa.filter((document) => document.WeightPoint >=second&&document.WeightPoint <first)
+
+                }
+            }
+          }
     if(index===1){
         var out=[]
         let first = this.props.data[0].WeightPoint
-        return data.filter((document) => document.WeightPoint === first)
-    }
+        console.log(first)
+
+        let first2 = this.props.data[1].WeightPoint
+        console.log(first2)
+
+        let first3 = this.props.data[2].WeightPoint
+        let first4 = this.props.data[3].WeightPoint
+        console.log(first3)
+        return this.props.isA?findLargest3(this.props.data,3,0):findLargest3(this.props.data,1,0)
+      }
     if(index===2){
-        var out=[]
-        let first = this.props.data[0].WeightPoint
-        for(let a=0;a<data.length;a++){
-            if(data[a].WeightPoint !== first)
-            return data.filter((document) => document.WeightPoint === data[a].WeightPoint)
-        }
-        return out
+
+        return this.props.isA?findBetween(this.props.data,3,8):findBetween(this.props.data,1,4)
     }
     if(index===3){
         var out=[]
         let first = this.props.data[0].WeightPoint
         let second
-        for(let a=0;a<data.length;a++){
-            if(data[a].WeightPoint !== first)
-            {
-                second = data[a].WeightPoint
-                break
-            }
-        }
-        for(let a=0;a<data.length;a++){
-            if(data[a].WeightPoint !== first && data[a].WeightPoint !== second)
-            return data.filter((document) => document.WeightPoint === data[a].WeightPoint)
-        }
-        return out
+        return this.props.isA?findBetween(this.props.data,7,12):findBetween(this.props.data,3,6)
+
     }
     }
     render() {
 
-        let second = this.getFirst(2,this.props.data)
-        let first = this.getFirst(1,this.props.data)
+        let second = this.getFirst(2,this.props.data,this.props.isA)
+        let first = this.getFirst(1,this.props.data,this.props.isA)
 
-        let third = this.getFirst(3,this.props.data)
+        let third = this.getFirst(3,this.props.data,this.props.isA)
         return (
             <View style={{ flexDirection: "row", height: screenHeight * 0.3, marginRight: "3%", marginLeft: "3%", marginBottom: "3%" }}>
 

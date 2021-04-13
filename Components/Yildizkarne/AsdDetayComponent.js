@@ -157,7 +157,7 @@ export default class AsdDetayComponent extends React.Component {
           >
             {isHeader
               ? "GERÇEKLEŞEN"
-              : this.numberWithCommas(rowData.ActualTarget.toFixed(0))}
+              : this.numberWithCommas(!rowData.ActualTarget?0:rowData.ActualTarget.toFixed(0))}
           </Text>
         </View>
 
@@ -242,7 +242,7 @@ export default class AsdDetayComponent extends React.Component {
               isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
-            {isHeader ? "GERÇ. %" : rowData.ActualTargetPercent.toFixed(2)}
+            {isHeader ? "GERÇ. %" : !rowData.ActualTargetPercent || rowData.ActualTargetPercent ==="NaN"?0:rowData.ActualTargetPercent.toFixed(2)}
           </Text>
         </View>
         <View
@@ -328,7 +328,7 @@ export default class AsdDetayComponent extends React.Component {
           <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(1)}>
               <Text style={[styles.headerText, { backgroundColor: "#CEEDD1" }]}>
-                YENİ MÜŞTERİ KAZANIMI
+                OPARWEB CRM HEDEFİ
               </Text>
             </TouchableOpacity>
             {visible[1] === true && this.renderTable(1)}
@@ -344,7 +344,7 @@ export default class AsdDetayComponent extends React.Component {
           <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(3)}>
               <Text style={[styles.headerText, { backgroundColor: "#B1CE95" }]}>
-                FIRSAT PARÇALARININ SATIŞI
+                FOKUS ÜRÜN GRUBU SATIŞI
               </Text>
             </TouchableOpacity>
             {visible[3] === true && this.renderTable(3)}

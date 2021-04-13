@@ -205,7 +205,7 @@ export default class TypmDetayComponent extends React.Component {
               isHeader ? { fontWeight: "bold", color: "#5a5a5a" } : {},
             ]}
           >
-            {isHeader ? "GERÇ. %" : rowData.ActualTargetPercent.toFixed(2)}
+            {isHeader ? "GERÇ. %" : !rowData.ActualTargetPercent?0:rowData.ActualTargetPercent.toFixed(2)}
           </Text>
         </View>
         <View
@@ -261,7 +261,7 @@ export default class TypmDetayComponent extends React.Component {
             : index === 3
               ? allData.aksesuarHacmi
               : index === 4
-                ? allData.yerelIletisim
+                ? allData.memnuniyetAnketi
                 : index === 5
                   ? allData.firsatParcalari
                   : index === 6
@@ -297,7 +297,7 @@ export default class TypmDetayComponent extends React.Component {
           <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(1)}>
               <Text style={[styles.headerText, { backgroundColor: "#CEEDD1" }]}>
-                YENİ MÜŞTERİ KAZANIMI
+                OPARWEB CRM HEDEFİ
               </Text>
             </TouchableOpacity>
             {visible[1] === true && this.renderTable(1)}
@@ -318,18 +318,18 @@ export default class TypmDetayComponent extends React.Component {
             </TouchableOpacity>
             {visible[3] === true && this.renderTable(3)}
           </View>
-          {/* <View style={{ marginTop: screenHeight * 0.06 }}>
+          <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(4)}>
               <Text style={[styles.headerText, { backgroundColor: "#D0CECE" }]}>
-                YEREL İLETİŞİM
+                MÜŞTERİ MEMNUNİYETİ ANKET SKORU
               </Text>
             </TouchableOpacity>
             {visible[4] === true && this.renderTable(4)}
-          </View> */}
+          </View>
           <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(5)}>
               <Text style={[styles.headerText, { backgroundColor: "#F1CCB1" }]}>
-                FIRSAT PARÇALARININ SATIŞI
+                FOKUS ÜRÜN GRUBU SATIŞI
               </Text>
             </TouchableOpacity>
             {visible[5] === true && this.renderTable(5)}
@@ -342,14 +342,14 @@ export default class TypmDetayComponent extends React.Component {
             </TouchableOpacity>
             {visible[6] === true && this.renderTable(6)}
           </View> */}
-          {/* <View style={{ marginTop: screenHeight * 0.06 }}>
+          <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(7)}>
               <Text style={[styles.headerText, { backgroundColor: "#B7C6E4" }]}>
-                B2B KAMPANYA PANELİNDEKİ KAMPANYA ADETİ
+                TOFAŞ AKADEMİ EĞİTİM PUANI
               </Text>
             </TouchableOpacity>
             {visible[7] === true && this.renderTable(7)}
-          </View> */}
+          </View>
         </View>
       </ScrollView>
     );

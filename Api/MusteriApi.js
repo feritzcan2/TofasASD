@@ -428,7 +428,6 @@ export function getListInvoice(params) {
       resolve(result)
       return
     }
-    console.log(params)
     if (!global.userData || !global.userData.Token) resolve(null);
 
     let result = await fetch(url, {
@@ -460,7 +459,6 @@ export function getListInvoice(params) {
       resolve(result);
       return;
     }
-    console.log("invoice: ", result.Data)
 
     resolve(result.Data);
   });

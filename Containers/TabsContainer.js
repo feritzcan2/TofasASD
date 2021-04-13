@@ -45,7 +45,7 @@ export default class TabsContainer extends Component {
             yeniMusteri: [],
             oparWeb: [],
             aksesuarHacmi: [],
-            yerelIletisim: [],
+            memnuniyetAnketi: [],
             firsatParcalari: [],
             stokDevir: [],
             kampanyaPaneli: [],
@@ -135,7 +135,7 @@ export default class TabsContainer extends Component {
         yeniMusteri: [],
         oparWeb: [],
         aksesuarHacmi: [],
-        yerelIletisim: [],
+        memnuniyetAnketi: [],
         firsatParcalari: [],
         stokDevir: [],
         kampanyaPaneli: [],
@@ -151,21 +151,26 @@ export default class TabsContainer extends Component {
     for (let a = 0; a < data.length; a++) {
       let row = data[a];
       if (row.TympTypeCode === "S_SHG") karneDetail.asd.satisHedef.push(row);
-      if (row.TympTypeCode === "S_YMK") karneDetail.asd.yeniMusteri.push(row);
-      if (row.TympTypeCode === "S_AS") karneDetail.asd.aksesuarSatis.push(row);
-      if (row.TympTypeCode === "S_FP") karneDetail.asd.firsatParca.push(row);
-      if (row.TympTypeCode === "S_DS") karneDetail.asd.dmpSatis.push(row);
+      if (row.TympTypeCode === "S_OWCH") {
 
+        karneDetail.asd.yeniMusteri.push(row);
+      }
+      if (row.TympTypeCode === "S_AS") karneDetail.asd.aksesuarSatis.push(row);
+      if (row.TympTypeCode === "S_FUGS") karneDetail.asd.firsatParca.push(row);
+      if (row.TympTypeCode === "S_DS") karneDetail.asd.dmpSatis.push(row);
+      
       if (row.TympTypeCode === "B_YPH") karneDetail.typm.yedekParca.push(row);
-      if (row.TympTypeCode === "B_YMK") karneDetail.typm.yeniMusteri.push(row);
+      if (row.TympTypeCode === "B_OWCH") {
+        karneDetail.typm.yeniMusteri.push(row);
+      }
       if (row.TympTypeCode === "B_OW") karneDetail.typm.oparWeb.push(row);
       if (row.TympTypeCode === "B_AIH")
         karneDetail.typm.aksesuarHacmi.push(row);
-      if (row.TympTypeCode === "B_YI") karneDetail.typm.yerelIletisim.push(row);
-      if (row.TympTypeCode === "B_FPS")
+      if (row.TympTypeCode === "B_MMAS") karneDetail.typm.memnuniyetAnketi.push(row);
+      if (row.TympTypeCode === "B_FUGS")
         karneDetail.typm.firsatParcalari.push(row);
       if (row.TympTypeCode === "B_SDH") karneDetail.typm.stokDevir.push(row);
-      if (row.TympTypeCode === "B_BKK")
+      if (row.TympTypeCode === "B_TAEP")
         karneDetail.typm.kampanyaPaneli.push(row);
     }
 

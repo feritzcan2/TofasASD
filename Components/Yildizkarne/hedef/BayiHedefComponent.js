@@ -220,7 +220,7 @@ export default class BayiHedefComponent extends React.Component {
           <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(1)}>
               <Text style={[styles.headerText, { backgroundColor: "#CEEDD1" }]}>
-                YENİ MÜŞTERİ KAZANIMI
+                OPARWEB CRM HEDEFİ
               </Text>
             </TouchableOpacity>
             {visible[1] === true && this.renderTable(1)}
@@ -245,7 +245,7 @@ export default class BayiHedefComponent extends React.Component {
           <View style={{ marginTop: screenHeight * 0.06 }}>
             <TouchableOpacity onPress={() => this.toggleVisible(4)}>
               <Text style={[styles.headerText, { backgroundColor: "#F1CCB1" }]}>
-                FIRSAT PARÇALARININ SATIŞI
+                FOKUS ÜRÜN GRUBU SATIŞI
               </Text>
             </TouchableOpacity>
             {visible[4] === true && this.renderTable(4)}
